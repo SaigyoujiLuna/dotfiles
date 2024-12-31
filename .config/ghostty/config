@@ -5,3 +5,11 @@ cursor-style-blink = true
 cursor-style = block_hollow
 mouse-hide-while-typing = true
 keybind = ctrl+shift+t=new_tab
+gtk-titlebar = true
+gtk-adwaita = true
+adw-toolbar-style = raised-border
+background-opacity = 0.75
+
+window-theme = ghostty
+window-colorspace  = display-p3
+window-decoration = true
