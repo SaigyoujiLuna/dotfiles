@@ -21,12 +21,22 @@ eval "$(rbenv init -)"
 export PROTO_HOME="$HOME/.proto";
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 
+# ghcup
+export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
+# dotnet
+if [ -z "$DOTNET_ROOT" ]; then
+  export DOTNET_ROOT="$HOME/.dotnet";
+  export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools";
+fi
+# pnpm
+export PNPM_HOME="/home/yuki/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# ghcup
-export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
-# dotnet
-export DOTNET_ROOT="$HOME/.dotnet";
-export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools";
