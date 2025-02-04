@@ -18,7 +18,7 @@ return {
   { import = "astrocommunity.pack.cs" },
   { import = "astrocommunity.pack.dart" },
   { import = "astrocommunity.pack.go" },
-  -- { import = "astrocommunity.pack.haskell" },
+  { import = "astrocommunity.pack.haskell"},
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.java" },
   { import = "astrocommunity.pack.kotlin" },
