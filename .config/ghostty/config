@@ -12,4 +12,4 @@ background-opacity = 0.75
 
 window-theme = ghostty
 window-colorspace  = display-p3
-window-decoration = client
+window-decoration = false
