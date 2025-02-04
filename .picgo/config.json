@@ -2,8 +2,10 @@
   "picBed": {
     "uploader": "smms",
     "smms": {
-      "token": "ZYS161F0LIXdjMVgXdaCUt3FlHv8Xu44"
-    }
+      "token": "ZYS161F0LIXdjMVgXdaCUt3FlHv8Xu44",
+      "backupDomain": "smms.app"
+    },
+    "current": "smms"
   },
   "picgoPlugins": {}
 }
