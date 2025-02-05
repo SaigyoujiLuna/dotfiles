@@ -5,6 +5,11 @@ cursor-style-blink = true
 cursor-style = block_hollow
 mouse-hide-while-typing = true
 window-padding-x = 12
+window-padding-y = 12
 keybind = ctrl+shift+t=new_tab
 
-window-colorspace  = display-p3
+window-colorspace = display-p3
+window-vsync = true
+background-opacity = 0.75
+background-blur = true
+macos-titlebar-style = hidden
