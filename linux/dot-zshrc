@@ -11,13 +11,17 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# antidote init 
 source '/usr/share/zsh-antidote/antidote.zsh'
 antidote load
 
+# change editor to neovim
 export EDITOR='nvim'
 
+# starship init
 eval "$(starship init zsh)"
 
+# rbenv init
 eval "$(rbenv init -)"
 # proto
 export PROTO_HOME="$HOME/.proto";
