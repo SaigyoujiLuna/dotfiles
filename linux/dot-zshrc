@@ -16,20 +16,24 @@ source '/usr/share/zsh-antidote/antidote.zsh'
 antidote load
 
 # change editor to neovim
-export EDITOR='nvim'
+export EDITOR=nvim
 
 # starship init
 eval "$(starship init zsh)"
 
 # rbenv init
 eval "$(rbenv init -)"
+# ------------------- path setting ----------------------
 # proto
 export PROTO_HOME="$HOME/.proto";
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 
-# ghcup
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# ccache
+export PATH="/usr/lib/ccache/bin/:$PATH"
