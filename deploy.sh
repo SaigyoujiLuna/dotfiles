@@ -9,10 +9,9 @@ stow --adopt --dotfiles common -t ~
 # common config deploy
 echo "common dotfiles deploy success."
 
-l
 #unix deplo
 if [[ "$os_name" == "Linux" || "$os_name" == "Darwin" || "$os_name" == "FreeBSD" ]]; then
-  stow --adopt --dotfiles unix -t --ignore=YukiConfig.code-profile ~ && echo "unix dotfiles deploy success."
+  stow --adopt --dotfiles unix --ignore=YukiConfig.code-profile -t ~ && echo "unix dotfiles deploy success."
 fi
 
 if [[ "$os_name" == "Linux" ]]; then
