@@ -6,6 +6,9 @@ return {
         menu = { border = "rounded" },
         documentation = { window = { border = "rounded" } },
         -- list = { selection = "auto_insert" },
+        ghost_text = {
+          enabled = true,
+        },
       },
       signature = { window = { border = "rounded" } },
       keymap = {
