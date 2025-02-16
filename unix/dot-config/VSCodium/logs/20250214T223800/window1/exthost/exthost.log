@@ -1,0 +1,27 @@
+2025-02-14 22:38:01.786 [info] Extension host with pid 13163 started
+2025-02-14 22:38:01.844 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2025-02-14 22:38:01.845 [info] ExtensionService#_doActivateExtension be5invis.vscode-custom-css, startup: true, activationEvent: '*'
+2025-02-14 22:38:01.887 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2025-02-14 22:38:01.898 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2025-02-14 22:38:01.921 [info] Extension host with pid 13193 started
+2025-02-14 22:38:01.925 [info] Eager extensions activated
+2025-02-14 22:38:01.925 [info] ExtensionService#_doActivateExtension vscodevim.vim, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.970 [info] Eager extensions activated
+2025-02-14 22:38:01.976 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.976 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.976 [info] ExtensionService#_doActivateExtension alefragnani.Bookmarks, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.976 [info] ExtensionService#_doActivateExtension BrandonKirbyson.vscode-animations, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.977 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:01.980 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc-icons, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:02.020 [info] ExtensionService#_doActivateExtension Codeium.codeium, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:02.244 [info] ExtensionService#_doActivateExtension vadimcn.vscode-lldb, startup: false, activationEvent: 'onStartupFinished'
+2025-02-14 22:38:02.254 [error] Failed to load translations for alefragnani.Bookmarks from file:///home/yuki/.vscode-oss/extensions/alefragnani.bookmarks-13.5.0/l10n/bundle.l10n.zh-cn.json: 无法读取文件'/home/yuki/.vscode-oss/extensions/alefragnani.bookmarks-13.5.0/l10n/bundle.l10n.zh-cn.json' (Error: 无法解析不存在的文件 '/home/yuki/.vscode-oss/extensions/alefragnani.bookmarks-13.5.0/l10n/bundle.l10n.zh-cn.json')
+2025-02-14 22:38:02.261 [warning] Using default string since no string found in i18n bundle that has the key: Support
+2025-02-14 22:38:02.380 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+2025-02-14 22:38:02.381 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2025-02-14 22:38:02.381 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2025-02-14 22:38:02.381 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2025-02-14 22:38:47.949 [info] Extension host terminating: renderer closed the MessagePort
+2025-02-14 22:38:47.951 [info] Extension host terminating: renderer closed the MessagePort
+2025-02-14 22:38:47.951 [info] Extension host with pid 13193 exiting with code 0
+2025-02-14 22:38:47.957 [info] Extension host with pid 13163 exiting with code 0

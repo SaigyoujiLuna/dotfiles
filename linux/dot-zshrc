@@ -26,6 +26,7 @@ eval "$(rbenv init -)"
 # ------------------- path setting ----------------------
 # proto
 export PROTO_HOME="$HOME/.proto";
+
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -37,3 +38,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
+
+alias code=codium UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland

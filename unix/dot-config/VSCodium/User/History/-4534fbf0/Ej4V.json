@@ -1,0 +1,381 @@
+{
+    "animations.Enabled": true,
+    "animations.CursorAnimation": true,
+    "animations.CursorAnimationOptions": {
+        "TrailLength": 8
+    },
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.list.smoothScrolling": true,
+    "editor.dropIntoEditor.preferences": [],
+    "editor.minimap.sectionHeaderFontSize": 16,
+    "editor.inlineSuggest.showToolbar": "always",
+    "editor.largeFileOptimizations": false,
+    "editor.codeActionsOnSave": {},
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.wordWrap": "on",
+    "editor.fontFamily": "'MonoLisa Variable','FiraCode','Symbols Nerd Font Mono'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "editor.fontVariations": true,
+    "editor.fontWeight": "normal",
+    "editor.formatOnPaste": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.smoothScrolling": true,
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "files.autoSave": "afterDelay",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "terminal.external.linuxExec": "ghostty",
+    "vim.leader": "<space>",
+    "vim.smartRelativeLine": true,
+    "vim.useCtrlKeys": true,
+    "vim.useSystemClipboard": true,
+    "vim.commandLineModeKeyBindings": [],
+    "vim.commandLineModeKeyBindingsNonRecursive": [],
+    "vim.digraphs": {},
+    //plugin
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-c>": false,
+        "<C-f>": false,
+        "<C-v>": false
+    },
+    "vim.highlightedyank.enable": true,
+    "vim.hlsearch": true,
+    "vim.incsearch": true,
+    "vim.autoindent": true,
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "after": [
+                "<Esc>"
+            ],
+            "before": [
+                "j",
+                "j"
+            ]
+        },
+        // use <c-space> to trigger suggest
+        {
+            "before": [
+                "<c-space>"
+            ],
+            "commands": [
+                "editor.action.triggerSuggest"
+            ],
+            "expr": true,
+            "silent": true
+        },
+        {
+            "before": [
+                "<C-/>"
+            ],
+            "commands": [
+                "workbench.action.terminal.toggleTerminal"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "f"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            //use leader + a applying code actions to the selected code block
+            "before": [
+                "<leader>",
+                "l",
+                "a"
+            ],
+            "commands": [
+                "editor.action.codeAction"
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "m",
+                "t"
+            ],
+            "commands": [
+                "bookmarks.toggle"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "m",
+                "l"
+            ],
+            "commands": [
+                "bookmarks.list"
+            ]
+        },
+        //use sd show code document
+        {
+            "before": [
+                "K"
+            ],
+            "commands": [
+                "editor.action.showHover"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        // "g" + "i" to go to last inserted
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "workbench.action.navigateToLastEditLocation"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "g",
+                "I"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "g",
+                "y"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ],
+            "silent": true
+        },
+        // use the leader + q + f to quick fix the code.
+        {
+            "before": [
+                "<leader>",
+                "q",
+                "f"
+            ],
+            "commands": [
+                "editor.action.quickFix"
+            ]
+        },
+        {
+            //l + f to format the code.
+            "before": [
+                "<leader>",
+                "l",
+                "f"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        //use "gpg" go to prev diagnositic
+        {
+            "before": [
+                "[",
+                "d"
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ],
+            "silent": true
+        },
+        // use gng go to next diagnositic
+        {
+            "before": [
+                "]",
+                "d"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ],
+            "silent": true
+        },
+        //use <leader> + a for applying code action at the current cursor position
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "a"
+            ],
+            "commands": [
+                "editor.action.codeAction"
+            ]
+        },
+        //use <leader> + r +  e applying refactor code action
+        {
+            "before": [
+                "<leader>",
+                "r",
+                "e"
+            ],
+            "commands": [
+                "editor.action.refactor"
+            ],
+            "silent": true
+        },
+        // use r + n to apply rename
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "r"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        //use leader + c + l to run the Code Lens action on ther current line
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "l"
+            ],
+            "commands": [
+                "editor.action.codeLens.run"
+            ]
+        },
+        //use ctrl + t to toggle left panel
+        {
+            "before": [
+                "<leader>",
+                "e"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        //uses leader + f + f to find file
+        {
+            "before": [
+                "<leader>",
+                "<space>"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        //use leader + f + g to find in files
+        {
+            "before": [
+                "<leader>",
+                "/"
+            ],
+            "commands": [
+                "workbench.action.findInFiles"
+            ]
+        },
+        {
+            "before": [
+                "[",
+                "b"
+            ],
+            "commands": [
+                ":tabprev"
+            ]
+        },
+        {
+            "before": [
+                "]",
+                "b"
+            ],
+            "commands": [
+                ":tabnext"
+            ]
+        }
+        // {
+        //   "before": ["<C-o>"],
+        //   "command": ["workbench.action.navigateBack"]
+        // },
+        // {
+        //   "before": ["<C-i>"],
+        //   "command": ["workbench.action.navigateForward"]
+        // },
+    ],
+    "vscode_custom_css.imports": [
+        "file:///home/yuki/.vscode-oss/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
+    ],
+    "window.customTitleBarVisibility": "auto",
+    "vim.statusBarColorControl": true,
+}

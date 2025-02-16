@@ -1,0 +1,20 @@
+{
+    "animation.Enabled": true,
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "editor.dropIntoEditor.preferences": [],
+    "editor.wordWrap": "on",
+    "editor.fontFamily": "'MonoLisa Variable','FiraCode','Symbols Nerd Font Mono'",
+    "vscode_custom_css.imports": [
+        "file:///home/yuki/.vscode-oss/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
+    ],
+    "terminal.external.linuxExec": "ghostty",
+    "vim.leader": "<space>",
+  "vim.smartRelativeLine": true,
+  "vim.statusBarColorControl": true,
+  "vim.useCtrlKeys": true,
+  "vim.useSystemClipboard": true,
+  "vim.commandLineModeKeyBindings": [],
+  "vim.commandLineModeKeyBindingsNonRecursive": [],
+  "vim.digraphs": {},
+}

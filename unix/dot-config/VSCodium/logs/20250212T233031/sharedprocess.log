@@ -1,0 +1,23 @@
+2025-02-12 23:31:07.414 [info] Getting Manifest... illixion.vscode-vibrancy-continued
+2025-02-12 23:31:07.455 [info] Installing extension: illixion.vscode-vibrancy-continued {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json","path":"/home/yuki/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"productVersion":{"version":"1.97.0","date":"2025-02-06T20:43:57.680Z"}}
+2025-02-12 23:31:17.068 [info] Extracted extension to file:///home/yuki/.vscode-oss/extensions/illixion.vscode-vibrancy-continued-1.1.44: illixion.vscode-vibrancy-continued
+2025-02-12 23:31:17.162 [info] Renamed to /home/yuki/.vscode-oss/extensions/illixion.vscode-vibrancy-continued-1.1.44
+2025-02-12 23:31:17.174 [info] Extension installed successfully: illixion.vscode-vibrancy-continued vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
+2025-02-12 23:31:32.275 [info] Uninstalling extension from the profile: illixion.vscode-vibrancy-continued@1.1.44 vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
+2025-02-12 23:31:32.290 [info] Marked extension as removed illixion.vscode-vibrancy-continued-1.1.44
+2025-02-12 23:31:32.688 [info] Successfully uninstalled extension from the profile illixion.vscode-vibrancy-continued@1.1.44 vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
+2025-02-12 23:34:01.355 [info] Getting Manifest... ms-python.python
+2025-02-12 23:34:01.392 [info] Installing extension: ms-python.python {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json","path":"/home/yuki/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"productVersion":{"version":"1.97.0","date":"2025-02-06T20:43:57.680Z"}}
+2025-02-12 23:34:02.143 [info] Getting Manifest... ms-python.vscode-pylance
+2025-02-12 23:34:02.154 [info] Getting Manifest... ms-python.debugpy
+2025-02-12 23:34:02.175 [info] Installing extension: ms-python.vscode-pylance {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json","path":"/home/yuki/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"productVersion":{"version":"1.97.0","date":"2025-02-06T20:43:57.680Z"},"context":{"dependecyOrPackExtensionInstall":true}}
+2025-02-12 23:34:02.176 [info] Installing extension: ms-python.debugpy {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json","path":"/home/yuki/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"productVersion":{"version":"1.97.0","date":"2025-02-06T20:43:57.680Z"},"context":{"dependecyOrPackExtensionInstall":true}}
+2025-02-12 23:34:05.970 [info] Extracted extension to file:///home/yuki/.vscode-oss/extensions/ms-python.python-2025.0.0-linux-x64: ms-python.python
+2025-02-12 23:34:06.000 [info] Renamed to /home/yuki/.vscode-oss/extensions/ms-python.python-2025.0.0-linux-x64
+2025-02-12 23:34:06.082 [info] Extracted extension to file:///home/yuki/.vscode-oss/extensions/ms-python.debugpy-2025.0.0-linux-x64: ms-python.debugpy
+2025-02-12 23:34:06.087 [info] Renamed to /home/yuki/.vscode-oss/extensions/ms-python.debugpy-2025.0.0-linux-x64
+2025-02-12 23:34:10.535 [info] Extracted extension to file:///home/yuki/.vscode-oss/extensions/ms-python.vscode-pylance-2025.2.1: ms-python.vscode-pylance
+2025-02-12 23:34:10.626 [info] Renamed to /home/yuki/.vscode-oss/extensions/ms-python.vscode-pylance-2025.2.1
+2025-02-12 23:34:10.639 [info] Extension installed successfully: ms-python.python vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
+2025-02-12 23:34:10.639 [info] Extension installed successfully: ms-python.debugpy vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
+2025-02-12 23:34:10.639 [info] Extension installed successfully: ms-python.vscode-pylance vscode-userdata:/home/yuki/.vscode-oss/extensions/extensions.json
