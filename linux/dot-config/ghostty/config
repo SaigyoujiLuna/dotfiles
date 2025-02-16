@@ -7,9 +7,11 @@ mouse-hide-while-typing = true
 window-padding-x = 12
 keybind = ctrl+shift+t=new_tab
 
+alpha-blending = native
 background-opacity = 0.75
 background-blur = true
 
 window-decoration = true
 window-colorspace = display-p3
 window-theme = ghostty
+minimum-contrast = 2.1

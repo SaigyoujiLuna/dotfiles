@@ -4,10 +4,20 @@ return {
     opts = {
       completion = {
         menu = { border = "rounded" },
-        documentation = { window = { border = "rounded" } },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 800,
+          window = { border = "rounded" },
+        },
         -- list = { selection = "auto_insert" },
         ghost_text = {
           enabled = true,
+        },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = true,
+          },
         },
       },
       signature = { window = { border = "rounded" } },
