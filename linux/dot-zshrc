@@ -39,4 +39,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
 
-alias code=codium UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland
+alias code='codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland'
+alias ll='ls -l -h'

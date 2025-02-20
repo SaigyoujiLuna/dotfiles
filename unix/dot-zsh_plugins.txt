@@ -8,5 +8,5 @@ zsh-users/zsh-syntax-highlighting
 
 ajeetdsouza/zoxide
 Aloxaf/fzf-tab
-# marlonrichert/zsh-hist
+
 MichaelAquilina/zsh-you-should-use
