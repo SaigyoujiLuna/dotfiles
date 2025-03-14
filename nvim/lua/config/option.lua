@@ -1,5 +1,4 @@
 local opt = vim.opt
-vim.cmd.colorscheme("catppuccin")
 opt.relativenumber = true
 opt.number = true
 
@@ -9,7 +8,7 @@ opt.expandtab = true
 opt.autoindent = true
 
 opt.wrap = false
-
+opt.confirm = true
 opt.cursorline = true
 
 opt.mouse:append("a")
@@ -23,3 +22,7 @@ opt.smartcase = true
 
 opt.termguicolors = true
 opt.signcolumn = "yes"
+
+opt.scrolloff = 8
+opt.smoothscroll = true
+
