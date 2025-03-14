@@ -7,11 +7,17 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
-    config = function (_, opts)
+    config = function(_, opts)
       require("which-key").setup(opts)
       require("which-key").add({
-        {"<leader>f", group = "file"},
-        {"<leader>c", group = "code"}
+        { "<leader>f", group = "file" },
+        { "<leader>c", group = "code" },
+        { "<leader>d", group = "debug"},
+        { "<leader>g", group = "git"},
+        { "<leader>b", group = "buffer"},
+        { "[", group = "prev"},
+        { "]", group = "next"},
+        { "g", group = "goto"},
       })
     end,
     keys = {
@@ -20,7 +26,7 @@ return {
         function()
           require("which-key").show()
         end,
-        desc = "Buffer Local Keymaps (which-key)",
+        desc = "Buffer Keymaps (which-key)",
       },
     },
   },
