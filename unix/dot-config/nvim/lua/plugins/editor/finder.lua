@@ -10,8 +10,8 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		keys = {
-			{ "<leader> ", require("telescope.builtin").find_files, desc = "Find in files" },
-			{ "<leader>/", require("telescope.builtin").live_grep, desc = "Live grep" },
+			{ "<leader> ", function() require("telescope.builtin").find_files() end , desc = "Find in files" },
+			{ "<leader>/", function() require("telescope.builtin").live_grep() end , desc = "Live grep" },
 		},
 	},
 }
