@@ -14,4 +14,4 @@ background-blur = true
 window-decoration = true
 window-colorspace = display-p3
 window-theme = ghostty
-minimum-contrast = 2.1
+minimum-contrast = 1.1
