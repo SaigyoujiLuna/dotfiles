@@ -3,6 +3,7 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = { "catppuccin", "nvim-tree/nvim-web-devicons" },
+    event = {"BufEnter"},
     opts = {
       options = {
         -- separator_style = "slant",

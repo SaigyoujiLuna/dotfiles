@@ -1,0 +1,69 @@
+return {}
+-- local highlight = {
+--   "RainbowRed",
+--   "RainbowYellow",
+--   "RainbowBlue",
+--   "RainbowOrange",
+--   "RainbowGreen",
+--   "RainbowViolet",
+--   "RainbowCyan",
+-- }
+--       vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+--       vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+--       vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+--       vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+--       vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+--       vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+--       vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+--       vim.g.rainbow_delimiters = {highlight = highlight}
+-- return {
+--   {
+--     "folke/snacks.nvim",
+--     priority = 1000,
+--     lazy = false,
+--     ---@class snacks.Config
+--     opts = {
+--       bigfile = { enabled = true },
+--       dashboard = { enabled = true },
+--       indent = {
+--         enabled = true,
+--         hl = {
+--           "RainbowWhite",
+--           "RainbowViolet",
+--           "RainbowBlue",
+--           "RainbowGreen",
+--           "RainbowYellow",
+--           "RainbowOrange",
+--           "RainbowRed",
+--           "RainbowCyan"
+--         }
+--       },
+--     },
+--     config = function(_, opts)
+--       -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+--       -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+--       -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+--       -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+--       -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+--       -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+--       -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+--       -- vim.g.rainbow_delimiters = {highlight = highlight}
+--       require("snacks").setup(opts)
+--     end,
+--     keys = {},
+--   },
+--   {
+--     "nvim-neo-tree/neo-tree.nvim",
+--     opts = function(_, opts)
+--       local function on_move(data)
+--         require("snacks").rename.on_rename_file(data.source, data.destination)
+--       end
+--       local events = require("neo-tree.events")
+--       opts.event_handlers = opts.event_handlers or {}
+--       vim.list_extend(opts.event_handlers, {
+--         { event = events.FILE_MOVED, handler = on_move },
+--         { event = events.FILE_RENAMED, handler = on_move },
+--       })
+--     end,
+--   },
+-- }

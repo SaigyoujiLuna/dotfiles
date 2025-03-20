@@ -11,8 +11,8 @@ return {
           capabilities = {
             offsetEncoding = { "utf-16" },
             textDocument = {
-              formatting = false
-            }
+              formatting = false,
+            },
           },
           cmd = {
             "clangd",
@@ -39,9 +39,6 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      -- formatters_by_ft = {
-      --   cpp = { "clang_format", lsp_format = "fallback" },
-      -- },
     },
   },
 }

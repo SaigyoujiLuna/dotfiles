@@ -1,8 +1,13 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets", "mikavilpas/blink-ripgrep.nvim" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "mikavilpas/blink-ripgrep.nvim",
+      { "saghen/blink.compat", optinal = true, opts = {}, version = "*" },
+    },
     version = "*",
+    event = "InsertEnter",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -21,7 +26,36 @@ return {
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
+      completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+        menu = {
+          auto_show = true,
 
+          border = "rounded",
+
+          draw = {
+            treesitter = { "lsp" },
+          },
+        },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 600,
+          window = { border = "rounded" },
+        },
+        ghost_text = {
+          enabled = true,
+        },
+      },
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
@@ -48,31 +82,12 @@ return {
       --
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust_with_warning" },
-      completion = {
-        trigger = {},
-        menu = {
-          auto_show = true,
-          border = "rounded",
-        },
-        ghost_text = {
-          enabled = true,
-          show_with_menu = false,
-        },
-        list = {
-          selection = {
-            preselect = false,
-            auto_insert = false,
-          },
-        },
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 600,
-          window = { border = "rounded" },
-        },
-      },
       signature = { window = { border = "rounded" } },
     },
-    opts_extend = { "sources.default" },
+    opts_extend = {
+      "sources.completion.enabled_providers",
+      "sources.default",
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -94,4 +109,9 @@ return {
       end
     end,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    optional = true,
+    enabled = false,
+  }
 }
