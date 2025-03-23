@@ -7,7 +7,7 @@ return {
     opts = {
       enabled_cmp_source = true,
       virtual_text = {
-        enabled = true,
+        enabled = false,
         key_bindings = {
           accept = false,
         },
@@ -33,9 +33,11 @@ return {
   },
   {
     "saghen/blink.compat",
+    lazy = true,
+    version = "*",
     optional = true,
     opts = {
-      enable_events = true,
+      enable_events = true
     },
-  },
+  }
 }
