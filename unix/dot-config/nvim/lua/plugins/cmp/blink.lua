@@ -87,6 +87,7 @@ return {
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.default",
+      "sources.providers"
     },
   },
   {

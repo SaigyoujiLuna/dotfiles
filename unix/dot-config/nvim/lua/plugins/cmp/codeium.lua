@@ -20,6 +20,7 @@ return {
     dependencies = { "codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
+        default = {"codeium"},
         providers = {
           codeium = {
             name = "codeium",
@@ -31,4 +32,11 @@ return {
       },
     },
   },
+  {
+    "saghen/blink.compat",
+    optional = true,
+    opts = {
+      enable_events = true,
+    }
+  }
 }
