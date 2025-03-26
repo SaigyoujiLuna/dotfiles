@@ -10,25 +10,24 @@ return {
         enabled = true,
         key_bindings = {
           accept = false,
-        }
+        },
       },
     },
   },
   {
     "saghen/blink.cmp",
     optional = true,
-    dependencies = { "codeium.nvim", "saghen/blink.compat" },
+    dependencies = { "Exafunction/codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        default = {"codeium"},
+        compat = { "codeium"},
         providers = {
           codeium = {
-            name = "codeium",
-            module = "blink.compat.source",
+            -- kind = "Codeium",
             score_offset = 100,
             async = true,
-          },
-        },
+          }
+        }
       },
     },
   },
@@ -37,6 +36,6 @@ return {
     optional = true,
     opts = {
       enable_events = true,
-    }
-  }
+    },
+  },
 }

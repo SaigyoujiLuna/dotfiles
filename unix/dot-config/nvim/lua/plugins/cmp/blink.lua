@@ -6,6 +6,7 @@ return {
       "mikavilpas/blink-ripgrep.nvim",
       { "saghen/blink.compat", optinal = true, opts = {}, version = "*" },
     },
+    build = "cargo build --release",
     version = "*",
     event = "InsertEnter",
     ---@module 'blink.cmp'
@@ -85,34 +86,29 @@ return {
       signature = { window = { border = "rounded" } },
     },
     opts_extend = {
-      "sources.completion.enabled_providers",
+      "sources.compat",
       "sources.default",
-      "sources.providers"
-    },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = { "saghen/blink.cmp" },
-
-    -- example using `opts` for defining servers
-    opts = {
-      servers = {
-        lua_ls = {},
-      },
     },
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
-      for server, config in pairs(opts.servers) do
-        -- passing config.capabilities to blink.cmp merges with the capabilities in your
-        -- `opts[server].capabilities, if you've defined it
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
+      local enabled = opts.sources.default
+      for _, source in ipairs(opts.sources.compat or {}) do
+        opts.sources.providers[source] = vim.tbl_deep_extend(
+          "force",
+          { name = source, module = "blink.compat.source" },
+          opts.sources.providers[source] or {}
+        )
+        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
+          table.insert(enabled, source)
+        end
       end
+      opts.sources.compat = nil
+      require("blink.cmp").setup(opts)
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
-    optional = true,
-    enabled = false,
-  }
+    "saghen/blink.compat",
+    version = "*",
+    lazy = true,
+    opts = {},
+  },
 }
