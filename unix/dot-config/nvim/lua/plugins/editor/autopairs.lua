@@ -1,3 +1,3 @@
 return {
-	{ "echasnovski/mini.pairs", version = "*", opts = {}, event = "BufEnter"},
+  { "echasnovski/mini.pairs", version = "*", opts = {}, event = "BufEnter" },
 }
