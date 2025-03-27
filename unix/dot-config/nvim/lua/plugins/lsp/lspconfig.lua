@@ -82,5 +82,9 @@ return {
         lspconfig[server].setup(config)
       end
     end,
+    opts_extend = {
+      "servers",
+      "setup",
+    }
   },
 }

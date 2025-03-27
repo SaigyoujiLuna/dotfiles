@@ -13,6 +13,15 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      YukiVim.cmp.actions.ai_accept = function()
+        if require("codeium.virtual_text").get_current_completion_item() then
+          vim.api.nvim_input(require("codeium.virtual_text").accept())
+          return true
+        end
+      end
+      require("codeium").setup(opts)
+    end
   },
   {
     "saghen/blink.cmp",

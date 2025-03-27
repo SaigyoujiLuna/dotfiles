@@ -5,14 +5,15 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    optional = true,
     opts = {
       servers = {
         clangd = {
           capabilities = {
             offsetEncoding = { "utf-16" },
-            textDocument = {
-              formatting = false,
-            },
+            -- textDocument = {
+            --   formatting = false,
+            -- },
           },
           cmd = {
             "clangd",
@@ -30,15 +31,30 @@ return {
           },
         },
       },
+      setup = {
+        clangd = function(_, opts)
+          require("clangd_extensions").setup({ server = opts })
+          return false
+        end,
+      },
     },
   },
   {
     "p00f/clangd_extensions.nvim",
-    opts = {},
-  },
-  {
-    "stevearc/conform.nvim",
+    lazy = true,
+    config = function() end,
     opts = {
     },
   },
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    optional = true,
+    opts = {
+      ensure_installed = { "clangd" },
+    },
+  }
 }

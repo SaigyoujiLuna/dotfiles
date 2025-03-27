@@ -70,8 +70,11 @@ return {
               context_size = 5,
               max_filesize = "512K",
               project_root_marker = { ".git", "package.json" },
-              project_root_fallback = true,
+              project_root_fallback = false,
               search_casing = "--smart-case",
+              future_features = {
+                on_off = "<leader>tg",
+              },
             },
           },
         },
