@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 local keymap = vim.keymap
 
-keymap.set("i", "jk", "<ESC>")
+keymap.set("i", "jk", "<ESC>", { desc = "Normal mode" })
 
 -- better up/down
 keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

@@ -31,12 +31,12 @@ return {
           },
         },
       },
-      setup = {
-        clangd = function(_, opts)
-          require("clangd_extensions").setup({ server = opts })
-          return false
-        end,
-      },
+      -- setup = {
+      --   clangd = function(_, opts)
+      --     require("clangd_extensions").setup({ server = opts })
+      --     return false
+      --   end,
+      -- },
     },
   },
   {

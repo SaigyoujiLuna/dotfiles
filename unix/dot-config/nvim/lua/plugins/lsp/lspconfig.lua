@@ -9,6 +9,13 @@ return {
         "stylua",
         "shfmt",
       },
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
@@ -59,32 +66,71 @@ return {
       { "mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
     },
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     opts = {
+      inlay_hints = {
+        enabled = true,
+      },
+      codelens = {
+        enabled = true,
+      },
       diagnostics = {
+        virtual_text = {
+          spacing = 4,
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
-        inlay_hints = {
-          enabled = true,
-        },
-        codelens = {
-          enabled = true,
-        },
-        format = {},
       },
+      servers = {
+        lua_ls = {
+          settings = {
+            Lua = {
+              hint = {
+                enable = true,
+                setType = true,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+              },
+            },
+          },
+        },
+      },
+      -- setup = {},
     },
     config = function(_, opts)
+      -- diagnostics
+      opts.diagnostics = opts.diagnostics or {}
+      vim.diagnostic.config(opts.diagnostics)
+      -- inlay hints
+      opts.inlay_hints = opts.inlay_hints or {}
+      if opts.inlay_hints.enabled then
+        YukiVim.lsp.on_attach(function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end)
+      end
+      -- codelen
+      opts.codelens = opts.codelens or {}
+      if opts.codelens.enabled and vim.lsp.codelens then
+        YukiVim.lsp.on_attach(function(client, bufnr)
+          vim.lsp.codelens.refresh()
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = bufnr,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end)
+      end
       local lspconfig = require("lspconfig")
       for server, config in pairs(opts.servers) do
-        -- passing config.capabilities to blink.cmp merges with the capabilities in your
-        -- `opts[server].capabilities, if you've defined it
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
         lspconfig[server].setup(config)
       end
     end,
     opts_extend = {
       "servers",
       "setup",
-    }
+    },
   },
 }
