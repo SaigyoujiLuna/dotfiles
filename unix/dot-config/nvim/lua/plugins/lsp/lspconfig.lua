@@ -1,3 +1,10 @@
+local diagnostics = {
+  Error = " ",
+  Warn = " ",
+  Hint = " ",
+  Info = " ",
+}
+
 return {
   {
     "williamboman/mason.nvim",
@@ -78,10 +85,22 @@ return {
       diagnostics = {
         virtual_text = {
           spacing = 4,
+          prefix = "●",
+        },
+        float = {
+          severity_sort = true,
+          border = "single",
+          source = "if_many",
         },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
+        sign = {
+          [vim.diagnostic.severity.ERROR] = diagnostics.Error,
+          [vim.diagnostic.severity.WARN] = diagnostics.Warn,
+          [vim.diagnostic.severity.INFO] = diagnostics.Info,
+          [vim.diagnostic.severity.HINT] = diagnostics.Hint,
+        },
       },
       servers = {
         lua_ls = {
