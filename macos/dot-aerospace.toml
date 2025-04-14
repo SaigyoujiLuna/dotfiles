@@ -219,9 +219,27 @@ up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
 [[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-run = ["layout tiling", 'move-node-to-workspace T']
+if.app-id = 'com.mitchellh.ghostty'
+run = ['layout tiling', 'move-node-to-workspace T']
 
 [[on-window-detected]]
-if.app-id = "com.jetbrains.intellij"
+if.app-id = 'com.jetbrains.intellij'
 run = ['move-node-to-workspace I']
+
+[[on-window-detected]]
+if.app-id = 'com.exafunction.windsurf'
+run = ['move-node-to-workspace V']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = ['move-node-to-workspace V']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.dt.Xcode'
+run = ['move-node-to-workspace X']
+
+[[on-window-detected]]
+if.app-id = 'com.meituan.msc.studio'
+run = ['move-node-to-workspace M']
+
+
