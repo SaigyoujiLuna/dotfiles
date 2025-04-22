@@ -3,6 +3,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
       animate = { enabled = true, duration = 300, easing = "linear", fps = 60 },
       bigfile = { enabled = true, notify = true, size = 3 * 1024 * 1024 },
@@ -21,6 +22,33 @@ return {
         },
       },
       words = { enabled = false },
+      win = {
+        border = "rounded",
+        position = "float",
+      },
+      terminal = {
+        win = {
+          style = "terminal",
+          position = "float",
+          border = "rounded"
+        },
+      },
+    },
+    keys = {
+      {
+        "<C-/>",
+        function()
+          require("snacks").terminal.toggle()
+        end,
+        mode = { "i", "n", "t" },
+      },
+      {
+        "<C-_>",
+        function()
+          require("snacks").terminal.toggle()
+        end,
+        mode = { "i", "n", "t" },
+      },
     },
   },
 }

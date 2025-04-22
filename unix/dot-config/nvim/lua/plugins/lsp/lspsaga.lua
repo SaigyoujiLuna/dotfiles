@@ -10,6 +10,8 @@ return {
       "nvim-tree/nvim-web-devicons", -- optional
     },
     keys = {
+      -- { "<C-/>", "<cmd>Lspsaga term_toggle<CR>", mode = { "n", "i", "t" }, desc = "Toggle terminal" },
+      -- { "<C-_>", "<cmd>Lspsaga term_toggle<CR>", mode = { "n", "i", "t" }, desc = "Toggle terminal" },
     },
   },
 }
