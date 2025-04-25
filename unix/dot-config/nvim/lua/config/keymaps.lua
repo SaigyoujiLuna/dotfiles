@@ -32,3 +32,13 @@ keymap.set({ "n" }, "<leader>ci", "<cmd>Lspsaga finder imp<CR>", { desc = "Goto 
 keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Show document" })
 keymap.set({ "n", "i", "t" }, "<C-/>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle terminal" })
 keymap.set({ "n", "i", "t" }, "<C-_>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle terminal" })
+
+--ui toggle
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.zen():map("<leader>uz")
+-- keymap.set("s", "<Tab>", function()
+--     return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
+--   end, { expr = true, desc = "Jump Next" })
+--   keymap.set({ "i", "s" }, "<S-Tab>", function()
+--     return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
+--   end, { expr = true, desc = "Jump Previous" })

@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 local opt = vim.opt
 opt.relativenumber = true
 opt.number = true
@@ -25,4 +27,3 @@ opt.signcolumn = "yes"
 
 opt.scrolloff = 8
 opt.smoothscroll = true
-

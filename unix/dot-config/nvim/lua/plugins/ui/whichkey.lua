@@ -15,6 +15,7 @@ return {
         { "<leader>d", group = "debug"},
         { "<leader>g", group = "git"},
         { "<leader>b", group = "buffer"},
+        { "<leader>u", group = "ui"},
         { "[", group = "prev"},
         { "]", group = "next"},
         { "g", group = "goto"},

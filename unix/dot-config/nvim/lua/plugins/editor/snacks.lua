@@ -30,7 +30,24 @@ return {
         win = {
           style = "terminal",
           position = "float",
-          border = "rounded"
+          border = "rounded",
+        },
+      },
+      zen = {
+        enabled = true,
+      },
+      toggle = {
+        enabled = true,
+        toggle = vim.keymap.set,
+        which_key = true,
+        notify = true,
+        color = {
+          enabled = "green",
+          disabled = "yellow",
+        },
+        wk_desc = {
+          enabled = "Disable ",
+          disabled = "Enable ",
         },
       },
     },
@@ -41,6 +58,7 @@ return {
           require("snacks").terminal.toggle()
         end,
         mode = { "i", "n", "t" },
+        desc = "Toggle Terminal",
       },
       {
         "<C-_>",
@@ -48,6 +66,7 @@ return {
           require("snacks").terminal.toggle()
         end,
         mode = { "i", "n", "t" },
+        desc = "Toggle Terminal",
       },
     },
   },
