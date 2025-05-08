@@ -17,26 +17,45 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true }
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
--- Lspsaga config
-keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "Goto definition" })
-keymap.set("n", "gD", "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Goto type definition" })
-keymap.set("n", "gr", "<cmd>Lspsaga finder ref<CR>", { desc = "Goto reference" })
-keymap.set("n", "gI", "<cmd>Lspsaga finder imp<CR>", { desc = "Goto implementation" })
-keymap.set("n", "<leader>cd", "<cmd>Lspsaga goto_definition<CR>", { desc = "Goto definition" })
-keymap.set("n", "<leader>cD", "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Goto type definition" })
-keymap.set("n", "<leader>cr", "<cmd>Lspsaga finder ref<CR>", { desc = "Goto reference" })
-keymap.set({ "n" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code action" })
-keymap.set({ "n" }, "<leader>cn", "<cmd>Lspsaga rename<CR>", { desc = "Rename" })
-keymap.set({ "n" }, "<leader>ci", "<cmd>Lspsaga finder imp<CR>", { desc = "Goto implementation" })
+-- lsp config
+keymap.set("n", "gd", function()
+  return vim.lsp.buf.definition()
+end, { desc = "Goto definition" })
 
-keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Show document" })
+keymap.set("n", "gD", function()
+  return vim.lsp.buf.type_definition()
+end, { desc = "Goto type definition" })
+keymap.set("n", "gr", function()
+  return vim.lsp.buf.references()
+end, { desc = "Goto reference" })
+keymap.set("n", "gI", function()
+  return vim.lsp.buf.implementation()
+end, { desc = "Goto implementation" })
+keymap.set("n", "<leader>cd", function()
+  return vim.lsp.buf.definition()
+end, { desc = "Goto definition" })
+keymap.set("n", "<leader>cD", function()
+  return vim.lsp.buf.type_definition()
+end, { desc = "Goto type definition" })
+
+keymap.set("n", "<leader>cr", function()
+  return vim.lsp.buf.references()
+end, { desc = "Goto reference" })
+keymap.set({ "n" }, "<leader>ca", function()
+  return vim.lsp.buf.code_action()
+end, { desc = "Code action" })
+
+keymap.set({ "n" }, "<leader>cn", function()
+  return vim.lsp.buf.rename()
+end, { desc = "Rename" })
+keymap.set({ "n" }, "<leader>ci", function()
+  return vim.lsp.buf.implementation()
+end, { desc = "Goto implementation" })
+
+keymap.set("n", "K", function()
+  return vim.lsp.buf.hover()
+end, { desc = "Show document" })
 
 --ui toggle
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.zen():map("<leader>uz")
--- keymap.set("s", "<Tab>", function()
---     return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
---   end, { expr = true, desc = "Jump Next" })
---   keymap.set({ "i", "s" }, "<S-Tab>", function()
---     return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
---   end, { expr = true, desc = "Jump Previous" })

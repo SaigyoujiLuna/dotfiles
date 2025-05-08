@@ -53,6 +53,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     opts_extend = { "ensure_installed" },
     opts = {
+      automatic_enable = true,
       ensure_installed = {
         "lua_ls",
         "bashls",
@@ -60,11 +61,6 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
-        end,
-      })
     end,
   },
   {
@@ -82,6 +78,7 @@ return {
       codelens = {
         enabled = true,
       },
+      ---@type vim.diagnostic.Opts
       diagnostics = {
         virtual_text = {
           spacing = 4,
@@ -142,9 +139,9 @@ return {
           })
         end)
       end
-      local lspconfig = require("lspconfig")
+
       for server, config in pairs(opts.servers) do
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
       end
     end,
     opts_extend = {
