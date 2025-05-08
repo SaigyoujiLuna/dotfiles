@@ -1,6 +1,6 @@
 return {
   {
-    "Exafunction/codeium.nvim",
+    "Exafunction/windsurf.nvim",
     cmd = "Codeium",
     event = "InsertEnter",
     build = ":Codeium Auth",
@@ -13,40 +13,36 @@ return {
         },
       },
     },
+
     config = function(_, opts)
-      YukiVim.cmp.actions.ai_accept = function()
-        if require("codeium.virtual_text").get_current_completion_item() then
-          vim.api.nvim_input(require("codeium.virtual_text").accept())
-          return true
-        end
-      end
       require("codeium").setup(opts)
-    end
+    end,
   },
   {
     "saghen/blink.cmp",
     optional = true,
-    dependencies = { "Exafunction/codeium.nvim", "saghen/blink.compat" },
+    dependencies = { "Exafunction/windsurf.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = { "codeium"},
+        default = { "codeium" },
         providers = {
           codeium = {
-            -- kind = "Codeium",
+            name = "Codeium",
+            module = "codeium.blink",
             score_offset = 100,
             async = true,
-          }
-        }
+          },
+        },
       },
     },
   },
-  {
-    "saghen/blink.compat",
-    lazy = true,
-    version = "*",
-    optional = true,
-    opts = {
-      enable_events = true
-    },
-  }
+  -- {
+  --   "saghen/blink.compat",
+  --   lazy = true,
+  --   version = "*",
+  --   optional = true,
+  --   opts = {
+  --     enable_events = true
+  --   },
+  -- }
 }

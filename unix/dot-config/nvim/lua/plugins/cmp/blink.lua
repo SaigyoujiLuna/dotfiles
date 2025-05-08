@@ -15,6 +15,7 @@ return {
       keymap = {
         preset = "enter",
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       },
 
@@ -55,6 +56,7 @@ return {
         },
         ghost_text = {
           enabled = true,
+          show_with_menu = false,
         },
       },
       -- Default list of enabled providers defined so that you can extend it
