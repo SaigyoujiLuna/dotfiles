@@ -30,7 +30,7 @@ return {
     end,
     keys = {
       {
-        "<leader> ",
+        "<leader><Space>",
         function()
           require("telescope.builtin").find_files()
         end,
