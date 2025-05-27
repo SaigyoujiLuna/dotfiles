@@ -15,6 +15,8 @@ return {
       ensure_installed = {
         "stylua",
         "shfmt",
+        "lua-language-server",
+        "bash-language-server",
       },
       ui = {
         icons = {
@@ -52,13 +54,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts_extend = { "ensure_installed" },
-    opts = {
-      automatic_enable = true,
-      ensure_installed = {
-        "lua_ls",
-        "bashls",
-      },
-    },
+    opts = {},
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
     end,
@@ -81,22 +77,25 @@ return {
       ---@type vim.diagnostic.Opts
       diagnostics = {
         virtual_text = {
-          spacing = 4,
+          spacing = 2,
+          source = "if_many",
           prefix = "●",
         },
         float = {
           severity_sort = true,
-          border = "single",
+          border = "rounded",
           source = "if_many",
         },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
-        sign = {
-          [vim.diagnostic.severity.ERROR] = diagnostics.Error,
-          [vim.diagnostic.severity.WARN] = diagnostics.Warn,
-          [vim.diagnostic.severity.INFO] = diagnostics.Info,
-          [vim.diagnostic.severity.HINT] = diagnostics.Hint,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = diagnostics.Warn,
+            [vim.diagnostic.severity.INFO] = diagnostics.Info,
+            [vim.diagnostic.severity.HINT] = diagnostics.Hint,
+          },
         },
       },
       servers = {
@@ -118,6 +117,10 @@ return {
       -- setup = {},
     },
     config = function(_, opts)
+      -- keymap
+      YukiVim.lsp.on_attach(function(client, buffer)
+        require("config.keymaps.lspkeymap").on_attach(client, buffer)
+      end)
       -- diagnostics
       opts.diagnostics = opts.diagnostics or {}
       vim.diagnostic.config(opts.diagnostics)

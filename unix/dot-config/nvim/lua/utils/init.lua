@@ -1,6 +1,7 @@
 ---@class yukivim.utils
 ---@field cmp yukivim.utils.cmp
 ---@field lsp yukivim.utils.lsp
+---@field lazy yukivim.utils.lazy
 local M = {}
 
 setmetatable(M, {
