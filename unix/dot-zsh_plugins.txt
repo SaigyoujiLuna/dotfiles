@@ -1,12 +1,16 @@
-jeffreytse/zsh-vi-mode
+# jeffreytse/zsh-vi-mode
 
 # comp
 mattmc3/ez-compinit
 zsh-users/zsh-completions kind:fpath path:src
 zsh-users/zsh-autosuggestions
+#zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-syntax-highlighting
-
 ajeetdsouza/zoxide
+
+#bookmark
+pabloariasal/zfm
+#fuzzy search
 Aloxaf/fzf-tab
 
 MichaelAquilina/zsh-you-should-use
