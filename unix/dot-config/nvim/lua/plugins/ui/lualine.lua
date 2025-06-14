@@ -11,11 +11,6 @@ return {
           disabled_filetypes = {
             statusline = { "neo-tree", "netrw", "dashboard" },
           },
-          -- sections = {
-          -- 	lualine_a = "mode",
-          -- 	lualine_b = { "branch"},
-          --
-          -- }
         },
         sections = {
           lualine_a = { "mode" },
@@ -25,26 +20,15 @@ return {
             Snacks.profiler.status(),
             {
               function()
-                ---@type NoiceStatus
-                return require("noice").api.status.command.get()
+                local recording_register = vim.fn.reg_recording()
+                if recording_register == "" then
+                  return ""
+                else
+                  return "󰑋 " .. recording_register
+                end
               end,
-              cond = function()
-                return package.loaded["noice"] and require("noice").api.status.command.has()
-              end,
-              color = function()
-                return { fg = Snacks.util.color("Statement") }
-              end,
-            },
-            {
-              function()
-                return require("noice").api.status.mode.get()
-              end,
-              cond = function()
-                return package.loaded["noice"] and require("noice").api.status.mode.has()
-              end,
-              color = function()
-                return { fg = Snacks.util.color("Constant") }
-              end,
+              separator = { left = "", right = "" },
+              color = { fg = "#333333", bg = require("catppuccin.palettes").get_palette("macchiato").red },
             },
           },
           lualine_y = {

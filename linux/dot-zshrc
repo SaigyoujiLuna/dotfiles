@@ -24,10 +24,6 @@ eval "$(starship init zsh)"
 # rbenv init
 eval "$(rbenv init -)"
 # ------------------- path setting ----------------------
-# proto
-export PROTO_HOME="$HOME/.proto";
-
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
