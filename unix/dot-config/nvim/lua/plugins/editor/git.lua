@@ -28,6 +28,12 @@ return {
         end,
         desc = "Current line blame",
       },
+      {
+        "<leader>gd",
+        function()
+          require('gitsigns').diffthis()
+        end
+      }
     },
   },
 }

@@ -15,3 +15,5 @@ pabloariasal/zfm
 Aloxaf/fzf-tab
 
 MichaelAquilina/zsh-you-should-use
+
+romkatv/powerlevel10k

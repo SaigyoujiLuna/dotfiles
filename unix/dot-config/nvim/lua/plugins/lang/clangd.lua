@@ -11,9 +11,6 @@ return {
         clangd = {
           capabilities = {
             offsetEncoding = { "utf-16" },
-            -- textDocument = {
-            --   formatting = false,
-            -- },
           },
           cmd = {
             "clangd",
@@ -31,12 +28,12 @@ return {
           },
         },
       },
-      -- setup = {
-      --   clangd = function(_, opts)
-      --     require("clangd_extensions").setup({ server = opts })
-      --     return false
-      --   end,
-      -- },
+      setup = {
+        clangd = function(_, opts)
+          require("clangd_extensions").setup({ server = opts })
+          return false
+        end,
+      },
     },
   },
   {
@@ -44,6 +41,26 @@ return {
     lazy = true,
     config = function() end,
     opts = {
+      inlay_hints = {},
+      ast = {
+        role_icons = {
+          type = "",
+          declaration = "",
+          expression = "",
+          specifier = "",
+          statement = "",
+          ["template argument"] = "",
+        },
+        kind_icons = {
+          Compound = "",
+          Recovery = "",
+          TranslationUnit = "",
+          PackExpansion = "",
+          TemplateTypeParm = "",
+          TemplateTemplateParm = "",
+          TemplateParamObject = "",
+        },
+      },
     },
   },
   {
@@ -56,5 +73,5 @@ return {
     opts = {
       ensure_installed = { "clangd" },
     },
-  }
+  },
 }

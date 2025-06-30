@@ -242,4 +242,9 @@ run = ['move-node-to-workspace X']
 if.app-id = 'com.meituan.msc.studio'
 run = ['move-node-to-workspace M']
 
+[[on-window-detected]]
+if.app-name-regex-substring = "CatPaw for Xcode Extension"  # 同时匹配Xcode主应用和插件
+#title-regex = "CatPaw for Xcode Extension|CATPAW CHAT"  # 匹配插件窗口标题
+#mode = "floating"  # 强制浮动模式
+run = ['layout floating']
 
