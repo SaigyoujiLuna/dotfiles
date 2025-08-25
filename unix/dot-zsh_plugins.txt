@@ -15,4 +15,5 @@ Aloxaf/fzf-tab
 
 MichaelAquilina/zsh-you-should-use
 
-romkatv/powerlevel10k
+# romkatv/powerlevel10k
+axieax/zsh-starship

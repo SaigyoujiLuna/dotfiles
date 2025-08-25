@@ -1,5 +1,6 @@
 theme = catppuccin-macchiato
 font-family = "MonoLisa Variable"
+font-family = "Noto Sans"
 font-size = 14
 cursor-style-blink = true
 cursor-style = block_hollow
