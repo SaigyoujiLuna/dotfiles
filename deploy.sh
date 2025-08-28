@@ -1,38 +1,50 @@
 #!/usr/bin/env bash
 
-# environment check
-if ! command -v stow >/dev/null 2>&1; then
-	echo "stow is not available"
-	echo "Please install stow first"
-	exit 1
-fi
+set -euo pipefail
 
-origin_dir=$(pwd)
-work_dir=$(dirname "${BASH_SOURCE[0]}")
+# Simple colored output
+success() { echo -e "\033[32m✓\033[0m $*"; }
+error() { echo -e "\033[31m✗\033[0m $*" >&2; }
+info() { echo -e "\033[34m→\033[0m $*"; }
 
-declare -A deploy_map
-deploy_map=([common]="Linux Darwin FreeBSD" [unix]="Linux Darwin FreeBSD" [linux]="Linux" [macos]="Darwin")
-declare -a order_list
-order_list=("common" "unix" "linux" "macos")
-ignorefiles=("YukiConfig.code-profile")
-os_name=$(uname)
+# Check dependencies
+command -v stow >/dev/null || { error "stow not found"; exit 1; }
 
-cd "$work_dir" || exit 1
+# Determine targets based on OS
+case "$(uname)" in
+    Darwin) targets=(common unix macos) ;;
+    Linux)  targets=(common unix linux) ;;
+    *)      error "Unsupported OS: $(uname)"; exit 1 ;;
+esac
 
-for target in "${order_list[@]}"; do
-	read -r -a support_os <<<"${deploy_map[$target]}"
-	for support_os_item in "${support_os[@]}"; do
-		if [[ "$support_os_item" == "$os_name" ]]; then
-			ignore_command=""
+info "Deploying: ${targets[*]}"
 
-			for ignore in "${ignorefiles[@]}"; do
-				ignore_command="--ignore=$ignore $ignore_command"
-			done
-			command="stow --adopt --dotfiles $target $ignore_command -t $HOME"
-			$command && echo "$target dotfiles deploy success." || echo "$target dotfiles deploy failed."
-		fi
-	done
+# Deploy function
+deploy() {
+    local target="$1"
+    [[ -d "$target" ]] || return 1
+    
+    stow --dotfiles -D "$target" -t "$HOME" 2>/dev/null || true
+    stow --dotfiles --adopt "$target" --ignore="YukiConfig.code-profile" -t "$HOME"
+}
+
+# Main deployment loop
+cd "$(dirname "$0")" || exit 1
+failed=()
+
+for target in "${targets[@]}"; do
+    if deploy "$target"; then
+        success "$target"
+    else
+        error "$target failed"
+        failed+=("$target")
+    fi
 done
 
-cd "$origin_dir" || exit 1
-echo "All done, Ciallo ～(∠・ω< )⌒★"
+# Summary
+if [[ ${#failed[@]} -eq 0 ]]; then
+    success "All dotfiles deployed! Ciallo ～(∠・ω< )⌒★"
+else
+    error "Failed: ${failed[*]}"
+    exit 1
+fi
