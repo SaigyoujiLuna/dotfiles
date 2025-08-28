@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-# Simple colored output
-success() { echo -e "\033[32m✓\033[0m $*"; }
-error() { echo -e "\033[31m✗\033[0m $*" >&2; }
-info() { echo -e "\033[34m→\033[0m $*"; }
+# Kawaii colored output (◕‿◕)
+success() { echo -e "\033[32m(◕‿◕)♡\033[0m $* desu~"; }
+error() { echo -e "\033[31m(╥﹏╥)\033[0m $* failed... gomen nasai" >&2; }
+info() { echo -e "\033[34m(｡◕‿◕｡)\033[0m $* nya~"; }
 
 # Check dependencies
 command -v stow >/dev/null || { error "stow not found"; exit 1; }
@@ -17,7 +17,7 @@ case "$(uname)" in
     *)      error "Unsupported OS: $(uname)"; exit 1 ;;
 esac
 
-info "Deploying: ${targets[*]}"
+info "Deploying dotfiles"
 
 # Deploy function
 deploy() {
@@ -34,17 +34,17 @@ failed=()
 
 for target in "${targets[@]}"; do
     if deploy "$target"; then
-        success "$target"
+        success "$target complete!"
     else
-        error "$target failed"
+        error "$target"
         failed+=("$target")
     fi
 done
 
 # Summary
 if [[ ${#failed[@]} -eq 0 ]]; then
-    success "All dotfiles deployed! Ciallo ～(∠・ω< )⌒★"
+    success "Mission complete! Ciallo ～(∠・ω< )⌒★"
 else
-    error "Failed: ${failed[*]}"
+    error "Some configs"
     exit 1
 fi
