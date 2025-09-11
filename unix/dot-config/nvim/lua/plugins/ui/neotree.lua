@@ -8,7 +8,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-      { "3rd/image.nvim", opts = {} }, -- Optional image support in preview window: See `# Preview Mode` for more information
+      vim.g.neovide and {} or { "3rd/image.nvim", opts = {} } -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     opts = {
       close_if_last_window = false,

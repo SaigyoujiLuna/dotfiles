@@ -17,6 +17,7 @@ return {
     config = function(_, opts)
       YukiVim.cmp.actions.ai_accept = function()
         if require("codeium.virtual_text").get_current_completion_item() then
+          YukiVim.create_undo()
           vim.api.nvim_input(require("codeium.virtual_text").accept())
           return true
         end
