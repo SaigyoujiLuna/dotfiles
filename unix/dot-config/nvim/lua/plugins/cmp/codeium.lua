@@ -5,44 +5,23 @@ return {
     event = "InsertEnter",
     build = ":Codeium Auth",
     opts = {
-      enabled_cmp_source = true,
+      enabled_cmp_source = false,
+      idle_delay = 75,
       virtual_text = {
-        enabled = false,
+        enabled = true,
         key_bindings = {
-          accept = false,
+          accept = false
         },
       },
     },
-
     config = function(_, opts)
+      YukiVim.cmp.actions.ai_accept = function()
+        if require("codeium.virtual_text").get_current_completion_item() then
+          vim.api.nvim_input(require("codeium.virtual_text").accept())
+          return true
+        end
+      end
       require("codeium").setup(opts)
-    end,
+    end
   },
-  {
-    "saghen/blink.cmp",
-    optional = true,
-    dependencies = { "Exafunction/windsurf.nvim", "saghen/blink.compat" },
-    opts = {
-      sources = {
-        default = { "codeium" },
-        providers = {
-          codeium = {
-            name = "Codeium",
-            module = "codeium.blink",
-            score_offset = 100,
-            async = true,
-          },
-        },
-      },
-    },
-  },
-  -- {
-  --   "saghen/blink.compat",
-  --   lazy = true,
-  --   version = "*",
-  --   optional = true,
-  --   opts = {
-  --     enable_events = true
-  --   },
-  -- }
 }

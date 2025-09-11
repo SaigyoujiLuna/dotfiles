@@ -1,3 +1,4 @@
+local otherCmps = YukiVim.cmp.map({ "snippet_forward", "ai_accept" })
 return {
   {
     "saghen/blink.cmp",
@@ -13,17 +14,26 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = "enter",
-        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        preset = "super-tab",
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.get_selected_item() then
+              return cmp.accept()
+            end
+            if otherCmps() then
+              return true
+            else
+              return cmp.select_and_accept()
+              -- return false
+            end
+          end,
+          "fallback",
+        },
+        ["<C-Tab>"] = { "hide" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
       },
 
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
-        use_nvim_cmp_as_default = false,
         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
@@ -35,7 +45,8 @@ return {
           },
         },
         menu = {
-          auto_show = true,
+          -- enabled = false,
+          -- auto_show = true,
 
           border = "rounded",
 
@@ -48,14 +59,17 @@ return {
             preselect = false,
             auto_insert = false,
           },
+          cycle = {
+            from_top = false,
+          },
         },
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 600,
+          auto_show_delay_ms = 300,
           window = { border = "rounded" },
         },
         ghost_text = {
-          enabled = true,
+          enabled = false,
           show_with_menu = false,
         },
       },
@@ -69,11 +83,15 @@ return {
             name = "Ripgrep",
             opts = {
               prefix_min_len = 3,
-              context_size = 5,
-              max_filesize = "512K",
+              backend = {
+                context_size = 5,
+                ripgrep = {
+                  max_filesize = "512K",
+                  project_root_fallback = false,
+                  search_casing = "--smart-case",
+                },
+              },
               project_root_marker = { ".git", "package.json" },
-              project_root_fallback = false,
-              search_casing = "--smart-case",
               future_features = {
                 on_off = "<leader>tg",
               },
@@ -91,6 +109,7 @@ return {
       signature = { window = { border = "rounded" } },
     },
     opts_extend = {
+      "sources.completion.enabled_providers",
       "sources.compat",
       "sources.default",
     },

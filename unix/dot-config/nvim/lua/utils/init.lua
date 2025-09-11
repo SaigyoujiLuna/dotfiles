@@ -19,4 +19,10 @@ function M.get_pkg_path(pkg, path, opts)
     local ret = root .. "/packages" .. pkg .. path
     return ret
 end
+M.CREATE_UNDO = vim.api.nvim_replace_termcodes("<C-g>u", true, true, true)
+function M.create_undo()
+    if vim.api.nvim_get_mode().mode == "i" then
+        vim.api.nvim_feedkeys(M.CREATE_UNDO, "n", false)
+    end
+end
 return M
