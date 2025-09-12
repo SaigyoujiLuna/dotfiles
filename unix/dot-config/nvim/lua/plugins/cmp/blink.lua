@@ -16,17 +16,9 @@ return {
       keymap = {
         preset = "super-tab",
         ["<Tab>"] = {
-          function(cmp)
-            if cmp.get_selected_item() then
-              return cmp.accept()
-            end
-            if otherCmps() then
-              return true
-            else
-              return cmp.select_and_accept()
-              -- return false
-            end
-          end,
+          "accept",
+          YukiVim.cmp.map({"snippet_forward", "ai_accept"}),
+          "select_and_accept",
           "fallback",
         },
         ["<C-Tab>"] = { "hide" },
