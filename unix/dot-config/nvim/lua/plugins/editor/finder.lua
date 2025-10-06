@@ -29,20 +29,20 @@ return {
       require('telescope').load_extension('fzf')
     end,
     keys = {
-      {
-        "<leader><Space>",
-        function()
-          require("telescope.builtin").find_files()
-        end,
-        desc = "Find in files",
-      },
-      {
-        "<leader>/",
-        function()
-          require("telescope.builtin").live_grep()
-        end,
-        desc = "Live grep",
-      },
+      -- {
+      --   "<leader><Space>",
+      --   function()
+      --     require("telescope.builtin").find_files()
+      --   end,
+      --   desc = "Find in files",
+      -- },
+      -- {
+      --   "<leader>/",
+      --   function()
+      --     require("telescope.builtin").live_grep()
+      --   end,
+      --   desc = "Live grep",
+      -- },
       {
         "<leader>x",
         function()

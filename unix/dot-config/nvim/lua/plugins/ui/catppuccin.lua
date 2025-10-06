@@ -17,7 +17,7 @@ return {
         flash = true,
         indent_blankline = {
           enabled = true,
-          scope_color = "macchiato",
+          colored_indent_levels = true,
         },
         lsp_saga = true,
         mason = true,
@@ -48,6 +48,10 @@ return {
         },
         notify = true,
         semantic_tokens = true,
+        snacks = {
+          enabled = true,
+          -- indent_scope_color = "lavender",
+        },
         treesitter_context = true,
         treesitter = true,
         rainbow_delimiters = true,
@@ -68,6 +72,7 @@ return {
   {
 
     "nvim-lualine/lualine.nvim",
+    optional = true,
     opts = {
       options = {
         theme = "catppuccin",
@@ -89,7 +94,7 @@ return {
   	dependencies = "catppuccin",
     optional = true,
   	opts = function(_, opts)
-  		opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme()
+  		opts.highlights = require("catppuccin.special.bufferline").get_theme()
     end
   }
 }

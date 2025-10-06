@@ -3,17 +3,28 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = { "catppuccin", "nvim-tree/nvim-web-devicons" },
-    event = {"BufEnter"},
+    event = { "BufEnter" },
+    ---@type bufferline.UserConfig
     opts = {
       options = {
         -- separator_style = "slant",
         always_show_bufferline = false,
+        close_command = function(n)
+          Snacks.bufdelete(n)
+        end,
+        right_mouse_command = function(n)
+          Snacks.bufdelete(n)
+        end,
+        diagnostics = "nvim_lsp",
         offsets = {
           {
             filetype = "neo-tree",
             text = "NeoTree",
             highlight = "Directory",
             text_align = "left",
+          },
+          {
+            filetype = "snacks_layout_box",
           },
         },
       },
@@ -34,7 +45,7 @@ return {
       { "<S-h>", "<cmd>BufferLineCyclePrev<CR>", desc = "Prev Buffer" },
       { "<S-l>", "<cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
       { "<leader>bp", "<cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-      { "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers"},
+      { "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
     },
   },
 }

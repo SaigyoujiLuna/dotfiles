@@ -20,3 +20,4 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true }
 --ui toggle
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.zen():map("<leader>uz")
+Snacks.toggle.dim():map("<leader>ud")
