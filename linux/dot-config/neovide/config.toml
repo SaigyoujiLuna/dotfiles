@@ -1,0 +1,5 @@
+frame = "full"
+[font]
+normal = ["MonoLisa Variable"]
+size = 14.0
+
