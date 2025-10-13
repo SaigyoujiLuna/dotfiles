@@ -25,6 +25,17 @@ return {
         layout = {
           explorer = {},
         },
+        config = function(opts)
+            if opts.source == 'explorer' then
+                ---@type snacks.picker.explorer.Config
+                local explorer_opts = opts
+                explorer_opts.hidden = true
+                explorer_opts.git_untracked = true
+                explorer_opts.ignored = true
+                return explorer_opts
+            end
+            return opts
+        end,
         win = {
           explorer = {
             backdrop = {
