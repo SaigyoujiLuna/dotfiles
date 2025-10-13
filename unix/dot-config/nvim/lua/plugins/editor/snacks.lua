@@ -78,7 +78,7 @@ return {
     },
     config = function(_, opts)
       require("snacks").setup(opts)
-      Snacks.dim.enable()
+      -- Snacks.dim.enable()
     end,
     keys = {
       {
