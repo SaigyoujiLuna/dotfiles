@@ -18,8 +18,6 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^6", -- Recommended
-    lazy = false,
     ft = { "rust" },
     ---@type rustaceanvim.Opts
     opts = {
@@ -50,11 +48,6 @@ return {
             },
             procMacro = {
               enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["napi-derive"] = { "napi" },
-                ["async-recursion"] = { "async_recursion" },
-              },
             },
             files = {
               excludeDirs = {
@@ -68,6 +61,7 @@ return {
                 "venv",
                 ".venv",
               },
+              watcher = "client",
             },
           },
         },
@@ -75,8 +69,8 @@ return {
       tools = {
         float_win_config = {
           auto_focus = true,
-        }
-      }
+        },
+      },
     },
     config = function(_, opts)
       local package_path = YukiVim.get_pkg_path("codelldb")
