@@ -17,33 +17,21 @@ return {
       notifier = {
         enabled = true,
         style = "compact",
-        animate = true,
       },
       input = { enabled = true },
       picker = {
         enabled = true,
-        layout = {
-          explorer = {},
-        },
         config = function(opts)
-            if opts.source == 'explorer' then
-                ---@type snacks.picker.explorer.Config
-                local explorer_opts = opts
-                explorer_opts.hidden = true
-                explorer_opts.git_untracked = true
-                explorer_opts.ignored = true
-                return explorer_opts
-            end
-            return opts
+          if opts.source == "explorer" then
+            ---@type snacks.picker.explorer.Config
+            local explorer_opts = opts
+            explorer_opts.hidden = true
+            explorer_opts.git_untracked = true
+            explorer_opts.ignored = true
+            return explorer_opts
+          end
+          return opts
         end,
-        win = {
-          explorer = {
-            backdrop = {
-              transparent = true,
-            },
-          },
-          input = {},
-        },
       },
       quickfile = { enabled = true, win = {} },
       scope = { enabled = true },
@@ -57,17 +45,13 @@ return {
       statuscolumn = {
         enabled = true,
       },
-      words = { enabled = false },
+      words = { enabled = true },
       win = {
         border = "rounded",
         position = "float",
       },
       terminal = {
-        win = {
-          style = "terminal",
-          position = "float",
-          border = "rounded",
-        },
+        enabled = true,
       },
       zen = {
         enabled = true,
@@ -95,7 +79,12 @@ return {
       {
         "<C-/>",
         function()
-          require("snacks").terminal.toggle()
+          require("snacks").terminal.toggle(nil, {
+            win = {
+              position = "float",
+              border = "rounded",
+            },
+          })
         end,
         mode = { "i", "n", "t" },
         desc = "Toggle Terminal",

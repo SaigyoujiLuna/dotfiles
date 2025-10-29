@@ -116,7 +116,7 @@ return {
       },
       -- setup = {},
     },
-    config = function(_, opts)
+    config = vim.schedule_wrap(function(_, opts)
       -- keymap
       YukiVim.lsp.on_attach(function(client, buffer)
         require("config.keymaps.lspkeymap").on_attach(client, buffer)
@@ -146,7 +146,7 @@ return {
       for server, config in pairs(opts.servers) do
         vim.lsp.config(server, config)
       end
-    end,
+    end),
     opts_extend = {
       "servers",
       "setup",

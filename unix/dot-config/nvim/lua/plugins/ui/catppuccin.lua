@@ -7,10 +7,18 @@ return {
     opts = {
       flavour = "macchiato", -- latte, frappe, macchiato, mocha
       transparent_background = true,
+      float = {
+          transparent = true,
+      },
       show_end_of_buffer = true,
+      term_colors = true,
+      dim_inactive = {
+          enalbed = true,
+      },
       no_italic = false,
       no_bold = false,
       no_underline = false,
+      auto_integrations = true,
       integrations = {
         dashboard = true,
         fidget = true,
