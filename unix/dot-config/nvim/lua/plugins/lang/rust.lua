@@ -42,9 +42,9 @@ return {
                 enabled = true,
               },
             },
-            checkOnSave = false,
+            checkOnSave = true,
             diagnostics = {
-              enabled = false,
+              enabled = true,
             },
             procMacro = {
               enable = true,
@@ -99,7 +99,7 @@ return {
     opts = {
       ensure_installed = {
         "codelldb",
-        "bacon",
+        -- "bacon",
       },
     },
   },
@@ -108,7 +108,7 @@ return {
     opts = {
       servers = {
         bacons_ls = {
-          enabled = true,
+          enabled = false,
         },
         rust_analyzer = {
           enabled = false,
