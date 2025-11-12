@@ -66,11 +66,6 @@ return {
           },
         },
       },
-      tools = {
-        float_win_config = {
-          auto_focus = true,
-        },
-      },
     },
     config = function(_, opts)
       local package_path = YukiVim.get_pkg_path("codelldb")

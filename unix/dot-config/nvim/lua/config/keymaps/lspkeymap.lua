@@ -1,99 +1,14 @@
-local M = {}
-
----@type LazyKeysLspSpec[]|nil
-M._keys = nil
-
----@alias LazyKeysLspSpec LazyKeysSpec|{has?:string|string[], cond?:fun():boolean}
----@alias LazyKeysLsp LazyKeys|{has?: string|string[], cond?: fun(): boolean}
-
----@return LazyKeysLspSpec[]
-function M.get()
-  if M._keys then
-    return M._keys
-  end
-
-  -- stylua: ignore
-  M._keys = {
-    { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-    { "gr", vim.lsp.buf.references, desc = "Goto References", nowait = true },
-    { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-    { "gt", vim.lsp.buf.type_definition, desc = "Goto Type Definition" },
-    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    { "K", function() return vim.lsp.buf.hover() end, desc = "Hover", },
-    { "gk", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp", },
-    { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp", },
-    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v", },  has = "codeAction", },
-    { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v", }, has = "codeLens", },
-    { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh Codelens", mode = { "n", }, has = "codeLens", },
-    { "<leader>cN", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = { "n", }, has = { "workspace/didRenameFiles", "workspace/willRenameFiles", }, },
-    { "<leader>cn", vim.lsp.buf.rename, desc = "Rename", has = "rename", },
-    { "]]", function() Snacks.words.jump(vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end},
-    { "[[", function() Snacks.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Prev Reference", cond = function() return Snacks.words.is_enabled() end},
-  }
-  return M._keys
-end
-
----@param method string|string[]
-function M.has(buffer, method)
-  if type(method) == "table" then
-    for _, m in ipairs(method) do
-      if M.has(buffer, m) then
-        return true
-      end
-    end
-    return false
-  end
-  method = method:find("/") and method or "textDocument/" .. method
-  local clients = YukiVim.lsp.get_clients({ bufnr = buffer })
-  for _, client in ipairs(clients) do
-    if client:supports_method(method) then
-      return true
-    end
-  end
-  return false
-end
-
----@return LazyKeysLsp[]
-function M.resolve(buffer)
-  local Keys = require("lazy.core.handler.keys")
-  local spec = M.get()
-  local clients = YukiVim.lsp.get_clients({ bufnr = buffer })
-  local opts = YukiVim.lazy.opts("nvim-lspconfig")
-  for _, client in ipairs(clients) do
-    local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
-    vim.list_extend(spec, maps)
-  end
-  return Keys.resolve(spec)
-end
-
-function M.on_attach(_, buffer)
-  local Keys = require("lazy.core.handler.keys")
-  local keymaps = M.resolve(buffer)
-
-  for _, keys in pairs(keymaps) do
-    local has = not keys.has or M.has(buffer, keys.has)
-    local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
-
-    if has and cond then
-      ---@type LazyKeysBase|{has?:string|string[], silent?:boolean, cond?:fun():boolean}
-      local opts = Keys.opts(keys)
-      opts.cond = nil
-      opts.has = nil
-      opts.silent = opts.silent ~= false
-      ---@type vim.keymap.set.Opts
-      local keys_opts = {
-        desc = opts.desc,
-        buffer = buffer,
-        silent = opts.silent,
-        remap = opts.remap,
-        noremap = opts.noremap,
-        expr = opts.expr,
-        nowait = opts.nowait,
-      }
-      vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, keys_opts)
-    end
+local map = vim.keymap.set
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  return function()
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      float = true,
+    })
   end
 end
-return M
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })

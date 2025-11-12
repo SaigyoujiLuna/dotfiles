@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -10,8 +11,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        -- build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-        build = "make"
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
       },
     },
     opts = {
@@ -21,34 +21,48 @@ return {
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
-        }
-      }
+        },
+      },
     },
-    config = function (_, opts)
-      require('telescope').setup(opts)
-      require('telescope').load_extension('fzf')
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("fzf")
     end,
     keys = {
-      -- {
-      --   "<leader><Space>",
-      --   function()
-      --     require("telescope.builtin").find_files()
-      --   end,
-      --   desc = "Find in files",
-      -- },
-      -- {
-      --   "<leader>/",
-      --   function()
-      --     require("telescope.builtin").live_grep()
-      --   end,
-      --   desc = "Live grep",
-      -- },
+      {
+        "<leader><Space>",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find in files",
+      },
+      {
+        "<leader>/",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "Live grep",
+      },
+      {
+        "gs",
+        function()
+          require("telescope.builtin").lsp_document_symbols({ symbols = YukiVim.config.get_kind_filter() })
+        end,
+        desc = "Goto Symbol",
+      },
+      {
+          "gS",
+          function()
+              require("telescope.builtin").lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
+          end,
+          desc = "Goto Symbol (Workspace)",
+      },
       {
         "<leader>x",
         function()
           require("telescope.builtin").diagnostics()
-        end
-      }
+        end,
+      },
     },
   },
 }

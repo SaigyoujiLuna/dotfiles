@@ -131,19 +131,33 @@ return {
         end,
         desc = "Git File Status",
       },
+      -- {
+      --   "<leader>/",
+      --   function()
+      --     Snacks.picker.grep()
+      --   end,
+      --   desc = "Live Grep",
+      -- },
+      -- {
+      --   "<leader><Space>",
+      --   function()
+      --     Snacks.picker.files()
+      --   end,
+      --   desc = "Find Files",
+      -- },
       {
-        "<leader>/",
+        "gs",
         function()
-          Snacks.picker.grep()
+          Snacks.picker.lsp_symbols({ filter = YukiVim.config.kind_filter })
         end,
-        desc = "Live Grep",
+        desc = "LSP Symbols",
       },
       {
-        "<leader><Space>",
+        "gS",
         function()
-          Snacks.picker.files()
+          Snacks.picker.lsp_workspace_symbols({ filter = YukiVim.config.kind_filter })
         end,
-        desc = "Find Files",
+        desc = "LSP Workspace Symbols",
       },
     },
   },
