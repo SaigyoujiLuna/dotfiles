@@ -51,6 +51,13 @@ M.icons = {
     Hint = " ",
     Info = " ",
   },
+  dap = {
+    Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+    Breakpoint = " ",
+    BreakpointCondition = " ",
+    BreakpointRejected = { " ", "DiagnosticError" },
+    LogPoint = ".>",
+  },
 }
 
 ---@param buf? number
@@ -65,13 +72,12 @@ function M.get_kind_filter(buf)
     return
   end
   if type(M.kind_filter[ft]) == "table" then
----@diagnostic disable-next-line: return-type-mismatch
+    ---@diagnostic disable-next-line: return-type-mismatch
     return M.kind_filter[ft]
   end
   ---@diagnostic disable-next-line: return-type-mismatch
   return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
-
 
 M.did_init = false
 function M.init()

@@ -17,6 +17,10 @@ return {
       notifier = {
         enabled = true,
         style = "compact",
+        width = {
+          min = 40,
+          max = 0.7,
+        },
       },
       input = { enabled = true },
       picker = {
@@ -109,6 +113,7 @@ return {
         function()
           Snacks.lazygit()
         end,
+        desc = "Lazygit",
       },
       {
         "<leader>n",

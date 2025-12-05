@@ -18,21 +18,22 @@ return {
         topdelete = { text = "" },
         changedelete = { text = "▎" },
       },
+      current_line_blame = true,
     },
-    config = true,
     keys = {
       {
-        "<leader>gb",
+        "do",
         function()
-          require("gitsigns").toggle_current_line_blame()
+          require('gitsigns').preview_hunk()
         end,
-        desc = "Current line blame",
+        desc = "diff hunk"
       },
       {
-        "<leader>gd",
-        function()
-          require('gitsigns').diffthis()
-        end
+          "dp",
+          function()
+              require('gitsigns').reset_hunk()
+          end,
+          desc = "Restore change"
       }
     },
   },
