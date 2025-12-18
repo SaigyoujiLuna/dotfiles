@@ -1,7 +1,7 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    event = {"BufEnter"},
+    event = { "BufEnter" },
     opts = {
       signs = {
         add = { text = "▎" },
@@ -22,19 +22,35 @@ return {
     },
     keys = {
       {
-        "do",
+        "[c",
         function()
-          require('gitsigns').preview_hunk()
+          require("gitsigns").nav_hunk("prev", {
+            wrap = true,
+          })
         end,
-        desc = "diff hunk"
       },
       {
-          "dp",
-          function()
-              require('gitsigns').reset_hunk()
-          end,
-          desc = "Restore change"
-      }
+        "]c",
+        function()
+          require("gitsigns").nav_hunk("next", {
+            wrap = true,
+          })
+        end,
+      },
+      {
+        "do",
+        function()
+          require("gitsigns").preview_hunk()
+        end,
+        desc = "diff hunk",
+      },
+      {
+        "dp",
+        function()
+          require("gitsigns").reset_hunk()
+        end,
+        desc = "Restore change",
+      },
     },
   },
 }
