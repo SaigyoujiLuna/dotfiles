@@ -49,3 +49,8 @@ alias vi='nvim'
 eval $(thefuck --alias)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# private api_key environment variable
+set -a
+source "$HOME/.config/private_passport.conf"
+set +a

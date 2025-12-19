@@ -1,4 +1,4 @@
-local otherCmps = YukiVim.cmp.map({ "snippet_forward", "ai_accept" })
+-- local otherCmps = YukiVim.cmp.map({ "snippet_forward", "ai_accept" })
 return {
   {
     "saghen/blink.cmp",
@@ -17,7 +17,7 @@ return {
         preset = "super-tab",
         ["<Tab>"] = {
           "accept",
-          YukiVim.cmp.map({"snippet_forward", "ai_accept"}),
+          YukiVim.cmp.map({ "snippet_forward", "ai_accept" }),
           "select_and_accept",
           "fallback",
         },
@@ -99,6 +99,9 @@ return {
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust" },
       signature = { window = { border = "rounded" } },
+      per_filetype = {
+        codecompanion = { "codecompanion" },
+      },
     },
     opts_extend = {
       "sources.completion.enabled_providers",

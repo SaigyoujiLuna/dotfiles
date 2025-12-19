@@ -25,9 +25,8 @@ deploy() {
     [[ -d "$target" ]] || return 1
     
     stow --dotfiles -D "$target" -t "$HOME" 2>/dev/null || true
-    stow --dotfiles --adopt "$target" --ignore="YukiConfig.code-profile" -t "$HOME"
+    stow --dotfiles --adopt "$target" --ignore="YukiConfig.code-profile" --ignore="private_passport.conf" -t "$HOME"
 }
-
 # Main deployment loop
 cd "$(dirname "$0")" || exit 1
 failed=()
@@ -40,9 +39,10 @@ for target in "${targets[@]}"; do
         failed+=("$target")
     fi
 done
-
+cp ./private_passport.conf ~/.config/private_passport.conf
 # Summary
 if [[ ${#failed[@]} -eq 0 ]]; then
+    success "Please remember to edit ~/.config/private_passport.conf file to set the api_key"
     success "Mission complete! Ciallo ～(∠・ω< )⌒★"
 else
     error "Some configs"
