@@ -73,11 +73,13 @@ return {
           ripgrep = {
             module = "blink-ripgrep",
             name = "Ripgrep",
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
             opts = {
               prefix_min_len = 3,
               backend = {
-                context_size = 5,
                 ripgrep = {
+                  context_size = 5,
                   max_filesize = "512K",
                   project_root_fallback = false,
                   search_casing = "--smart-case",
