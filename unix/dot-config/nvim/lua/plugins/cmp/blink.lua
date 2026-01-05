@@ -101,9 +101,6 @@ return {
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust" },
       signature = { window = { border = "rounded" } },
-      per_filetype = {
-        codecompanion = { "codecompanion" },
-      },
     },
     opts_extend = {
       "sources.completion.enabled_providers",
