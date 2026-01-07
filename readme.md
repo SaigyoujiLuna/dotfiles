@@ -1,8 +1,8 @@
 # Introduction 
 
-My self dotfile config, running on Arch Linux and MacOS
+This is my personal dotfiles configuration, compatible with both Arch Linux and MacOS.
 
-contains this config
+## Included Configurations
 * Common
     * neovim
     * starship
@@ -10,15 +10,15 @@ contains this config
     * zsh\_plugin(require antidote installed)
     * neovide
     * ghostty
-* Mac
+* MacOS Specific
     * aerospace
-* Linux
+* Linux Specific
     * electron wayland integration
-    * zsh config
+    * zsh config(If you want, also can used in MacOS)
 
 # Installation
 
-run command below to start:
+To start the installation, run the following command in your terminal:
 
 ```bash
 ./deploy.sh
