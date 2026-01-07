@@ -26,6 +26,12 @@ return {
           {
             filetype = "snacks_layout_box",
           },
+          {
+              filetype = "NvimTree",
+              text = "NvimTree",
+              highlight = "Directory",
+              text_align = "left",
+          }
         },
       },
     },

@@ -33,7 +33,8 @@ return {
           enabled = true,
           indentscope_color = "macchiato",
         },
-        neotree = true,
+        -- neotree = true,
+        nvimtree = true,
         native_lsp = {
           enabled = true,
           virtual_text = {
