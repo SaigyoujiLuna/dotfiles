@@ -44,6 +44,7 @@ alias diff='diff --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 alias vi='nvim'
+alias neovide='~/.local/bin/disown_run.sh neovide'
 
 eval $(thefuck --alias)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
