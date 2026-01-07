@@ -9,7 +9,7 @@ return {
       bigfile = { enabled = true, notify = true, size = 3 * 1024 * 1024 },
       dashboard = { enabled = true },
       dim = { enabled = true },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       indent = { enabled = false },
       lazygit = {
         configure = true,
@@ -101,13 +101,13 @@ return {
         mode = { "i", "n", "t" },
         desc = "Toggle Terminal",
       },
-      {
-        "<leader>e",
-        function()
-          Snacks.picker.explorer()
-        end,
-        desc = "File Explorer",
-      },
+      -- {
+      --   "<leader>e",
+      --   function()
+      --     Snacks.picker.explorer()
+      --   end,
+      --   desc = "File Explorer",
+      -- },
       {
         "<leader>gg",
         function()
