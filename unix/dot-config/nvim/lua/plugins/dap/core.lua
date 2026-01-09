@@ -34,10 +34,33 @@ return {
         return vim.json.decode(json.json_strip_comments(str))
       end
     end,
+    keys = {
+      {
+        "<leader>dp",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint",
+      },
+    },
   },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    opts = {},
+    config = function(_, opts)
+        require("dapui").setup(opts)
+        vim.api.nvim_create_user_command("D", function() require("dapui").toggle() end, {})
+    end,
+    keys = {
+      {
+        "<leader>du",
+        function()
+          require("dapui").toggle()
+        end,
+        desc = "Toggle UI",
+      },
+    },
   },
   {
     "folke/lazydev.nvim",
