@@ -14,3 +14,4 @@ window-vsync = true
 background-opacity = 0.75
 background-blur = true
 macos-titlebar-style = hidden
+custom-shader = shaders/cursor_wrap.glsl

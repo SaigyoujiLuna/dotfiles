@@ -4,12 +4,25 @@ vim.opt.termguicolors = true
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {
-    },
+    opts = {},
     lazy = false,
     keys = {
-      { "<leader>e", ":NvimTreeToggle<CR>", mode = { "n" }, desc = "File Explorer"},
-      { "<leader>E", ":NvimTreeFindFileToggle<CR>", mode = { "n" }, desc = "File Explorer(Location File)" },
+      {
+        "<leader>e",
+        function()
+          require("nvim-tree.api").tree.toggle()
+        end,
+        mode = { "n" },
+        desc = "File Explorer",
+      },
+      {
+        "<leader>E",
+        function()
+          require("nvim-tree.api").tree.toggle({ find_file = true })
+        end,
+        mode = { "n" },
+        desc = "File Explorer(Location File)",
+      },
     },
   },
 }

@@ -9,7 +9,7 @@ return {
           icons_enabled = true,
           globalstatus = vim.o.laststatus == 3,
           disabled_filetypes = {
-            statusline = { "neo-tree", "netrw", "dashboard" },
+            statusline = { "NvimTree", "neo-tree", "netrw", "dashboard" },
           },
         },
         sections = {

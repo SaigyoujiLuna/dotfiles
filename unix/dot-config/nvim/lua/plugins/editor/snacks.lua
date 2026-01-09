@@ -101,13 +101,6 @@ return {
         mode = { "i", "n", "t" },
         desc = "Toggle Terminal",
       },
-      -- {
-      --   "<leader>e",
-      --   function()
-      --     Snacks.picker.explorer()
-      --   end,
-      --   desc = "File Explorer",
-      -- },
       {
         "<leader>gg",
         function()
@@ -136,20 +129,6 @@ return {
         end,
         desc = "Git File Status",
       },
-      -- {
-      --   "<leader>/",
-      --   function()
-      --     Snacks.picker.grep()
-      --   end,
-      --   desc = "Live Grep",
-      -- },
-      -- {
-      --   "<leader><Space>",
-      --   function()
-      --     Snacks.picker.files()
-      --   end,
-      --   desc = "Find Files",
-      -- },
       {
         "gs",
         function()
