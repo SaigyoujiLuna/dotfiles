@@ -21,9 +21,6 @@ return {
       scope = {
         highlight = highlight,
       },
-      -- indent = {
-      --   highlight = highlight,
-      -- },
       exclude = {
         filetypes = {
           "lspinfo",
@@ -55,9 +52,4 @@ return {
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
   },
-  -- {
-  --   "nmac427/guess-indent.nvim",
-  --   event = "BufEnter",
-  --   opts = {},
-  -- },
 }
