@@ -1,35 +1,127 @@
 return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-        branch = "master",
-        lazy = false,
-		opts = {
-			ensure_installed = {
-				"c",
-				"lua",
-				"vim",
-				"vimdoc",
-				"java",
-				"rust",
-				"python",
-			},
-			sync_install = false,
-			auto_install = true,
-			highlight = {
-				enable = true
-			},
-			indent = {
-				enable = true
-			}
-		},
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-	},
-    {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        dependencies = { "nvim-treesitter/nvim-treesitter"}
-    }
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    branch = "main",
+    lazy = false,
+    opts = {
+      ensure_installed = {
+        "c",
+        "lua",
+        "vim",
+        "vimdoc",
+        "java",
+        "rust",
+        "python",
+      },
+      sync_install = false,
+      auto_install = true,
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+    },
+    config = function(_, opts)
+        local treesitter = require("nvim-treesitter")
+        treesitter.setup(opts)
+    end
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "BufReadPost",
+    opts = {
+      move = {
+        enable = true,
+        set_jumps = true,
+      },
+    },
+    keys = {
+      {
+        "]m",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+        end,
+        mode = "n",
+      },
+      {
+        "[m",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to previous function start",
+      },
+      {
+        "]M",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to next function end",
+      },
+      {
+        "[M",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to previous function end",
+      },
+      {
+        "]/",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@comment.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to next comment start",
+      },
+      {
+        "[/",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start("@comment.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to previous comment start",
+      },
+      {
+        "[*",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start("@comment.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to previous comment start",
+      },
+      {
+        "]*",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@comment.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Go to next comment start",
+      },
+      {
+        "]]",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start({"@class.outer", "@function.outer"}, "textobjects")
+        end,
+        noremap = true,
+        mode = { "n" },
+        desc = "Go to next class start",
+      },
+      {
+        "[[",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start({"@class.outer", "@function.outer"}, "textobjects")
+        end,
+      },
+    },
+  },
 }

@@ -3,7 +3,10 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
-    event = "BufReadPost",
+    event = "InsertEnter",
+    dependencies = {
+        -- "copilotlsp-nvim/copilot-lsp"
+    },
     opts = function()
       YukiVim.cmp.actions.ai_accept = function()
         if require("copilot.suggestion").is_visible() then
