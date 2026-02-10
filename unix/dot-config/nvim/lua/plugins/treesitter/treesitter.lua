@@ -22,9 +22,17 @@ return {
       indent = {
         enable = true,
       },
+      incremental_selection = {
+          enable = true,
+          keymaps = {
+              node_incremental = "]x",
+              node_decremental = "[x",
+          }
+      }
     },
     config = function(_, opts)
         local treesitter = require("nvim-treesitter")
+        YukiVim.treesitter.setup(opts)
         treesitter.setup(opts)
     end
   },

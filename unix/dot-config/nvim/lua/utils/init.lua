@@ -4,6 +4,7 @@
 ---@field lsp yukivim.utils.lsp
 ---@field lazy yukivim.utils.lazy
 ---@field config yukivim.config
+---@field treesitter yukivim.utils.treesitter
 local M = {}
 
 setmetatable(M, {
@@ -25,7 +26,9 @@ function M.get_pkg_path(pkg, path, opts)
     return ret
 end
 
+---@private
 M.CREATE_UNDO = vim.api.nvim_replace_termcodes("<C-g>u", true, true, true)
+
 function M.create_undo()
     if vim.api.nvim_get_mode().mode == "i" then
         vim.api.nvim_feedkeys(M.CREATE_UNDO, "n", false)
@@ -40,6 +43,10 @@ function M.opts(name)
     end
     local Plugin = require("lazy.core.plugin")
     return Plugin.values(plugin, "opts", false)
+end
+
+function M.augroup(name)
+  return vim.api.nvim_create_augroup("yukinvim_" .. name, { clear = true })
 end
 
 return M
