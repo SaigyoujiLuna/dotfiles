@@ -23,18 +23,18 @@ return {
         enable = true,
       },
       incremental_selection = {
-          enable = true,
-          keymaps = {
-              node_incremental = "]x",
-              node_decremental = "[x",
-          }
-      }
+        enable = true,
+        keymaps = {
+          node_incremental = "]x",
+          node_decremental = "[x",
+        },
+      },
     },
     config = function(_, opts)
-        local treesitter = require("nvim-treesitter")
-        YukiVim.treesitter.setup(opts)
-        treesitter.setup(opts)
-    end
+      local treesitter = require("nvim-treesitter")
+      YukiVim.treesitter.setup(opts)
+      treesitter.setup(opts)
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -118,17 +118,56 @@ return {
       {
         "]]",
         function()
-          require("nvim-treesitter-textobjects.move").goto_next_start({"@class.outer", "@function.outer"}, "textobjects")
+          require("nvim-treesitter-textobjects.move").goto_next_start(
+            { "@class.outer", "@function.outer" },
+            "textobjects"
+          )
         end,
-        noremap = true,
         mode = { "n" },
-        desc = "Go to next class start",
+        desc = "Go to next section",
       },
       {
         "[[",
         function()
-          require("nvim-treesitter-textobjects.move").goto_previous_start({"@class.outer", "@function.outer"}, "textobjects")
+          require("nvim-treesitter-textobjects.move").goto_previous_start(
+            { "@class.outer", "@function.outer" },
+            "textobjects"
+          )
         end,
+        mode = { "n" },
+        desc = "Go to previous section",
+      },
+      {
+        "ac",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Select around class",
+      },
+      {
+        "ic",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Select inner class",
+      },
+      {
+        "af",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Select around method",
+      },
+      {
+        "if",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+        end,
+        mode = { "n" },
+        desc = "Select inner method"
       },
     },
   },
