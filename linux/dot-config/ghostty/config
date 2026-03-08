@@ -16,3 +16,4 @@ window-decoration = true
 window-colorspace = display-p3
 window-theme = ghostty
 minimum-contrast = 1.1
+custom-shader = shaders/cursor_wrap.glsl
