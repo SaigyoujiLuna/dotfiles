@@ -102,13 +102,19 @@ return {
                 enabled = "all",
               },
             },
+            home = "/opt/homebrew/opt/openjdk",
           },
         },
       }
     end,
     config = function(_, opts)
       local bundles = {} ---@type string[]
-      local mason_registry = require("mason-registry")
+      if opts.dap then
+        bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*jar", false, true)
+        if opts.test then
+          vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
+        end
+      end
       local function attach_jdtls()
         local fname = vim.api.nvim_buf_get_name(0)
         local config = extend_or_override({
@@ -118,7 +124,7 @@ return {
             bundles = bundles,
           },
           settings = opts.settings,
-          require("blink-cmp").get_lsp_capabilities(),
+          capabilities = require("blink-cmp").get_lsp_capabilities(),
         }, opts.jdtls)
         require("jdtls").start_or_attach(config)
       end
@@ -127,7 +133,40 @@ return {
         callback = attach_jdtls,
       })
       vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args) end,
+        callback = function(args)
+          local wk = require("which-key")
+          if opts.dap then
+            require("jdtls.dap").setup_dap(opts.dap)
+            if opts.dap_main then
+              require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
+            end
+            if opts.test then
+              wk.add({
+                mode = "n",
+                buffer = args.buf,
+                {
+                  "<leader>tt",
+                  function()
+                    require("jdtls.dap").test_class({
+                      config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                    })
+                  end,
+                  desc = "Run All Test",
+                },
+                {
+                  "<leader>tr",
+                  function()
+                    require("jdtls.dap").test_nearest_method({
+                      config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                    })
+                  end,
+                  desc = "Run Nearest Test",
+                },
+                { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
+              })
+            end
+          end
+        end,
       })
       attach_jdtls()
     end,

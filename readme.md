@@ -23,3 +23,8 @@ To start the installation, run the following command in your terminal:
 ```bash
 ./deploy.sh
 ```
+
+required dependencies:
+
+* jdtls
+
