@@ -33,6 +33,12 @@ return {
       filesystem = {
         bind_to_cwd = false,
         use_libuv_file_watcher = true,
+        -- show hidden & gitignored files
+        filtered_items = {
+            visible = true,
+            hide_gitignored = false,
+            hide_hidden = false,
+        },
       },
     },
   },
