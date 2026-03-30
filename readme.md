@@ -27,4 +27,5 @@ To start the installation, run the following command in your terminal:
 required dependencies:
 
 * jdtls
+* ImageMagick
 

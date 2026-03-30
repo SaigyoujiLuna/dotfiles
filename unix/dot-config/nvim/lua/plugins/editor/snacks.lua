@@ -22,6 +22,9 @@ return {
           max = 0.7,
         },
       },
+      image = {
+          enabled = true,
+      },
       input = { enabled = true },
       picker = {
         enabled = true,
