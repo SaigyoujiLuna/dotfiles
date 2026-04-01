@@ -112,7 +112,7 @@ return {
         function()
           require("nvim-treesitter-textobjects.move").goto_next_start("@comment.outer", "textobjects")
         end,
-        mode = { "n" },
+        mode = { "n", "v" },
         desc = "Go to next comment start",
       },
       {
@@ -123,7 +123,7 @@ return {
             "textobjects"
           )
         end,
-        mode = { "n" },
+        mode = { "n", "v" },
         desc = "Go to next section",
       },
       {
@@ -134,7 +134,7 @@ return {
             "textobjects"
           )
         end,
-        mode = { "n" },
+        mode = { "n", "v" },
         desc = "Go to previous section",
       },
       {
@@ -142,7 +142,7 @@ return {
         function()
           require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
         end,
-        mode = { "n" },
+        mode = { "v" },
         desc = "Select around class",
       },
       {
@@ -150,7 +150,7 @@ return {
         function()
           require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
         end,
-        mode = { "n" },
+        mode = { "v" },
         desc = "Select inner class",
       },
       {
@@ -158,7 +158,7 @@ return {
         function()
           require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
         end,
-        mode = { "n" },
+        mode = { "v" },
         desc = "Select around method",
       },
       {
@@ -166,8 +166,8 @@ return {
         function()
           require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
         end,
-        mode = { "n" },
-        desc = "Select inner method"
+        mode = { "v" },
+        desc = "Select inner method",
       },
     },
   },
