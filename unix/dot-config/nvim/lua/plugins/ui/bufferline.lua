@@ -1,40 +1,43 @@
 return {
   {
     "akinsho/bufferline.nvim",
-    version = "*",
-    dependencies = { "catppuccin", "nvim-tree/nvim-web-devicons" },
+    sem_version = "*",
+    dependencies = { "catppuccin/nvim", "nvim-tree/nvim-web-devicons" },
     event = { "BufEnter" },
     ---@type bufferline.UserConfig
-    opts = {
-      options = {
-        -- separator_style = "slant",
-        always_show_bufferline = false,
-        close_command = function(n)
-          Snacks.bufdelete(n)
-        end,
-        right_mouse_command = function(n)
-          Snacks.bufdelete(n)
-        end,
-        diagnostics = "nvim_lsp",
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "NeoTree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-          {
-            filetype = "snacks_layout_box",
-          },
-          {
+    opts = function()
+      return {
+        highlights = require("catppuccin.special.bufferline").get_theme(),
+        options = {
+          -- separator_style = "slant",
+          always_show_bufferline = false,
+          close_command = function(n)
+            Snacks.bufdelete(n)
+          end,
+          right_mouse_command = function(n)
+            Snacks.bufdelete(n)
+          end,
+          diagnostics = "nvim_lsp",
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "NeoTree",
+              highlight = "Directory",
+              text_align = "left",
+            },
+            {
+              filetype = "snacks_layout_box",
+            },
+            {
               filetype = "NvimTree",
               text = "NvimTree",
               highlight = "Directory",
               text_align = "left",
-          }
+            },
+          },
         },
-      },
-    },
+      }
+    end,
     config = function(_, opts)
       require("bufferline").setup(opts)
       vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {

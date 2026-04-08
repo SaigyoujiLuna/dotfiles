@@ -2,14 +2,23 @@
 return {
   {
     "saghen/blink.cmp",
+    cond = not vim.g.vscode,
     dependencies = {
       "rafamadriz/friendly-snippets",
       "mikavilpas/blink-ripgrep.nvim",
-      { "saghen/blink.compat", optinal = true, opts = {}, version = "*" },
+      "neovim/nvim-lspconfig",
     },
-    build = "cargo build --release",
-    version = "*",
-    event = "InsertEnter",
+    build = function(plugin)
+      local obj = vim.system({ "cargo", "build", "--release" }, { cwd = plugin.path }):wait()
+      if obj.code == 0 then
+        vim.notify("Building blink.cmp done", vim.log.levels.INFO)
+      else
+        vim.notify("Building blink.cmp failed", vim.log.levels.ERROR)
+      end
+    end,
+    sem_version = "1.*",
+    lazy = false,
+    -- event = "InsertEnter",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -66,9 +75,10 @@ return {
         },
       },
       -- Default list of enabled providers defined so that you can extend it
+      -- add lazydev to your completion providers
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+        default = { "lsp", "path", "snippets", "buffer", "ripgrep", "lazydev" },
         providers = {
           ripgrep = {
             module = "blink-ripgrep",
@@ -90,6 +100,12 @@ return {
                 on_off = "<leader>tg",
               },
             },
+          },
+
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
           },
         },
       },
@@ -121,12 +137,7 @@ return {
       end
       opts.sources.compat = nil
       require("blink.cmp").setup(opts)
+      vim.notify("Blink.cmp loaded", vim.log.levels.INFO)
     end,
-  },
-  {
-    "saghen/blink.compat",
-    version = "*",
-    lazy = true,
-    opts = {},
   },
 }

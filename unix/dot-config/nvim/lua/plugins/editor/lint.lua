@@ -4,7 +4,9 @@ return {
     lazy = false,
     opts = {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-      linters_by_ft = {},
+      linters_by_ft = {
+        markdown = { "markdownlint-cli2" },
+      },
     },
     config = function(_, opts)
       local M = {}
@@ -27,14 +29,14 @@ return {
           return linter and not (type(linter) == "table")
         end, names)
         if #names > 0 then
-            lint.try_lint(names)
+          lint.try_lint(names)
         end
       end
       lint.linters_by_ft = opts.linters_by_ft
       vim.api.nvim_create_autocmd(opts.events, {
         group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
         callback = function()
-            M.lint()
+          M.lint()
         end,
       })
     end,

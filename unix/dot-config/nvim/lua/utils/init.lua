@@ -2,7 +2,6 @@
 ---@class yukivim.utils
 ---@field cmp yukivim.utils.cmp
 ---@field lsp yukivim.utils.lsp
----@field lazy yukivim.utils.lazy
 ---@field config yukivim.config
 ---@field treesitter yukivim.utils.treesitter
 local M = {}
@@ -34,19 +33,8 @@ function M.create_undo()
         vim.api.nvim_feedkeys(M.CREATE_UNDO, "n", false)
     end
 end
-
----@param name string
-function M.opts(name)
-    local plugin = require("lazy.core.config").spec.plugins[name]
-    if not plugin then
-        return {}
-    end
-    local Plugin = require("lazy.core.plugin")
-    return Plugin.values(plugin, "opts", false)
-end
-
 function M.augroup(name)
-  return vim.api.nvim_create_augroup("yukinvim_" .. name, { clear = true })
+    return vim.api.nvim_create_augroup("yukinvim_" .. name, { clear = true })
 end
 
 return M

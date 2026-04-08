@@ -83,32 +83,4 @@ return {
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
     end,
   },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = { ensure_installed = { "rust", "ron" } },
-  },
-  {
-    "williamboman/mason.nvim",
-    optional = true,
-    opts = {
-      ensure_installed = {
-        "codelldb",
-        -- "bacon",
-      },
-    },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        bacons_ls = {
-          enabled = false,
-        },
-        rust_analyzer = {
-          enabled = false,
-        },
-      },
-    },
-  },
 }

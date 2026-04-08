@@ -28,4 +28,4 @@ required dependencies:
 
 * jdtls
 * ImageMagick
-
+* vtsls

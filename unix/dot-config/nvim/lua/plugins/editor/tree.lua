@@ -35,36 +35,11 @@ return {
         use_libuv_file_watcher = true,
         -- show hidden & gitignored files
         filtered_items = {
-            visible = true,
-            hide_gitignored = false,
-            hide_hidden = false,
+          visible = true,
+          hide_gitignored = false,
+          hide_hidden = false,
         },
       },
     },
   },
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   opts = {},
-  --   lazy = false,
-  --   keys = {
-  --     {
-  --       "<leader>e",
-  --       function()
-  --         require("nvim-tree.api").tree.toggle({
-  --             find_file = true
-  --         })
-  --       end,
-  --       mode = { "n" },
-  --       desc = "File Explorer",
-  --     },
-  --     {
-  --       "<leader>E",
-  --       function()
-  --         require("nvim-tree.api").tree.toggle({ find_file = true })
-  --       end,
-  --       mode = { "n" },
-  --       desc = "File Explorer(Location File)",
-  --     },
-  --   },
-  -- }
 }

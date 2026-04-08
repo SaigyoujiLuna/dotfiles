@@ -33,6 +33,16 @@ return {
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
       end
+      local dap = require("dap")
+      dap.configurations.java = {
+        {
+          type = "java",
+          request = "attach",
+          name = "Debug (Attach) - Remote",
+          hostName = "127.0.0.1",
+          port = 5005,
+        },
+      }
     end,
     keys = {
       {
@@ -49,8 +59,10 @@ return {
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     opts = {},
     config = function(_, opts)
-        require("dapui").setup(opts)
-        vim.api.nvim_create_user_command("D", function() require("dapui").toggle() end, {})
+      require("dapui").setup(opts)
+      vim.api.nvim_create_user_command("D", function()
+        require("dapui").toggle()
+      end, {})
     end,
     keys = {
       {
@@ -61,13 +73,5 @@ return {
         desc = "Toggle UI",
       },
     },
-  },
-  {
-    "folke/lazydev.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.library = opts.library or {}
-      opts.library = vim.tbl_deep_extend("force", {}, opts.library, { "nvim-dap-ui" })
-    end,
   },
 }

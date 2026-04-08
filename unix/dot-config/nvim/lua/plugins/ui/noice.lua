@@ -9,22 +9,22 @@ return {
     cmdline = {
       format = {
         search_down = {
-          view = "cmdline"
+          view = "cmdline",
         },
         search_up = {
-          view = "cmdline"
-        }
-      }
+          view = "cmdline",
+        },
+      },
     },
     lsp = {
       hover = {
         enabled = true,
         ---@type NoiceViewOptions
         opts = {
-          border = "rounded"
-        }
-      }
-    }
+          border = "rounded",
+        },
+      },
+    },
     -- add any options here
   },
   dependencies = {
@@ -33,5 +33,5 @@ return {
   },
   config = function(_, opts)
     require("noice").setup(opts)
-  end
+  end,
 }

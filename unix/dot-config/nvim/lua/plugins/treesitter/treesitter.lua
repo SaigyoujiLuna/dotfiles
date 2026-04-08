@@ -6,13 +6,17 @@ return {
     lazy = false,
     opts = {
       ensure_installed = {
+        "cpp",
         "c",
         "lua",
         "vim",
         "vimdoc",
         "java",
         "rust",
+        "ron",
         "python",
+        "ninja",
+        "rst",
       },
       sync_install = false,
       auto_install = true,

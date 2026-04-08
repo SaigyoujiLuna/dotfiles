@@ -1,12 +1,13 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", "folke/snacks.nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "folke/snacks.nvim", "catppuccin/nvim" },
     event = { "BufEnter" },
     opts = function()
       return {
         options = {
           icons_enabled = true,
+          theme = "catppuccin",
           globalstatus = vim.o.laststatus == 3,
           disabled_filetypes = {
             statusline = { "NvimTree", "neo-tree", "netrw", "dashboard" },

@@ -1,7 +1,9 @@
 return {
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -12,15 +14,15 @@ return {
       require("which-key").add({
         { "<leader>f", group = "file" },
         { "<leader>c", group = "code" },
-        { "<leader>d", group = "debug"},
-        { "<leader>g", group = "git"},
-        { "<leader>b", group = "buffer"},
-        { "<leader>u", group = "ui"},
-        { "<leader>x", group = "diagnostic"},
-        { "<leader>d", group = "debug"},
-        { "[", group = "prev"},
-        { "]", group = "next"},
-        { "g", group = "goto"},
+        { "<leader>d", group = "debug" },
+        { "<leader>g", group = "git" },
+        { "<leader>b", group = "buffer" },
+        { "<leader>u", group = "ui" },
+        { "<leader>x", group = "diagnostic" },
+        { "<leader>d", group = "debug" },
+        { "[", group = "prev" },
+        { "]", group = "next" },
+        { "g", group = "goto" },
       })
     end,
     keys = {

@@ -35,24 +35,20 @@ return {
     end,
   },
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        copilot = {
-          enabled = false,
-        },
-      },
-    },
-  },
-  {
     "yetone/avante.nvim",
-    build = "make",
+    build = function(plugin)
+      local res = vim.system({ "make" }, { cwd = plugin.path }):wait()
+      if res.code == 0 then
+        vim.notify("avante built successfully", vim.log.levels.INFO)
+      else
+        vim.notify("Failed to build avante: " .. res.stderr, vim.log.levels.ERROR)
+      end
+    end,
     event = "VeryLazy",
-    version = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "zbirenbaum/copilot.lua"
+      "zbirenbaum/copilot.lua",
     },
     ---@module 'avante'
     ---@type avante.Config
@@ -60,8 +56,8 @@ return {
       instructions_file = "AGENTS.md",
       provider = "copilot",
       behavior = {
-          auto_suggestions = false,
-      }
+        auto_suggestions = false,
+      },
     },
   },
 }

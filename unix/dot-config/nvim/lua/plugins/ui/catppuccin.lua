@@ -8,12 +8,12 @@ return {
       flavour = "macchiato", -- latte, frappe, macchiato, mocha
       transparent_background = true,
       float = {
-          transparent = true,
+        transparent = true,
       },
       show_end_of_buffer = true,
       term_colors = true,
       dim_inactive = {
-          enalbed = true,
+        enalbed = true,
       },
       no_italic = false,
       no_bold = false,
@@ -73,37 +73,9 @@ return {
         which_key = true,
       },
     },
-	config = function (_, opts)
-		require("catppuccin").setup(opts)
-		vim.cmd.colorscheme("catppuccin")
-	end
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin")
+    end,
   },
-  {
-
-    "nvim-lualine/lualine.nvim",
-    optional = true,
-    opts = {
-      options = {
-        theme = "catppuccin",
-      },
-    },
-  },
-  {
-    "j-hui/fidget.nvim",
-    opts = {
-      notification = {
-        window = {
-          winblend = 0,
-        },
-      },
-    },
-  },
-  {
-  	"akinsho/bufferline.nvim",
-  	dependencies = "catppuccin",
-    optional = true,
-  	opts = function(_, opts)
-  		opts.highlights = require("catppuccin.special.bufferline").get_theme()
-    end
-  }
 }

@@ -1,13 +1,17 @@
 return {
   {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
+    "mason-org/mason.nvim",
     build = ":MasonUpdate",
-    opts_extend = { "ensure_installed" },
+    ---@type MasonSettings
     opts = {
       ensure_installed = {
         "stylua",
         "shfmt",
+        "java-debug-adapter",
+        "java-test",
+        "codelldb",
+        "markdownlint-cli2",
+        "markdown-toc",
       },
       ui = {
         icons = {
@@ -44,8 +48,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim", config = function() end },
+      { "mason-org/mason.nvim" },
+      { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
@@ -90,6 +94,30 @@ return {
       --   timeout_ms = nil,
       -- },
       servers = {
+        marksman = {},
+        copilot = {
+          enabled = false,
+        },
+        clangd = {
+          capabilities = {
+            offsetEncoding = { "utf-16" },
+          },
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+        },
+
         ["*"] = {
           -- stylua: ignore
             keys = {
@@ -111,7 +139,64 @@ return {
               { "<leader>cd", vim.lsp.buf.rename, desc = "Rename", has = "rename", },
             },
         },
+        vtsls = {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+          },
+          settings = {
+            complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                maxInlayHintLength = 30,
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
+        },
+        bacons_ls = {
+          enabled = false,
+        },
+        rust_analyzer = {
+          enabled = false,
+        },
+        ruff = {
+          enabled = true,
+          cmd_env = { RUFF_TRACE = "messages" },
+          init_options = {
+            settings = {
+              logLevel = "error",
+            },
+          },
+        },
+        ruff_lsp = {},
+
         stylua = { enabled = false },
+        basedpyright = {
+          enabled = true,
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -138,9 +223,24 @@ return {
             },
           },
         },
+        jdtls = {},
       },
       ---@type table<string, fun(server: string, opts: vim.lsp.Config): boolean?>
-      setup = {},
+      setup = {
+        jdtls = function()
+          return true -- avoid duplicate servers
+        end,
+
+        ["ruff"] = function()
+          Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
+            client.server_capabilities.hoverProvider = false
+          end)
+        end,
+        clangd = function(_, opts)
+          require("clangd_extensions").setup({ server = opts })
+          return false
+        end,
+      },
     },
     config = vim.schedule_wrap(function(_, opts)
       -- keymaps
@@ -172,7 +272,7 @@ return {
       -- code lens
       if opts.codelens.enabled and vim.lsp.codelens then
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-          vim.lsp.codelens.refresh({bufnr = buffer })
+          vim.lsp.codelens.refresh({ bufnr = buffer })
           vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             buffer = buffer,
             callback = vim.lsp.codelens.refresh,
@@ -214,7 +314,7 @@ return {
       end
       local install = vim.tbl_filter(configure, vim.tbl_keys(opts.servers))
       require("mason-lspconfig").setup({
-        ensure_installed = vim.list_extend(install, YukiVim.opts("mason-lspconfig.nvim").ensure_installed or {}),
+        ensure_installed = vim.list_extend(install, { "jsonls", "clangd" }),
         automatic_enable = { exclude = mason_exclude },
       })
     end),

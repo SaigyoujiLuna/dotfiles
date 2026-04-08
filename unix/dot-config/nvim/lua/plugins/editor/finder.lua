@@ -2,7 +2,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    branch = "0.1.x",
+    sem_version = "v0.2.*",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "BurntSushi/ripgrep",
@@ -11,7 +11,18 @@ return {
       "nvim-tree/nvim-web-devicons",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+        build = function(plugin)
+          local res = vim
+            .system({
+              "make",
+            }, { cwd = plugin.path })
+            :wait()
+          if res.code == 0 then
+            vim.notify("Build Telescope Fzf succeed", vim.log.levels.INFO)
+          else
+            vim.notify("Build Telescope Fzf failed", vim.log.levels.ERROR)
+          end
+        end,
       },
     },
     opts = {
@@ -51,11 +62,11 @@ return {
         desc = "Goto Symbol",
       },
       {
-          "gS",
-          function()
-              require("telescope.builtin").lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
-          end,
-          desc = "Goto Symbol (Workspace)",
+        "gS",
+        function()
+          require("telescope.builtin").lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
+        end,
+        desc = "Goto Symbol (Workspace)",
       },
       {
         "<leader>x",
