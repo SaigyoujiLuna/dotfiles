@@ -16,9 +16,14 @@ setmetatable(M, {
     end
 })
 
+---@param pkg string
+---@param path? string
 function M.get_pkg_path(pkg, path, opts)
     pcall(require, "mason")
     local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+    if pkg.sub(1, 1) ~= "/" then
+        pkg = "/" .. pkg
+    end
     opts = opts or {}
     path = path or ""
     local ret = root .. "/packages" .. pkg .. path

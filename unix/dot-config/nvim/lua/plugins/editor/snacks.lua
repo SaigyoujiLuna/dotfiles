@@ -7,7 +7,7 @@ return {
     opts = {
       animate = { enabled = true, duration = 300, easing = "linear", fps = 60 },
       bigfile = { enabled = true, notify = true, size = 3 * 1024 * 1024 },
-      dashboard = { enabled = true },
+      dashboard = { enabled = false },
       dim = { enabled = true },
       explorer = { enabled = false },
       indent = { enabled = false },
@@ -23,7 +23,7 @@ return {
         },
       },
       image = {
-          enabled = true,
+        enabled = true,
       },
       input = { enabled = true },
       picker = {
