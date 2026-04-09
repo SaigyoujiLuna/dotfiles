@@ -29,3 +29,5 @@ required dependencies:
 * jdtls
 * ImageMagick
 * vtsls
+* clang
+* lua-language-server

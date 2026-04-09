@@ -1,6 +1,14 @@
 return {
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		event = {"BufEnter"},
-	},
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    cond = not vim.g.vscode,
+    event = { "VeryLazy" },
+    main = "rainbow-delimiters.setup",
+    opts = {
+      condition = function(bufnr)
+        local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+        return ok and parser ~= nil
+      end,
+    },
+  },
 }

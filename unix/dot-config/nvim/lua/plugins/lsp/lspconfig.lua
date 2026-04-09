@@ -2,6 +2,7 @@ return {
   {
     "mason-org/mason.nvim",
     build = ":MasonUpdate",
+    cond = not vim.g.vscode,
     ---@type MasonSettings
     opts = {
       ensure_installed = {
@@ -51,9 +52,7 @@ return {
       { "mason-org/mason.nvim" },
       { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-    opts_extend = { "servers.*.keys" },
+    cond = not vim.g.vscode,
     opts = {
       ---@type vim.diagnostic.Opts
       diagnostics = {
@@ -79,45 +78,11 @@ return {
           },
         },
       },
-      inlay_hints = {
-        enabled = true,
-        exclude = { "vue" },
-      },
-      codelens = {
-        enabled = true,
-      },
-      folds = {
-        enabled = false,
-      },
-      -- format = {
-      --   formatting_options = nil,
-      --   timeout_ms = nil,
-      -- },
       servers = {
         marksman = {},
         copilot = {
           enabled = false,
         },
-        clangd = {
-          capabilities = {
-            offsetEncoding = { "utf-16" },
-          },
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-          },
-          init_options = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            clangdFileStatus = true,
-          },
-        },
-
         ["*"] = {
           -- stylua: ignore
             keys = {
@@ -134,112 +99,10 @@ return {
               { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp", },
               { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v", }, has = "codeAction", },
               { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v", }, has = "codeLens", },
-              { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh Codelens", mode = { "n", }, has = "codeLens", },
               { "<leader>cN", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = { "n", }, has = { "workspace/didRenameFiles", "workspace/willRenameFiles", }, },
               { "<leader>cd", vim.lsp.buf.rename, desc = "Rename", has = "rename", },
             },
         },
-        vtsls = {
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-          },
-          settings = {
-            complete_function_calls = true,
-            vtsls = {
-              enableMoveToFileCodeAction = true,
-              autoUseWorkspaceTsdk = true,
-              experimental = {
-                maxInlayHintLength = 30,
-                completion = {
-                  enableServerSideFuzzyMatch = true,
-                },
-              },
-            },
-            typescript = {
-              updateImportsOnFileMove = { enabled = "always" },
-              suggest = {
-                completeFunctionCalls = true,
-              },
-              inlayHints = {
-                enumMemberValues = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                variableTypes = { enabled = false },
-              },
-            },
-          },
-        },
-        bacons_ls = {
-          enabled = false,
-        },
-        rust_analyzer = {
-          enabled = false,
-        },
-        ruff = {
-          enabled = true,
-          cmd_env = { RUFF_TRACE = "messages" },
-          init_options = {
-            settings = {
-              logLevel = "error",
-            },
-          },
-        },
-        ruff_lsp = {},
-
-        stylua = { enabled = false },
-        basedpyright = {
-          enabled = true,
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              codeLens = {
-                enabled = true,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-              doc = {
-                privateName = { "^_" },
-              },
-              hint = {
-                enable = true,
-                setType = true,
-                paramType = true,
-                paramName = "Disable",
-                semicolon = "Disable",
-                arrayIndex = "Disable",
-              },
-            },
-          },
-        },
-        jdtls = {},
-      },
-      ---@type table<string, fun(server: string, opts: vim.lsp.Config): boolean?>
-      setup = {
-        jdtls = function()
-          return true -- avoid duplicate servers
-        end,
-
-        ["ruff"] = function()
-          Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
-            client.server_capabilities.hoverProvider = false
-          end)
-        end,
-        clangd = function(_, opts)
-          require("clangd_extensions").setup({ server = opts })
-          return false
-        end,
       },
     },
     config = vim.schedule_wrap(function(_, opts)
@@ -250,72 +113,117 @@ return {
         end
       end
       -- inlay hints
-      if opts.inlay_hints.enabled then
-        Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
-          if
-            vim.api.nvim_buf_is_valid(buffer)
-            and vim.bo[buffer].filetype == ""
-            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
-          then
-            vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-          end
-        end)
-      end
+      Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+        if
+          vim.api.nvim_buf_is_valid(buffer)
+          and vim.bo[buffer].filetype == ""
+          and not vim.tbl_contains({ "vue" }, vim.bo[buffer].filetype)
+        then
+          vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+        end
+      end)
       -- folds
-      if opts.folds.enabled then
-        Snacks.util.lsp.on({ method = "textDocument/foldingRange" }, function()
-          vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local" })
-          vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.lsp.foldexpr()", { scope = "local" })
-        end)
-      end
+      -- Snacks.util.lsp.on({ method = "textDocument/foldingRange" }, function()
+      --   vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local" })
+      --   vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.lsp.foldexpr()", { scope = "local" })
+      -- end)
 
       -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
-        Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-          vim.lsp.codelens.refresh({ bufnr = buffer })
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = buffer,
-            callback = vim.lsp.codelens.refresh,
-          })
-        end)
-      end
+      vim.lsp.codelens.enable(true)
       -- diagnostics
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+      -- lsp setup
       if opts.servers["*"] then
         vim.lsp.config("*", opts.servers["*"])
       end
-      local mason_all = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
-      local mason_exclude = {} ---@type string[]
 
-      ---@return boolean? exclude automatic setup
-      local function configure(server)
-        if server == "*" then
-          return false
-        end
-        local sopts = opts.servers[server]
-        sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts
+      vim.lsp.enable("vtsls", true)
+      vim.lsp.config("vtsls", {
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+        settings = {
+          complete_function_calls = true,
+          vtsls = {
+            enableMoveToFileCodeAction = true,
+            autoUseWorkspaceTsdk = true,
+            experimental = {
+              maxInlayHintLength = 30,
+              completion = {
+                enableServerSideFuzzyMatch = true,
+              },
+            },
+          },
+          typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              completeFunctionCalls = true,
+            },
+            inlayHints = {
+              enumMemberValues = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              variableTypes = { enabled = false },
+            },
+          },
+        },
+      })
 
-        if sopts.enabled == false then
-          mason_exclude[#mason_exclude + 1] = server
-          return
-        end
+      vim.lsp.enable("rust_analyzer", false)
+      vim.lsp.config("ruff", {
+        enabled = true,
+        cmd_env = { RUFF_TRACE = "messages" },
+        init_options = {
+          settings = {
+            logLevel = "error",
+          },
+        },
+      })
+      Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
+        client.server_capabilities.hoverProvider = false
+      end)
+      vim.lsp.enable("stylua", false)
+      vim.lsp.config("basedpyright", {
+        enabled = true,
+      })
+      vim.lsp.enable("lua_ls", true)
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            codeLens = {
+              enabled = true,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+            doc = {
+              privateName = { "^_" },
+            },
+            hint = {
+              enable = true,
+              setType = true,
+              paramType = true,
+              paramName = "Disable",
+              semicolon = "Disable",
+              arrayIndex = "Disable",
+            },
+          },
+        },
+      })
 
-        local use_mason = sopts.mason ~= false and vim.tbl_contains(mason_all, server)
-        local setup = opts.setup[server] or opts.setup["*"]
-        if setup and setup(server, sopts) then
-          mason_exclude[#mason_exclude + 1] = server
-        else
-          vim.lsp.config(server, sopts) -- configure the server
-          if not use_mason then
-            vim.lsp.enable(server)
-          end
-        end
-        return use_mason
-      end
-      local install = vim.tbl_filter(configure, vim.tbl_keys(opts.servers))
+      vim.lsp.config("ruff_lsp", {})
       require("mason-lspconfig").setup({
-        ensure_installed = vim.list_extend(install, { "jsonls", "clangd" }),
-        automatic_enable = { exclude = mason_exclude },
+        ensure_installed = { "jsonls" },
       })
     end),
   },

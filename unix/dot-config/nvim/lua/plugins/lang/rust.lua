@@ -18,7 +18,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    ft = { "rust" },
+    version = vim.version.range("^9"),
     ---@type rustaceanvim.Opts
     opts = {
       server = {

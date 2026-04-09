@@ -1,6 +1,11 @@
 return {
   "folke/noice.nvim",
+  cond = not vim.g.vscode,
   event = "VeryLazy",
+  dependencies = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    "MunifTanjim/nui.nvim",
+  },
   opts = {
     preset = {
       lsp_doc_border = true,
@@ -26,10 +31,6 @@ return {
       },
     },
     -- add any options here
-  },
-  dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    "MunifTanjim/nui.nvim",
   },
   config = function(_, opts)
     require("noice").setup(opts)

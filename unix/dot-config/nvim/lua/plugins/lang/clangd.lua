@@ -1,8 +1,7 @@
 return {
   {
     "p00f/clangd_extensions.nvim",
-    lazy = true,
-    config = function() end,
+    ft = { "c", "cpp", "objc", "objcpp" },
     opts = {
       inlay_hints = {},
       ast = {
@@ -24,6 +23,29 @@ return {
           TemplateParamObject = "",
         },
       },
+      server = {
+        capabilities = {
+          offsetEncoding = { "utf-16" },
+        },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
+        },
+      },
     },
+    config = function(_, opts)
+      require("clangd_extensions").setup(opts)
+      vim.lsp.enable("clangd", true)
+    end,
   },
 }

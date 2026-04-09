@@ -7,7 +7,7 @@ return {
       return {
         options = {
           icons_enabled = true,
-          theme = "catppuccin",
+          theme = "catppuccin-nvim",
           globalstatus = vim.o.laststatus == 3,
           disabled_filetypes = {
             statusline = { "NvimTree", "neo-tree", "netrw", "dashboard" },

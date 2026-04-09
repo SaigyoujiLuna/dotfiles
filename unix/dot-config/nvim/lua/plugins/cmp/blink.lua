@@ -1,11 +1,9 @@
--- local otherCmps = YukiVim.cmp.map({ "snippet_forward", "ai_accept" })
 return {
   {
     "saghen/blink.cmp",
     cond = not vim.g.vscode,
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "mikavilpas/blink-ripgrep.nvim",
       "neovim/nvim-lspconfig",
     },
     build = function(plugin)
@@ -17,8 +15,6 @@ return {
       end
     end,
     sem_version = "1.*",
-    lazy = false,
-    -- event = "InsertEnter",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -46,12 +42,11 @@ return {
           },
         },
         menu = {
-          -- enabled = false,
-          -- auto_show = true,
 
           border = "rounded",
 
           draw = {
+            gap = 2,
             treesitter = { "lsp" },
           },
         },
@@ -67,7 +62,7 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 300,
-          window = { border = "rounded" },
+          window = { border = "rounded", winblend = vim.o.winblend },
         },
         ghost_text = {
           enabled = false,
@@ -78,33 +73,12 @@ return {
       -- add lazydev to your completion providers
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "ripgrep", "lazydev" },
+        default = { "lsp", "path", "snippets", "buffer", "lazydev" },
         providers = {
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "Ripgrep",
-            ---@module "blink-ripgrep"
-            ---@type blink-ripgrep.Options
-            opts = {
-              prefix_min_len = 3,
-              backend = {
-                ripgrep = {
-                  context_size = 5,
-                  max_filesize = "512K",
-                  project_root_fallback = false,
-                  search_casing = "--smart-case",
-                },
-              },
-              project_root_marker = { ".git", "package.json" },
-              future_features = {
-                on_off = "<leader>tg",
-              },
-            },
-          },
-
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
+            fallbacks = { "lsp" },
             score_offset = 100,
           },
         },
@@ -116,28 +90,15 @@ return {
       --
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust" },
-      signature = { window = { border = "rounded" } },
+      signature = {
+        enabled = true,
+        window = { border = "rounded", winblend = vim.o.winblend },
+      },
     },
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
       "sources.default",
     },
-    config = function(_, opts)
-      local enabled = opts.sources.default
-      for _, source in ipairs(opts.sources.compat or {}) do
-        opts.sources.providers[source] = vim.tbl_deep_extend(
-          "force",
-          { name = source, module = "blink.compat.source" },
-          opts.sources.providers[source] or {}
-        )
-        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-          table.insert(enabled, source)
-        end
-      end
-      opts.sources.compat = nil
-      require("blink.cmp").setup(opts)
-      vim.notify("Blink.cmp loaded", vim.log.levels.INFO)
-    end,
   },
 }
