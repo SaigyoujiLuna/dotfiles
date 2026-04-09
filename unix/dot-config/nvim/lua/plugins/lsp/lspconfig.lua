@@ -54,35 +54,8 @@ return {
     },
     cond = not vim.g.vscode,
     opts = {
-      ---@type vim.diagnostic.Opts
-      diagnostics = {
-        virtual_text = {
-          spacing = 2,
-          source = "if_many",
-          prefix = "●",
-        },
-        float = {
-          severity_sort = true,
-          border = "rounded",
-          source = "if_many",
-        },
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = YukiVim.config.icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = YukiVim.config.icons.diagnostics.Warn,
-            [vim.diagnostic.severity.INFO] = YukiVim.config.icons.diagnostics.Info,
-            [vim.diagnostic.severity.HINT] = YukiVim.config.icons.diagnostics.Hint,
-          },
-        },
-      },
       servers = {
         marksman = {},
-        copilot = {
-          enabled = false,
-        },
         ["*"] = {
           -- stylua: ignore
             keys = {
@@ -105,33 +78,54 @@ return {
         },
       },
     },
-    config = vim.schedule_wrap(function(_, opts)
-      -- keymaps
-      for server, server_opts in pairs(opts.servers) do
-        if type(server_opts) == "table" and server_opts.keys then
-          YukiVim.lsp.set_keymap({ name = server ~= "*" and server or nil }, server_opts.keys)
-        end
-      end
-      -- inlay hints
-      Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
-        if
-          vim.api.nvim_buf_is_valid(buffer)
-          and vim.bo[buffer].filetype == ""
-          and not vim.tbl_contains({ "vue" }, vim.bo[buffer].filetype)
-        then
-          vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-        end
-      end)
-      -- folds
-      -- Snacks.util.lsp.on({ method = "textDocument/foldingRange" }, function()
-      --   vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local" })
-      --   vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.lsp.foldexpr()", { scope = "local" })
-      -- end)
+    config = function(_, opts)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          -- keymaps
+          for server, server_opts in pairs(opts.servers) do
+            if type(server_opts) == "table" and server_opts.keys then
+              YukiVim.lsp.set_keymap({ name = server ~= "*" and server or nil }, server_opts.keys)
+            end
+          end
+          -- inlay hints
+          Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+            if
+              vim.api.nvim_buf_is_valid(buffer)
+              and vim.bo[buffer].filetype == ""
+              and not vim.tbl_contains({ "vue" }, vim.bo[buffer].filetype)
+            then
+              vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+            end
+            -- code lens
+            vim.lsp.codelens.enable(true)
+            -- diagnostics
+            vim.diagnostic.config({
+              virtual_text = {
+                spacing = 2,
+                source = "if_many",
+                prefix = "●",
+              },
+              float = {
+                severity_sort = true,
+                border = "rounded",
+                source = "if_many",
+              },
+              underline = true,
+              update_in_insert = false,
+              severity_sort = true,
+              signs = {
+                text = {
+                  [vim.diagnostic.severity.ERROR] = YukiVim.config.icons.diagnostics.Error,
+                  [vim.diagnostic.severity.WARN] = YukiVim.config.icons.diagnostics.Warn,
+                  [vim.diagnostic.severity.INFO] = YukiVim.config.icons.diagnostics.Info,
+                  [vim.diagnostic.severity.HINT] = YukiVim.config.icons.diagnostics.Hint,
+                },
+              },
+            })
+          end)
+        end,
+      })
 
-      -- code lens
-      vim.lsp.codelens.enable(true)
-      -- diagnostics
-      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
       -- lsp setup
       if opts.servers["*"] then
         vim.lsp.config("*", opts.servers["*"])
@@ -177,6 +171,13 @@ return {
       })
 
       vim.lsp.enable("rust_analyzer", false)
+      vim.lsp.enable("bacon-ls", true)
+      vim.lsp.config("bacon-ls", {
+        init_options = {
+          undateOnSave = true,
+          undateOnSaveWaitMillis = 1000,
+        },
+      })
       vim.lsp.config("ruff", {
         enabled = true,
         cmd_env = { RUFF_TRACE = "messages" },
@@ -222,9 +223,15 @@ return {
       })
 
       vim.lsp.config("ruff_lsp", {})
+      vim.lsp.enable("copilot", true)
+      vim.lsp.inline_completion.enable(true)
+      YukiVim.cmp.actions.ai_accept = function()
+        return vim.lsp.inline_completion.get()
+      end
+
       require("mason-lspconfig").setup({
         ensure_installed = { "jsonls" },
       })
-    end),
+    end,
   },
 }

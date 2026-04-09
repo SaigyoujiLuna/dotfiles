@@ -1,21 +1,21 @@
 return {
   {
+    "copilotlsp-nvim/copilot-lsp",
+    init = function()
+      vim.g.copilot_nes_debounce = 500
+    end,
+  },
+  {
     "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
     build = ":Copilot auth",
-    event = "InsertEnter",
     dependencies = {
       "copilotlsp-nvim/copilot-lsp",
     },
     opts = function()
-      YukiVim.cmp.actions.ai_accept = function()
-        if require("copilot.suggestion").is_visible() then
-          YukiVim.create_undo()
-          require("copilot.suggestion").accept()
-          return true
-        end
-      end
       return {
+        nes = {
+          enabled = true,
+        },
         suggestion = {
           enabled = true,
           auto_trigger = true,

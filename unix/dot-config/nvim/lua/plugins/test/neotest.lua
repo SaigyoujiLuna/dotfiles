@@ -1,9 +1,16 @@
 return {
   {
     "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/nvim-nio" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
     opts = {
-      adapters = {},
+      adapters = {
+        ["rustaceanvim.neotest"] = {},
+      },
       status = { virtual_text = true },
     },
     keys = {
@@ -16,10 +23,18 @@ return {
         desc = "Attach to Test",
       },
       {
+        "<leader>tr",
+        function()
+          require("neotest").run.run()
+        end,
+        desc = "Run Nearest (Neotest)",
+      },
+      {
         "<leader>tu",
         function()
           require("neotest").output()
         end,
+        desc = "Test Output (Neotest)",
       },
     },
   },
