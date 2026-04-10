@@ -1,3 +1,4 @@
+-- vim.diagnostic.enable(true)
 return {
   {
     "folke/trouble.nvim",

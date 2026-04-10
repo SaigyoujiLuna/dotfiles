@@ -45,7 +45,6 @@ return {
     },
     config = function(_, opts)
       require("clangd_extensions").setup(opts)
-      vim.lsp.enable("clangd", true)
     end,
   },
 }

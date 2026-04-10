@@ -2,7 +2,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    sem_version = "v0.2.*",
+    branch="master",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "BurntSushi/ripgrep",
@@ -46,12 +46,14 @@ return {
           require("telescope.builtin").find_files()
         end,
         desc = "Find in files",
+        remap = false,
       },
       {
         "<leader>/",
         function()
           require("telescope.builtin").live_grep()
         end,
+        remap = false,
         desc = "Live grep",
       },
       {
@@ -59,6 +61,7 @@ return {
         function()
           require("telescope.builtin").lsp_document_symbols({ symbols = YukiVim.config.get_kind_filter() })
         end,
+        remap = false,
         desc = "Goto Symbol",
       },
       {
@@ -66,14 +69,15 @@ return {
         function()
           require("telescope.builtin").lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
         end,
+        remap = false,
         desc = "Goto Symbol (Workspace)",
       },
-      {
-        "<leader>x",
-        function()
-          require("telescope.builtin").diagnostics()
-        end,
-      },
+      -- {
+      --   "<leader>x",
+      --   function()
+      --     require("telescope.builtin").diagnostics()
+      --   end,
+      -- },
     },
   },
 }

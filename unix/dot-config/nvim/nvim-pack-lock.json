@@ -8,10 +8,6 @@
       "rev": "8c84af0f09e5d9058362ac58401a8e7b047d826e",
       "src": "https://github.com/yetone/avante.nvim"
     },
-    "blink-ripgrep.nvim": {
-      "rev": "f1e2f0132d4d8b8591e29f4f86f518f6d463371d",
-      "src": "https://github.com/mikavilpas/blink-ripgrep.nvim"
-    },
     "blink.cmp": {
       "rev": "a327b19a419347084074cce77f6cd074f54705ac",
       "src": "https://github.com/saghen/blink.cmp",
@@ -77,10 +73,6 @@
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
-    },
-    "lazy.nvim": {
-      "rev": "306a05526ada86a7b30af95c5cc81ffba93fef97",
-      "src": "https://github.com/folke/lazy.nvim"
     },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
@@ -207,7 +199,7 @@
     "telescope.nvim": {
       "rev": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026",
       "src": "https://github.com/nvim-telescope/telescope.nvim",
-      "version": "0.2.0 - 0.3.0"
+      "version": "'master'"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
@@ -224,6 +216,10 @@
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
+    },
+    "xcodebuild.nvim": {
+      "rev": "6ee81bcf0334eac180111ac7ac2435d421d1508d",
+      "src": "https://github.com/wojciech-kulik/xcodebuild.nvim"
     },
     "zpack.nvim": {
       "rev": "024d457b89a0c20983a3fad0e0e18a64f1e7f7e2",

@@ -64,9 +64,9 @@ return {
         treesitter_context = true,
         treesitter = true,
         rainbow_delimiters = true,
-        telescope = {
-          enabled = true,
-        },
+        -- telescope = {
+        --   enabled = true,
+        -- },
         gitsigns = true,
         noice = true,
         blink_cmp = true,

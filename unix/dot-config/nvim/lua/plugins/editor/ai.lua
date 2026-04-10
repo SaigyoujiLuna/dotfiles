@@ -13,9 +13,6 @@ return {
     },
     opts = function()
       return {
-        nes = {
-          enabled = true,
-        },
         suggestion = {
           enabled = true,
           auto_trigger = true,

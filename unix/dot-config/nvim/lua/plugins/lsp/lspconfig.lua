@@ -49,44 +49,35 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "mason-org/mason.nvim" },
+      "mason-org/mason.nvim",
       { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
     cond = not vim.g.vscode,
     opts = {
-      servers = {
-        marksman = {},
-        ["*"] = {
-          -- stylua: ignore
-            keys = {
-              { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-              { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-              { "gy", vim.lsp.buf.type_definition, desc = "Goto Type Definition" },
-              { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-              { "cd", vim.lsp.buf.rename, desc = "Rename", nowait = true },
-              { "gA", vim.lsp.buf.references, desc = "Goto References", nowait = true },
-              { "K", function() return vim.lsp.buf.hover() end, desc = "Hover", },
-              { "gh", function() return vim.lsp.buf.hover() end, desc = "Hover", },
-              { "gk", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp", },
-              { "g.", function() return vim.lsp.buf.code_action() end, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-              { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp", },
-              { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v", }, has = "codeAction", },
-              { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v", }, has = "codeLens", },
-              { "<leader>cN", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = { "n", }, has = { "workspace/didRenameFiles", "workspace/willRenameFiles", }, },
-              { "<leader>cd", vim.lsp.buf.rename, desc = "Rename", has = "rename", },
-            },
-        },
+      -- stylua: ignore
+      keys = {
+        { "gd", function() vim.lsp.buf.definition() end, desc = "Goto Definition", has = "definition" },
+        { "gD", function() vim.lsp.buf.declaration() end, desc = "Goto Declaration" },
+        { "gy", function() vim.lsp.buf.type_definition() end, desc = "Goto Type Definition" },
+        { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+        { "cd", function() vim.lsp.buf.rename() end , desc = "Rename", nowait = true },
+        { "gA", vim.lsp.buf.references, desc = "Goto References", nowait = true },
+        { "K", function() vim.lsp.buf.hover() end, desc = "Hover", },
+        { "gh", function() return vim.lsp.buf.hover() end, desc = "Hover", },
+        { "gk", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp", },
+        { "g.", function() return vim.lsp.buf.code_action() end, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+        { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp", },
+        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v", }, has = "codeAction", },
+        { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v", }, has = "codeLens", },
+        { "<leader>cN", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = { "n", }, has = { "workspace/didRenameFiles", "workspace/willRenameFiles", }, },
+        { "<leader>cd", vim.lsp.buf.rename, desc = "Rename", has = "rename", },
       },
     },
     config = function(_, opts)
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           -- keymaps
-          for server, server_opts in pairs(opts.servers) do
-            if type(server_opts) == "table" and server_opts.keys then
-              YukiVim.lsp.set_keymap({ name = server ~= "*" and server or nil }, server_opts.keys)
-            end
-          end
+          YukiVim.lsp.set_keymap({ name = nil }, opts.keys)
           -- inlay hints
           Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
             if
@@ -125,11 +116,6 @@ return {
           end)
         end,
       })
-
-      -- lsp setup
-      if opts.servers["*"] then
-        vim.lsp.config("*", opts.servers["*"])
-      end
 
       vim.lsp.enable("vtsls", true)
       vim.lsp.config("vtsls", {
@@ -225,6 +211,22 @@ return {
       vim.lsp.config("ruff_lsp", {})
       vim.lsp.enable("copilot", true)
       vim.lsp.inline_completion.enable(true)
+      vim.lsp.config("marksman", {})
+      vim.lsp.config("sourcekit", {
+        rootdir = function(_, callback)
+          callback(
+            require("lspconfig.util").root_pattern("Package.swift")(vim.fn.getcwd())
+              or vim.fs.dirname(vim.fs.find("git", { path = vim.fn.getcwd(), upward = true })[1])
+          )
+        end,
+        cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
+      })
+      vim.lsp.enable("sourcekit", true)
+      Snacks.util.lsp.on({ name = "sourcekit" }, function(client)
+        if vim.lsp.is_enabled("clangd") then
+          vim.lsp.enable("clangd", false)
+        end
+      end)
       YukiVim.cmp.actions.ai_accept = function()
         return vim.lsp.inline_completion.get()
       end
