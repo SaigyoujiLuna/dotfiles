@@ -222,11 +222,6 @@ return {
         cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
       })
       vim.lsp.enable("sourcekit", true)
-      Snacks.util.lsp.on({ name = "sourcekit" }, function(client)
-        if vim.lsp.is_enabled("clangd") then
-          vim.lsp.enable("clangd", false)
-        end
-      end)
       YukiVim.cmp.actions.ai_accept = function()
         return vim.lsp.inline_completion.get()
       end

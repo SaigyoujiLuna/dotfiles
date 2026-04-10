@@ -8,7 +8,7 @@ return {
       "MunifTanjim/nui.nvim",
       "nvim-treesitter/nvim-treesitter", -- (optional) for Quick tests support (required Swift parser)
     },
-    ft = { "swift", "objective-c", "objective-cpp" },
+    ft = { "swift", "objc", "objcpp" },
     config = function()
       require("xcodebuild").setup({})
     end,
