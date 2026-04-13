@@ -1,4 +1,5 @@
 # init
+export LC_MESSAGES="en_US.UTF-8"
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 autoload -U bashcompinit
