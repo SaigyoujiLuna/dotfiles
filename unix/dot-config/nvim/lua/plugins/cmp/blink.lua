@@ -5,6 +5,8 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "neovim/nvim-lspconfig",
+      "huijiro/blink-cmp-supermaven",
+      "supermaven-inc/supermaven-nvim",
     },
     build = function(plugin)
       local obj = vim.system({ "cargo", "build", "--release" }, { cwd = plugin.path }):wait()
@@ -21,7 +23,7 @@ return {
       keymap = {
         preset = "super-tab",
         ["<Tab>"] = {
-          "accept",
+          -- "accept",
           YukiVim.cmp.map({ "snippet_forward", "ai_accept" }),
           "select_and_accept",
           "fallback",
@@ -42,7 +44,6 @@ return {
           },
         },
         menu = {
-
           border = "rounded",
 
           draw = {

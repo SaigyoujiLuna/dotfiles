@@ -1,3 +1,4 @@
+
 return {
   {
     "mason-org/mason.nvim",
@@ -209,9 +210,6 @@ return {
       })
 
       vim.lsp.config("ruff_lsp", {})
-      -- vim.lsp.enable("copilot", true)
-      vim.lsp.enable("opencode", true)
-      vim.lsp.inline_completion.enable(true)
       vim.lsp.config("marksman", {})
       vim.lsp.config("sourcekit", {
         rootdir = function(_, callback)
@@ -223,6 +221,7 @@ return {
         cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
       })
       vim.lsp.enable("sourcekit", true)
+      vim.lsp.inline_completion.enable(true)
       YukiVim.cmp.actions.ai_accept = function()
         return vim.lsp.inline_completion.get()
       end
