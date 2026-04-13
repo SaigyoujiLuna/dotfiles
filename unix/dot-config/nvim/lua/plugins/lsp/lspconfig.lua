@@ -209,7 +209,8 @@ return {
       })
 
       vim.lsp.config("ruff_lsp", {})
-      vim.lsp.enable("copilot", true)
+      -- vim.lsp.enable("copilot", true)
+      vim.lsp.enable("opencode", true)
       vim.lsp.inline_completion.enable(true)
       vim.lsp.config("marksman", {})
       vim.lsp.config("sourcekit", {
