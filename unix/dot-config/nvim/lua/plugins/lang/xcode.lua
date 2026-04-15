@@ -1,6 +1,7 @@
 return {
   {
     "wojciech-kulik/xcodebuild.nvim",
+    cond = not vim.g.vscode,
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "folke/snacks.nvim", -- (optional) to show previews

@@ -2,6 +2,7 @@ return {
   {
     "p00f/clangd_extensions.nvim",
     ft = { "c", "cpp", "objc", "objcpp" },
+    cond = not vim.g.vscode,
     opts = {
       inlay_hints = {},
       ast = {

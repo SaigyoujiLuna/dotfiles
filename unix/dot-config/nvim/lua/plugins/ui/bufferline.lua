@@ -3,6 +3,7 @@ return {
     "akinsho/bufferline.nvim",
     sem_version = "*",
     dependencies = { "catppuccin/nvim", "nvim-tree/nvim-web-devicons" },
+    cond = not vim.g.vscode,
     event = { "BufEnter" },
     ---@type bufferline.UserConfig
     opts = function()

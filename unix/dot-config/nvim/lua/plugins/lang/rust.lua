@@ -1,6 +1,7 @@
 return {
   {
     "Saecki/crates.nvim",
+    cond = not vim.g.vscode,
     event = { "BufRead Cargo.toml" },
     opts = {
       completion = {
@@ -18,9 +19,11 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
+    cond = not vim.g.vscode,
     dependencies = {
       "neovim/nvim-lspconfig",
     },
+    ft = "rust",
     version = vim.version.range("^9"),
     ---@type rustaceanvim.Opts
     opts = {

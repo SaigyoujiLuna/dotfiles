@@ -1,6 +1,7 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
+    cond = not vim.g.vscode,
     event = { "BufEnter" },
     opts = {
       signs = {
@@ -29,7 +30,7 @@ return {
             target = "all",
           })
         end,
-        desc = "Next Change"
+        desc = "Next Change",
       },
       {
         "]c",
@@ -39,7 +40,7 @@ return {
             target = "all",
           })
         end,
-        desc = "Prev Change"
+        desc = "Prev Change",
       },
       {
         "do",
@@ -62,21 +63,21 @@ return {
           require("gitsigns").stage_hunk()
           require("gitsigns").nav_hunk("next", {
             wrap = true,
-            target = "unstaged"
+            target = "unstaged",
           })
         end,
-        desc = "Stage and Next"
+        desc = "Stage and Next",
       },
       {
         "dU",
         function()
           require("gitsigns").stage_hunk()
           require("gitsigns").nav_hunk("next", {
-              wrap = true,
-              target = "staged"
+            wrap = true,
+            target = "staged",
           })
         end,
-        desc = "Unstage and Next"
+        desc = "Unstage and Next",
       },
       {
         "dp",

@@ -14,6 +14,7 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
+    cond = not vim.g.vscode,
     opts = function()
       local cmd = { vim.fn.exepath("jdtls") }
       -- local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")

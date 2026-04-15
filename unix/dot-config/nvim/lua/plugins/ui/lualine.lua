@@ -2,6 +2,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "folke/snacks.nvim", "catppuccin/nvim" },
+    cond = not vim.g.vscode,
     event = { "BufEnter" },
     opts = function()
       return {
