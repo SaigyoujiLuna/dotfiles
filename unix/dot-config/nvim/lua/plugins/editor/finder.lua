@@ -31,7 +31,6 @@ return {
     },
     config = function()
       require("telescope").setup({
-
         extensions = {
           fzf = {
             fuzzy = true,
@@ -41,51 +40,27 @@ return {
           },
         },
       })
+      local builtin = require("telescope.builtin")
+      vim.keymap.set({ "n" }, "<leader><Space>", builtin.find_files, {
+        desc = "Find in files",
+      })
+      vim.keymap.set({ "n" }, "<leader>/", builtin.live_grep, {
+        desc = "Live grep",
+      })
+      vim.keymap.set({ "n" }, "gs", function()
+        builtin.lsp_document_symbols({ symbols = YukiVim.config.get_kind_filter() })
+      end, {
+        desc = "Goto Symbol",
+      })
+      vim.keymap.set({ "n" }, "gS", function()
+        builtin.lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
+      end, {
+        desc = "Goto Symbol (Workspace)",
+      })
+      vim.keymap.set({ "n" }, "<leader>x", builtin.diagnostics, {
+        desc = "Diagnostics",
+      })
       require("telescope").load_extension("fzf")
     end,
-    keys = {
-      {
-        "<leader><Space>",
-        function()
-          vim.notify("Finder is not available in this version", vim.log.levels.WARN)
-          require("telescope.builtin").find_files()
-        end,
-        mode = { "n" },
-        desc = "Find in files",
-        -- remap = false,
-      },
-      {
-        "<leader>/",
-        function()
-          require("telescope.builtin").live_grep()
-        end,
-        -- remap = false,
-        mode = { "n" },
-        desc = "Live grep",
-      },
-      {
-        "gs",
-        function()
-          require("telescope.builtin").lsp_document_symbols({ symbols = YukiVim.config.get_kind_filter() })
-        end,
-        -- remap = false,
-        mode = { "n" },
-        desc = "Goto Symbol",
-      },
-      {
-        "gS",
-        function()
-          require("telescope.builtin").lsp_workspace_symbols({ symbols = YukiVim.config.get_kind_filter() })
-        end,
-        -- remap = false,
-        desc = "Goto Symbol (Workspace)",
-      },
-      -- {
-      --   "<leader>x",
-      --   function()
-      --     require("telescope.builtin").diagnostics()
-      --   end,
-      -- },
-    },
   },
 }
