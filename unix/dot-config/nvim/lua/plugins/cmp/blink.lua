@@ -23,7 +23,7 @@ return {
       keymap = {
         preset = "super-tab",
         ["<Tab>"] = {
-          -- "accept",
+          "accept",
           YukiVim.cmp.map({ "snippet_forward", "ai_accept" }),
           "select_and_accept",
           "fallback",
