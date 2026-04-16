@@ -21,7 +21,6 @@ return {
       no_underline = false,
       integrations = {
         fidget = true,
-        flash = true,
         indent_blankline = {
           colored_indent_levels = true,
         },
