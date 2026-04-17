@@ -40,6 +40,7 @@ return {
           },
         },
       })
+      require("telescope").load_extension("fzf")
       local builtin = require("telescope.builtin")
       vim.keymap.set({ "n" }, "<leader><Space>", builtin.find_files, {
         desc = "Find in files",
@@ -60,7 +61,6 @@ return {
       vim.keymap.set({ "n" }, "<leader>x", builtin.diagnostics, {
         desc = "Diagnostics",
       })
-      require("telescope").load_extension("fzf")
     end,
   },
 }

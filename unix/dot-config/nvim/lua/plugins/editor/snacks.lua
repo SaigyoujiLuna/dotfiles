@@ -132,20 +132,20 @@ return {
         end,
         desc = "Git File Status",
       },
-      {
-        "gs",
-        function()
-          Snacks.picker.lsp_symbols({ filter = YukiVim.config.kind_filter })
-        end,
-        desc = "LSP Symbols",
-      },
-      {
-        "gS",
-        function()
-          Snacks.picker.lsp_workspace_symbols({ filter = YukiVim.config.kind_filter })
-        end,
-        desc = "LSP Workspace Symbols",
-      },
+      -- {
+      --   "gs",
+      --   function()
+      --     Snacks.picker.lsp_symbols({ filter = YukiVim.config.kind_filter })
+      --   end,
+      --   desc = "LSP Symbols",
+      -- },
+      -- {
+      --   "gS",
+      --   function()
+      --     Snacks.picker.lsp_workspace_symbols({ filter = YukiVim.config.kind_filter })
+      --   end,
+      --   desc = "LSP Workspace Symbols",
+      -- },
     },
   },
 }
