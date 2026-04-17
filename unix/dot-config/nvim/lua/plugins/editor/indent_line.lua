@@ -1,55 +1,28 @@
-local highlight = {
-  "RainbowRed",
-  "RainbowYellow",
-  "RainbowBlue",
-  "RainbowOrange",
-  "RainbowGreen",
-  "RainbowViolet",
-  "RainbowCyan",
-}
-
 return {
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    dependencies = {
-      "HiPhish/rainbow-delimiters.nvim",
-    },
-    ---@module "ibl"
-    ---@type ibl.config
+    "echasnovski/mini.indentscope",
+    branch = "main",
     opts = {
-      scope = {
-        highlight = highlight,
+      mappings = {
+        object_scope = "ii",
+        object_scope_with_border = "aI", -- handled manually below as ai/aI
+        goto_top = "",
+        goto_bottom = "",
       },
-      exclude = {
-        filetypes = {
-          "lspinfo",
-          "packer",
-          "checkhealth",
-          "help",
-          "man",
-          "gitcommit",
-          "TelescopePrompt",
-          "TelescopeResults",
-          "dashboard",
-        },
+      options = {
+        border = "both", -- default for ai: include only the header line above
       },
     },
     config = function(_, opts)
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-        vim.api.nvim_set_hl(1, "RainbowGreen", { fg = "#98C379" })
-        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-      end)
-      vim.g.rainbow_delimiters = { highlight = highlight }
-      require("ibl").setup(opts)
+      local mis = require("mini.indentscope")
+      mis.setup(opts)
 
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+      -- ai: scope + top border only (header line, e.g. `if`/`case`)
+      vim.keymap.set({ "x", "o" }, "ai", function()
+        vim.b.miniindentscope_config = { options = { border = "top" } }
+        mis.textobject(true)
+        vim.b.miniindentscope_config = nil
+      end, { desc = "Around indent scope (with header line above)" })
     end,
   },
 }

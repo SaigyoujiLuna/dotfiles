@@ -1,10 +1,9 @@
 return {
   {
-    "p00f/clangd_extensions.nvim",
+    "dchinmay2/clangd_extensions.nvim",
     ft = { "c", "cpp", "objc", "objcpp" },
     cond = not vim.g.vscode,
     opts = {
-      inlay_hints = {},
       ast = {
         role_icons = {
           type = "",
@@ -25,6 +24,19 @@ return {
         },
       },
       server = {
+        root_markers = {
+          "compile_commands.json",
+          "compile_flags.txt",
+          "configure.ac", -- AutoTools
+          "Makefile",
+          "configure.ac",
+          "configure.in",
+          "config.h.in",
+          "meson.build",
+          "meson_options.txt",
+          "build.ninja",
+          ".git",
+        },
         capabilities = {
           offsetEncoding = { "utf-16" },
         },
@@ -45,6 +57,7 @@ return {
       },
     },
     config = function(_, opts)
+      vim.lsp.enable("clangd", true)
       require("clangd_extensions").setup(opts)
     end,
   },

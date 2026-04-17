@@ -1,7 +1,7 @@
 return {
   {
     "wojciech-kulik/xcodebuild.nvim",
-    cond = not vim.g.vscode,
+    cond = not vim.g.vscode and vim.uv.os_uname().sysname == "Darwin",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "folke/snacks.nvim", -- (optional) to show previews

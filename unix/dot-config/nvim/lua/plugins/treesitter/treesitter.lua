@@ -127,26 +127,29 @@ return {
       end, {
         desc = "Go to next comment start",
       })
-      vim.keymap.set({ "v" }, "ac", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-      end, {
-        desc = "Select around class",
-      })
-      vim.keymap.set({ "v" }, "ic", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-      end, {
-        desc = "Select inner class",
-      })
-      vim.keymap.set({ "v" }, "af", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-      end, {
-        desc = "Select around method",
-      })
-      vim.keymap.set({ "v" }, "if", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-      end, {
-        desc = "Select inner method",
-      })
+      local select = require("nvim-treesitter-textobjects.select")
+      local function sel(lhs, capture, desc)
+        vim.keymap.set({ "v", "o" }, lhs, function()
+          select.select_textobject(capture, "textobjects")
+        end, { desc = desc })
+      end
+
+      -- class / definition
+      sel("ac", "@class.outer", "Around class/definition")
+      sel("ic", "@class.inner", "Inside class/definition")
+
+      -- function / method
+      sel("af", "@function.outer", "Around function/method")
+      sel("if", "@function.inner", "Inside function/method")
+
+      -- argument / parameter
+      sel("ia", "@parameter.inner", "Inside argument/list item")
+      sel("aa", "@parameter.outer", "Around argument/list item (with comma)")
+
+      -- HTML-like tag
+      sel("at", "@attribute.outer", "Around HTML-like tag")
+      sel("it", "@attribute.inner", "Inside HTML-like tag")
+
     end,
   },
 }

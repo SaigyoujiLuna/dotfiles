@@ -211,20 +211,18 @@ return {
 
       vim.lsp.config("ruff_lsp", {})
       vim.lsp.config("marksman", {})
-      vim.lsp.config("sourcekit", {
-        rootdir = function(_, callback)
-          callback(
-            require("lspconfig.util").root_pattern("Package.swift")(vim.fn.getcwd())
-              or vim.fs.dirname(vim.fs.find("git", { path = vim.fn.getcwd(), upward = true })[1])
-          )
-        end,
-        cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
-      })
-      vim.lsp.enable("sourcekit", true)
-      -- vim.lsp.inline_completion.enable(true)
-      -- YukiVim.cmp.actions.ai_accept = function()
-      --   return vim.lsp.inline_completion.get()
-      -- end
+      if vim.uv.os_uname().sysname == "Darwin" then
+        vim.lsp.config("sourcekit", {
+          rootdir = function(_, callback)
+            callback(
+              require("lspconfig.util").root_pattern("Package.swift")(vim.fn.getcwd())
+                or vim.fs.dirname(vim.fs.find("git", { path = vim.fn.getcwd(), upward = true })[1])
+            )
+          end,
+          cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
+        })
+        vim.lsp.enable("sourcekit", true)
+      end
 
       require("mason-lspconfig").setup({
         ensure_installed = { "jsonls" },

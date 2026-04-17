@@ -21,16 +21,12 @@ return {
       no_underline = false,
       integrations = {
         fidget = true,
-        indent_blankline = {
-          colored_indent_levels = true,
-        },
         mason = true,
         mini = {
-          indentscope_color = "macchiato",
+          enabled = true,
         },
         snacks = {
           enabled = true,
-          -- indent_scope_color = "lavender",
         },
         treesitter_context = true,
         treesitter = true,
@@ -39,7 +35,6 @@ return {
         noice = true,
         which_key = true,
       },
-
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
