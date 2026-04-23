@@ -1,7 +1,11 @@
 local M = {}
 
+---@type snacks.explorer.Config
 M.opts = {
   enabled = true,
+  git_untracked = true,
+  ignored = true,
+  hidden = true,
 }
 
 M.keys = {

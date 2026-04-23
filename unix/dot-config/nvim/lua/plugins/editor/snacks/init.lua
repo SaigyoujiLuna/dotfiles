@@ -1,4 +1,8 @@
 local tree = require("plugins.editor.snacks.tree")
+local finder = require("plugins.editor.snacks.finder")
+local keys = {}
+vim.list_extend(keys, tree.keys)
+vim.list_extend(keys, finder.keys)
 return {
   {
     "folke/snacks.nvim",
@@ -27,20 +31,7 @@ return {
         enabled = true,
       },
       input = { enabled = true },
-      picker = {
-        enabled = true,
-        config = function(opts)
-          if opts.source == "explorer" then
-            ---@type snacks.picker.explorer.Config
-            local explorer_opts = opts
-            explorer_opts.hidden = true
-            explorer_opts.git_untracked = true
-            explorer_opts.ignored = true
-            return explorer_opts
-          end
-          return opts
-        end,
-      },
+      picker = finder.opts,
       quickfile = { enabled = true, win = {} },
       scope = { enabled = true },
       scroll = {
@@ -133,20 +124,6 @@ return {
         end,
         desc = "Git File Status",
       },
-      -- {
-      --   "gs",
-      --   function()
-      --     Snacks.picker.lsp_symbols({ filter = YukiVim.config.kind_filter })
-      --   end,
-      --   desc = "LSP Symbols",
-      -- },
-      -- {
-      --   "gS",
-      --   function()
-      --     Snacks.picker.lsp_workspace_symbols({ filter = YukiVim.config.kind_filter })
-      --   end,
-      --   desc = "LSP Workspace Symbols",
-      -- },
-    }, tree.keys),
+    }, keys),
   },
 }
