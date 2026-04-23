@@ -1,3 +1,4 @@
+local tree = require("plugins.editor.snacks.tree")
 return {
   {
     "folke/snacks.nvim",
@@ -9,7 +10,7 @@ return {
       bigfile = { enabled = true, notify = true, size = 3 * 1024 * 1024 },
       dashboard = { enabled = false },
       dim = { enabled = true },
-      explorer = { enabled = false },
+      explorer = tree.opts,
       indent = { enabled = false },
       lazygit = {
         configure = true,
@@ -82,7 +83,7 @@ return {
       require("snacks").setup(opts)
       -- Snacks.dim.enable()
     end,
-    keys = {
+    keys = vim.list_extend({
       {
         "<C-/>",
         function()
@@ -146,6 +147,6 @@ return {
       --   end,
       --   desc = "LSP Workspace Symbols",
       -- },
-    },
+    }, tree.keys),
   },
 }
