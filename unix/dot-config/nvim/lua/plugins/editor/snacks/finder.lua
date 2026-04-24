@@ -11,9 +11,17 @@ M.opts = {
       explorer_opts.git_untracked = true
       explorer_opts.hidden = true
       explorer_opts.follow = false
+      explorer_opts.watch = true
     end
     return opts
   end,
+  sources = {
+    explorer = {
+      layout = {
+        auto_hide = { "input" },
+      },
+    },
+  },
 }
 M.keys = {
   {
