@@ -57,7 +57,7 @@ return {
                 enabled = "all",
               },
             },
-            home = "/opt/homebrew/opt/openjdk",
+            -- home = "/opt/homebrew/opt/openjdk",
           },
         },
       }
