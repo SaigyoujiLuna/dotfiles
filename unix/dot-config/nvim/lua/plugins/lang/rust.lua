@@ -33,7 +33,7 @@ return {
             vim.cmd.RustLsp("codeAction")
           end, { desc = "Code Action", buffer = bufnr, noremap = true, silent = true })
           vim.keymap.set("n", "g.", function()
-            vim.cmd.RusLsp("codeAction")
+            vim.cmd.RustLsp("codeAction")
           end, { desc = "Code Action", buffer = bufnr, noremap = true, silent = true })
           vim.keymap.set("n", "<leader>dr", function()
             vim.cmd.RustLsp("debuggables")

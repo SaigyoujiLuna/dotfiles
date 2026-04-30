@@ -1,4 +1,3 @@
-
 return {
   {
     "mason-org/mason.nvim",
@@ -27,15 +26,6 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
-
-      mr:on("package:install::success", function()
-        vim.defer_fn(function()
-          require("lazy.core.handler.event").trigger({
-            event = "FileType",
-            buf = vim.api.nvim_get_current_buf(),
-          })
-        end, 100)
-      end)
 
       mr.refresh(function()
         for _, tool in ipairs(opts.ensure_installed) do
@@ -83,7 +73,7 @@ return {
           Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
             if
               vim.api.nvim_buf_is_valid(buffer)
-              and vim.bo[buffer].filetype == ""
+              and vim.bo[buffer].filetype ~= ""
               and not vim.tbl_contains({ "vue" }, vim.bo[buffer].filetype)
             then
               vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
@@ -161,8 +151,8 @@ return {
       vim.lsp.enable("bacon-ls", true)
       vim.lsp.config("bacon-ls", {
         init_options = {
-          undateOnSave = true,
-          undateOnSaveWaitMillis = 1000,
+          updateOnSave = true,
+          updateOnSaveWaitMillis = 1000,
         },
       })
       vim.lsp.config("ruff", {

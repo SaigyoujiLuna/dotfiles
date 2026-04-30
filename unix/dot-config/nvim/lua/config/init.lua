@@ -87,10 +87,10 @@ function M.init()
 
   M.did_init = true
   M.load("options")
+  M.load("autocmds")
   M.load("lazy")
 end
 function M.setup()
-  M.load("autocmds")
   M.load("keymaps")
 end
 return M
