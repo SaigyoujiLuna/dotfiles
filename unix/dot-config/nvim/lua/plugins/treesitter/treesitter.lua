@@ -2,8 +2,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    branch = "main",
-    lazy = false,
     opts = {
       ensure_installed = {
         "cpp",
@@ -149,7 +147,6 @@ return {
       -- HTML-like tag
       sel("at", "@attribute.outer", "Around HTML-like tag")
       sel("it", "@attribute.inner", "Inside HTML-like tag")
-
     end,
   },
 }

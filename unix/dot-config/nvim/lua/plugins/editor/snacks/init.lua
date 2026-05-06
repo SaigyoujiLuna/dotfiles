@@ -1,9 +1,11 @@
 local tree = require("plugins.editor.snacks.tree")
 local finder = require("plugins.editor.snacks.finder")
 local styles = require("plugins.editor.snacks.style")
+local notifier = require("plugins.editor.snacks.notifier")
 local keys = {}
 vim.list_extend(keys, tree.keys)
 vim.list_extend(keys, finder.keys)
+vim.list_extend(keys, notifier.keys)
 return {
   {
     "folke/snacks.nvim",
@@ -20,14 +22,7 @@ return {
       lazygit = {
         configure = true,
       },
-      notifier = {
-        enabled = true,
-        style = "compact",
-        width = {
-          min = 40,
-          max = 0.7,
-        },
-      },
+      notifier = notifier.opts,
       image = {
         enabled = true,
       },
@@ -100,13 +95,6 @@ return {
           Snacks.lazygit()
         end,
         desc = "Lazygit",
-      },
-      {
-        "<leader>n",
-        function()
-          Snacks.picker.notifications()
-        end,
-        desc = "Notification History",
       },
       {
         "<leader>.",
