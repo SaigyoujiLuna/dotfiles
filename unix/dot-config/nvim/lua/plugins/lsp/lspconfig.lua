@@ -199,7 +199,6 @@ return {
         },
       })
 
-      vim.lsp.config("ruff_lsp", {})
       vim.lsp.config("marksman", {})
       if vim.uv.os_uname().sysname == "Darwin" then
         vim.lsp.config("sourcekit", {

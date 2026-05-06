@@ -1,5 +1,6 @@
 local tree = require("plugins.editor.snacks.tree")
 local finder = require("plugins.editor.snacks.finder")
+local styles = require("plugins.editor.snacks.style")
 local keys = {}
 vim.list_extend(keys, tree.keys)
 vim.list_extend(keys, finder.keys)
@@ -34,6 +35,7 @@ return {
       picker = finder.opts,
       quickfile = { enabled = true, win = {} },
       scope = { enabled = true },
+      styles = styles.opts,
       scroll = {
         enabled = true,
         animate = {
@@ -45,10 +47,6 @@ return {
         enabled = true,
       },
       words = { enabled = true },
-      win = {
-        border = "rounded",
-        position = "float",
-      },
       terminal = {
         enabled = true,
       },
