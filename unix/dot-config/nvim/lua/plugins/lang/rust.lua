@@ -51,19 +51,18 @@ return {
                 enabled = true,
               },
             },
-            checkOnSave = {
-              enabled = false,
-            },
+            checkOnSave = true,
             diagnostics = {
               enabled = false,
             },
             procMacro = {
-              enable = true,
+              enable = false,
             },
             files = {
               excludeDirs = {
                 ".direnv",
                 ".git",
+                ".jj",
                 ".github",
                 ".gitlab",
                 "bin",

@@ -150,9 +150,21 @@ return {
       vim.lsp.enable("rust_analyzer", false)
       vim.lsp.enable("bacon-ls", true)
       vim.lsp.config("bacon-ls", {
+        settings = {
+          bacon_ls = {
+            backend = "cargo",
+            cargo = {
+              command = "clippy",
+              features = "all",
+              checkOnSave = true,
+              allTargets = true,
+              noDefaultFeatures = true
+            },
+          },
+        },
         init_options = {
           updateOnSave = true,
-          updateOnSaveWaitMillis = 1000,
+          updateOnSaveWaitMillis = 3000,
         },
       })
       vim.lsp.config("ruff", {
