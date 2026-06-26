@@ -15,4 +15,3 @@ background-opacity = 0.75
 background-blur = macos-glass-clear
 macos-titlebar-style = hidden
 custom-shader = shaders/cursor_wrap.glsl
-scrollback-limit = 3000

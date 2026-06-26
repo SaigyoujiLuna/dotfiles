@@ -156,9 +156,7 @@ return {
             cargo = {
               command = "clippy",
               features = "all",
-              checkOnSave = true,
               allTargets = true,
-              noDefaultFeatures = true
             },
           },
         },
