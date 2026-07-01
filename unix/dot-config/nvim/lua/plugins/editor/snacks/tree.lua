@@ -2,7 +2,7 @@ local M = {}
 
 ---@type snacks.explorer.Config
 M.opts = {
-  enabled = true,
+  enabled = false,
 }
 
 M.keys = {

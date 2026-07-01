@@ -3,9 +3,15 @@ local finder = require("plugins.editor.snacks.finder")
 local styles = require("plugins.editor.snacks.style")
 local notifier = require("plugins.editor.snacks.notifier")
 local keys = {}
-vim.list_extend(keys, tree.keys)
-vim.list_extend(keys, finder.keys)
-vim.list_extend(keys, notifier.keys)
+if tree.opts.enabled then
+  vim.list_extend(keys, tree.keys)
+end
+if finder.opts.enabled then
+  vim.list_extend(keys, finder.keys)
+end
+if notifier.opts.enabled then
+  vim.list_extend(keys, notifier.keys)
+end
 return {
   {
     "folke/snacks.nvim",
