@@ -34,3 +34,7 @@ required dependencies:
 * rust-analyzer
 * bacon-ls
 * bacon
+* zsh-syntax-highlighting
+* zsh-autosuggestions
+* starship
+* zoxide

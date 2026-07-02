@@ -2,19 +2,12 @@
 export LC_MESSAGES="en_US.UTF-8"
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
-autoload -U bashcompinit
-bashcompinit
-
-# antidote plugin manager
-source '/usr/share/zsh-antidote/antidote.zsh'
-antidote load
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.cache/zsh/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
+setopt EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
@@ -40,7 +33,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # ccache
 export PATH="/usr/lib/ccache/bin:$PATH"
 
-alias code='codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland'
 alias ls='ls --color=auto'
 alias ll='ls -l -h'
 alias diff='diff --color=auto'
@@ -50,10 +42,13 @@ alias vi='nvim'
 alias neovide='~/.local/bin/disown_run.sh neovide'
 
 eval $(thefuck --alias)
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # private api_key environment variable
 set -a
 source "$HOME/.config/private_passport.conf"
 set +a
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
