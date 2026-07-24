@@ -11,8 +11,14 @@ return {
         api.map.on_attach.default(bufnr)
         vim.keymap.set("n", "y", api.fs.copy.node, { buffer = bufnr, noremap = true, silent = true, nowait = true })
       end
+      ---@type nvim_tree.config
       return {
         on_attach = on_attach,
+        filters = {
+          dotfiles = false,
+          git_ignored = false,
+          custom = { ".git", ".DS_Store" },
+        },
       }
     end,
     config = function(_, opts)

@@ -28,8 +28,8 @@ M.keys = {
     "<leader><Space>",
     function()
       Snacks.picker.files({
-        ignored = true,
-        hidden = true,
+        ignored = false,
+        hidden = false,
       })
     end,
     desc = "Find files",
