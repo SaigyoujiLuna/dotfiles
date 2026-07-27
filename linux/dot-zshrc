@@ -37,7 +37,6 @@ export PATH="/usr/lib/ccache/bin:$PATH"
 alias ls='ls --color=auto'
 alias ll='ls -l -h'
 alias diff='diff --color=auto'
-alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 alias vi='nvim'
 alias neovide='~/.local/bin/disown_run.sh neovide'
@@ -49,6 +48,7 @@ set -a
 source "$HOME/.config/private_passport.conf"
 set +a
 
+source /usr/share/zsh/plugins/fzf-tab/fzf-tab.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(starship init zsh)"

@@ -7,7 +7,6 @@ This is my personal dotfiles configuration, compatible with both Arch Linux and 
     * neovim
     * starship
     * picgo
-    * zsh\_plugin(require antidote installed)
     * neovide
     * ghostty
 * MacOS Specific
@@ -37,5 +36,6 @@ required dependencies:
 * bacon
 * zsh-syntax-highlighting
 * zsh-autosuggestions
+* fzf-tab
 * starship
 * zoxide
