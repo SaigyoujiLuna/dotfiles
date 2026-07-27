@@ -29,6 +29,12 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", noremap = true
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", noremap = true })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", noremap = true })
 
+-- Resize window using <ctrl> arrow keys
+keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
 -- clipboard support
 keymap.set("n", "<D-s>", ":w<CR>") -- Save
 keymap.set("v", "<D-c>", '"+y') -- Copy

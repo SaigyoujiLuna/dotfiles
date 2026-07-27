@@ -6,13 +6,18 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "mrcjkb/rustaceanvim",
     },
-    opts = {
-      adapters = {
-        ["rustaceanvim.neotest"] = {},
-      },
-      status = { virtual_text = true },
-    },
+    cond = not vim.g.vscode,
+    ft = { "rust" },
+    opts = function()
+      return {
+        adapters = {
+          require("rustaceanvim.neotest"),
+        },
+        status = { virtual_text = true },
+      }
+    end,
     keys = {
       { "<leader>t", "", desc = "+test" },
       {

@@ -25,6 +25,13 @@ return {
           show_on_dirs = true,
           show_on_open_dirs = true,
         },
+        view = {
+          width = {
+            min = 30,
+            max = "30%",
+            padding = 1,
+          },
+        },
       }
     end,
     config = function(_, opts)
