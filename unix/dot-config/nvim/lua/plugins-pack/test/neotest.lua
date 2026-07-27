@@ -19,9 +19,11 @@ require("neotest").setup({
   status = { virtual_text = true, enabled = true },
 })
 keymap({ "n" }, "<leader>t", "", { desc = "+test" })
---stylua: ignore
+-- stylua: ignore
 keymap({ "n" }, "<leader>ta", function() require("neotest").run.attach() end, { desc = "Attach to Test" })
---stylua: ignore
+-- stylua: ignore
+keymap({ "n" }, "<leader>td", function() require("neotest").run.run({ strategy = "dap", suite = true }) end, { desc = "Run Nearest Debug" })
+-- stylua: ignore
 keymap( { "n", }, "<leader>tr", function() require("neotest").run.run() end, { desc = "Run Nearest (Neotest)" })
---stylua: ignore
+-- stylua: ignore
 keymap({ "n" }, "<leader>tu", function() require("neotest").output() end, { desc = "Test Output (Neotest)" })

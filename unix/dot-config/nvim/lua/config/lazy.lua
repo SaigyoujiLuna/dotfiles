@@ -1,8 +1,7 @@
-vim.pack.add({ "https://github.com/zuqini/zpack.nvim" })
-require("plugins.treesitter.treesitter")
-require("plugins.dap.core")
-require("plugins.test.neotest")
-
+vim.pack.add({
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/zuqini/zpack.nvim",
+})
 require("zpack").setup({
   profiling = {
     loader = true,
@@ -13,3 +12,4 @@ require("zpack").setup({
   },
   cmd_prefix = "Z",
 })
+require("plugins-pack")
