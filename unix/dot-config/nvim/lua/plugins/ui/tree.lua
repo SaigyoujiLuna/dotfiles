@@ -10,14 +10,20 @@ return {
       local function on_attach(bufnr)
         api.map.on_attach.default(bufnr)
         vim.keymap.set("n", "y", api.fs.copy.node, { buffer = bufnr, noremap = true, silent = true, nowait = true })
+        vim.keymap.set("n", "/", api.filter.toggle, { buffer = bufnr, noremap = true, silent = true, nowait = true })
+        vim.keymap.set("n", "l", api.node.open.edit, { buffer = bufnr, noremap = true, silent = true, nowait = true })
+        vim.keymap.set("n", "h", api.node.collapse, { buffer = bufnr, noremap = true, silent = true, nowait = true })
       end
       ---@type nvim_tree.config
       return {
         on_attach = on_attach,
-        filters = {
-          dotfiles = false,
-          git_ignored = false,
-          custom = { ".git", ".DS_Store" },
+        sort = {
+          sorter = "case_sensitive",
+        },
+        git = {
+          enable = true,
+          show_on_dirs = true,
+          show_on_open_dirs = true,
         },
       }
     end,
