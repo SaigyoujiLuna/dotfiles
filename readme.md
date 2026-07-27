@@ -31,6 +31,7 @@ required dependencies:
 * vtsls
 * clang
 * lua-language-server
+* rust
 * rust-analyzer
 * bacon-ls
 * bacon
