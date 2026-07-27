@@ -1,4 +1,13 @@
-require("plugins-pack.treesitter")
-require("plugins-pack.cmp")
+vim.pack.add({
+  "https://github.com/catppuccin/nvim",
+})
+require("plugins-pack.theme")
+require("plugins-pack.base")
+require("plugins-pack.ui")
+require("plugins-pack.lsp")
 require("plugins-pack.dap")
+require("plugins-pack.treesitter")
+require("plugins-pack.lang")
+require("plugins-pack.cmp")
 require("plugins-pack.test")
+require("plugins-pack.other")

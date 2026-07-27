@@ -1,7 +1,7 @@
 vim.pack.add({
-  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/zuqini/zpack.nvim",
 })
+require("plugins-pack")
 require("zpack").setup({
   profiling = {
     loader = true,
@@ -12,4 +12,3 @@ require("zpack").setup({
   },
   cmd_prefix = "Z",
 })
-require("plugins-pack")

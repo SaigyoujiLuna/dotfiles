@@ -1,0 +1,6 @@
+require("plugins-pack.ui.tree")
+require("plugins-pack.ui.lualine")
+require("plugins-pack.ui.bufferline")
+require("plugins-pack.ui.fidget")
+require("plugins-pack.ui.noice")
+require("plugins-pack.ui.whichkey")
