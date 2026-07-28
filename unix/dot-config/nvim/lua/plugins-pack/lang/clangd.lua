@@ -4,7 +4,6 @@ end
 vim.pack.add({
   "https://github.com/dchinmay2/clangd_extensions.nvim",
 })
-vim.lsp.enable("clangd", true)
 require("clangd_extensions").setup({
   ast = {
     role_icons = {
@@ -58,3 +57,4 @@ require("clangd_extensions").setup({
     },
   },
 })
+vim.lsp.enable("clangd", true)

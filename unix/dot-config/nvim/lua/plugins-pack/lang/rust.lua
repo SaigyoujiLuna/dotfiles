@@ -22,7 +22,7 @@ require("crates").setup({
 local package_path = YukiVim.get_pkg_path("codelldb")
 local codelldb = package_path .. "/extension/adapter/codelldb"
 local library_path = ""
-local uname = io.popen("uname"):read("*l")
+local uname = vim.uv.os_uname().sysname
 if uname == "Linux" then
   library_path = package_path .. "/extension/lldb/lib/liblldb.so"
 else

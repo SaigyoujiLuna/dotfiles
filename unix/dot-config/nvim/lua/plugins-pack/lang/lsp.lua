@@ -42,14 +42,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local buf = ev.buf
-    keymap({ "n" }, "gd", function() vim.lsp.buf.definition() end, { desc = "Goto Definition", buf = buf })
+    keymap({ "n" }, "gd", vim.lsp.buf.definition, { desc = "Goto Definition", buf = buf })
     keymap({ "n" }, "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration", buf = buf })
     keymap({ "n" }, "gy", vim.lsp.buf.type_definition, { desc = "Goto Type Definition", buf = buf })
     keymap({ "n" }, "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
     keymap({ "n" }, "cd", vim.lsp.buf.rename, { desc = "Rename", nowait = true })
     keymap({ "n" }, "gA", vim.lsp.buf.references, { desc = "Goto References", nowait = true })
-    keymap({ "n" }, "K", function() vim.lsp.buf.hover() end, { desc = "Hover" })
-    keymap({ "n" }, "gh", vim.lsp.buf.hover, { desc = "Hover" })
     keymap({ "n" }, "gk", vim.lsp.buf.signature_help, { desc = "Signature Help" })
     keymap({ "n", "v" }, "g.", vim.lsp.buf.code_action, { desc = "Code Action" })
     keymap({ "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
@@ -97,7 +95,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.lsp.enable("stylua", false)
-vim.lsp.enable("lua_ls", true)
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -124,9 +121,12 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
+vim.lsp.enable("lua_ls", true)
 
 vim.lsp.config("marksman", {})
+vim.lsp.enable("marksman", true)
 
 require("mason-lspconfig").setup({
   ensure_installed = { "jsonls" },
 })
+vim.lsp.enable("jsonls", true)
