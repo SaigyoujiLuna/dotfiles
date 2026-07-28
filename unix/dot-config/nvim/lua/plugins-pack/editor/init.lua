@@ -1,0 +1,11 @@
+require("plugins-pack.editor.autopairs")
+require("plugins-pack.editor.indent_line")
+require("plugins-pack.editor.surround")
+require("plugins-pack.editor.leap")
+require("plugins-pack.editor.todo")
+require("plugins-pack.editor.formatter")
+require("plugins-pack.editor.ai")
+require("plugins-pack.editor.git")
+require("plugins-pack.editor.trouble")
+require("plugins-pack.editor.lint")
+

@@ -96,40 +96,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.lsp.enable("rust_analyzer", false)
-vim.lsp.enable("bacon-ls", true)
-vim.lsp.config("bacon-ls", {
-  settings = {
-    bacon_ls = {
-      backend = "cargo",
-      cargo = {
-        command = "clippy",
-        features = "all",
-        allTargets = true,
-      },
-    },
-  },
-  init_options = {
-    updateOnSave = true,
-    updateOnSaveWaitMillis = 3000,
-  },
-})
-vim.lsp.config("ruff", {
-  enabled = true,
-  cmd_env = { RUFF_TRACE = "messages" },
-  init_options = {
-    settings = {
-      logLevel = "error",
-    },
-  },
-})
-Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
-  client.server_capabilities.hoverProvider = false
-end)
 vim.lsp.enable("stylua", false)
-vim.lsp.config("basedpyright", {
-  enabled = true,
-})
 vim.lsp.enable("lua_ls", true)
 vim.lsp.config("lua_ls", {
   settings = {
@@ -159,18 +126,6 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.config("marksman", {})
-if vim.uv.os_uname().sysname == "Darwin" then
-  vim.lsp.config("sourcekit", {
-    rootdir = function(_, callback)
-      callback(
-        require("lspconfig.util").root_pattern("Package.swift")(vim.fn.getcwd())
-          or vim.fs.dirname(vim.fs.find("git", { path = vim.fn.getcwd(), upward = true })[1])
-      )
-    end,
-    cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
-  })
-  vim.lsp.enable("sourcekit", true)
-end
 
 require("mason-lspconfig").setup({
   ensure_installed = { "jsonls" },

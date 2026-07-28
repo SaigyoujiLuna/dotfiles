@@ -4,9 +4,6 @@ end
 
 local keymap = vim.keymap.set
 
-vim.pack.add({
-  { src = "https://github.com/akinsho/bufferline.nvim", version = vim.version.range("*") },
-})
 
 require("bufferline").setup({
   highlights = require("catppuccin.special.bufferline").get_theme(),

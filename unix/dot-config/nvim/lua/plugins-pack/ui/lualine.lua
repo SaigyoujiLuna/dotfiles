@@ -2,12 +2,6 @@ if vim.g.vscode then
   return
 end
 
-vim.pack.add({
-  "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/nvim-tree/nvim-web-devicons",
-  "https://github.com/folke/snacks.nvim",
-  "https://github.com/catppuccin/nvim",
-})
 require("lualine").setup({
   options = {
     icons_enabled = true,

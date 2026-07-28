@@ -1,13 +1,13 @@
 vim.pack.add({
-  "https://github.com/catppuccin/nvim",
+  "https://github.com/nvim-tree/nvim-web-devicons",
 })
-require("plugins-pack.theme")
 require("plugins-pack.base")
 require("plugins-pack.ui")
-require("plugins-pack.lsp")
 require("plugins-pack.dap")
-require("plugins-pack.treesitter")
 require("plugins-pack.lang")
 require("plugins-pack.cmp")
+require("plugins-pack.treesitter")
+require("plugins-pack.editor")
 require("plugins-pack.test")
 require("plugins-pack.other")
+vim.cmd.colorscheme "catppuccin-nvim"

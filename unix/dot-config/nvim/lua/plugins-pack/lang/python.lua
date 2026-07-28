@@ -10,3 +10,20 @@ require("venv-selector").setup({
     override_notify = false,
   },
 })
+
+vim.lsp.config("ruff", {
+  enabled = true,
+  cmd_env = { RUFF_TRACE = "messages" },
+  init_options = {
+    settings = {
+      logLevel = "error",
+    },
+  },
+})
+Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
+  client.server_capabilities.hoverProvider = false
+end)
+
+vim.lsp.config("basedpyright", {
+  enabled = true,
+})

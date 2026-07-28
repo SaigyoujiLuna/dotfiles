@@ -12,7 +12,7 @@ require("catppuccin").setup({
   show_end_of_buffer = true,
   term_colors = true,
   dim_inactive = {
-    enabled = true,
+    enabled = false,
   },
   no_italic = false,
   no_bold = false,
@@ -24,6 +24,7 @@ require("catppuccin").setup({
     mini = {
       enabled = true,
     },
+    nvimtree = true,
     snacks = {
       enabled = true,
     },
@@ -35,4 +36,3 @@ require("catppuccin").setup({
     which_key = true,
   },
 })
-vim.cmd.colorscheme("catppuccin-nvim")

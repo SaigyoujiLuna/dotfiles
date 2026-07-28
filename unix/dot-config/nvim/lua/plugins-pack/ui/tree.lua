@@ -1,7 +1,6 @@
-vim.pack.add({
-  "https://github.com/nvim-tree/nvim-tree.lua",
-  "https://github.com/nvim-tree/nvim-web-devicons",
-})
+if vim.g.vscode then
+    return
+end
 local api = require("nvim-tree.api")
 
 local function on_attach(bufnr)
