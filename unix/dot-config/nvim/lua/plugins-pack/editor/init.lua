@@ -3,7 +3,7 @@ vim.pack.add({
   "https://github.com/supermaven-inc/supermaven-nvim",
   { src = "https://github.com/echasnovski/mini.pairs" },
   "https://github.com/stevearc/conform.nvim",
-  "https://github.com/echasnovski/mini.indentscope",
+  {src = "https://github.com/echasnovski/mini.indentscope", version = "stable"},
   "https://codeberg.org/andyg/leap.nvim",
   "https://github.com/mfussenegger/nvim-lint",
   "https://github.com/echasnovski/mini.surround",
