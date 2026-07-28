@@ -10,4 +10,4 @@ require("plugins-pack.treesitter")
 require("plugins-pack.editor")
 require("plugins-pack.test")
 require("plugins-pack.other")
-vim.cmd.colorscheme "catppuccin-nvim"
+vim.cmd.colorscheme("catppuccin-nvim")

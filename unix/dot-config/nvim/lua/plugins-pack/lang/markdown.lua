@@ -16,4 +16,11 @@ vim.pack.add({
   "https://github.com/nvim-tree/nvim-web-devicons",
 })
 require("render-markdown").setup({})
--- vim.keymap.set({ "n" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview", ft = "markdown"})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "md", "markdown" },
+  callback = function(ev)
+    local buf = ev.buf
+    vim.keymap.set({ "n" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { buf = buf, desc = "Markdown Preview" })
+  end,
+})
