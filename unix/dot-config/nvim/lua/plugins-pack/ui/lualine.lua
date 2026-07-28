@@ -5,7 +5,6 @@ end
 require("lualine").setup({
   options = {
     icons_enabled = true,
-    theme = "catppuccin-nvim",
     globalstatus = vim.o.laststatus == 3,
     disabled_filetypes = {
       statusline = { "NvimTree", "neo-tree", "netrw", "dashboard" },
@@ -40,5 +39,5 @@ require("lualine").setup({
       end,
     },
   },
-  extensions = { "neo-tree", "lazy", "fzf" },
+  extensions = { "trouble", "nvim-dap-ui", "mason"  },
 })

@@ -1,6 +1,3 @@
-vim.pack.add({
-  "https://github.com/echasnovski/mini.indentscope",
-})
 local mis = require("mini.indentscope")
 mis.setup({
   mappings = {

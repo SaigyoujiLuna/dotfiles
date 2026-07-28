@@ -1,9 +1,6 @@
 if vim.g.vscode then
   return
 end
-vim.pack.add({
-  "https://github.com/lewis6991/gitsigns.nvim",
-})
 local gs = require("gitsigns")
 gs.setup({
   signs = {

@@ -1,6 +1,3 @@
-vim.pack.add({
-  "https://github.com/folke/trouble.nvim",
-})
 require("trouble").setup({
   auto_preview = false,
   auto_close = true,

@@ -19,7 +19,9 @@ if vim.uv.os_uname().sysname == "Darwin" then
           or vim.fs.dirname(vim.fs.find("git", { path = vim.fn.getcwd(), upward = true })[1])
       )
     end,
-    cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
+    cmd = function()
+      return { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) }
+    end,
   })
   vim.lsp.enable("sourcekit", true)
 end

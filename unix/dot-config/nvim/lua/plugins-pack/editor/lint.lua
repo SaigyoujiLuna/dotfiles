@@ -1,6 +1,3 @@
-vim.pack.add({
-  "https://github.com/mfussenegger/nvim-lint",
-})
 local M = {}
 local lint = require("lint")
 

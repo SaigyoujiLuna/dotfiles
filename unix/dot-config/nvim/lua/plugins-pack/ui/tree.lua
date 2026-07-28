@@ -1,8 +1,8 @@
 if vim.g.vscode then
-    return
+  return
 end
-local api = require("nvim-tree.api")
 
+local api = require("nvim-tree.api")
 local function on_attach(bufnr)
   api.map.on_attach.default(bufnr)
   vim.keymap.set("n", "y", api.fs.copy.node, { buffer = bufnr, noremap = true, silent = true, nowait = true })
@@ -10,7 +10,6 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "l", api.node.open.edit, { buffer = bufnr, noremap = true, silent = true, nowait = true })
   vim.keymap.set("n", "h", api.node.collapse, { buffer = bufnr, noremap = true, silent = true, nowait = true })
 end
-
 require("nvim-tree").setup({
   on_attach = on_attach,
   sort = {
@@ -30,4 +29,6 @@ require("nvim-tree").setup({
   },
 })
 vim.keymap.set({ "n" }, "<leader>e", api.tree.toggle, { desc = "Toggle Explorer" })
-vim.keymap.set({ "n" }, "<leader>E", function() api.tree.toggle({ find_file = true }) end, { desc = "Toggle Explorer(Current)" })
+vim.keymap.set({ "n" }, "<leader>E", function()
+  api.tree.toggle({ find_file = true })
+end, { desc = "Toggle Explorer(Current)" })
