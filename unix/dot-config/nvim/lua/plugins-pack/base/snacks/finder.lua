@@ -24,23 +24,23 @@ M.opts = {
   },
 }
 M.keys = {
-  {
-    "<leader><Space>",
-    function()
-      Snacks.picker.files({
-        ignored = false,
-        hidden = false,
-      })
-    end,
-    desc = "Find files",
-  },
-  {
-    "<leader>/",
-    function()
-      Snacks.picker.grep()
-    end,
-    desc = "Live grep",
-  },
+  -- {
+  --   "<leader><Space>",
+  --   function()
+  --     Snacks.picker.files({
+  --       ignored = false,
+  --       hidden = false,
+  --     })
+  --   end,
+  --   desc = "Find files",
+  -- },
+  -- {
+  --   "<leader>/",
+  --   function()
+  --     Snacks.picker.grep()
+  --   end,
+  --   desc = "Live grep",
+  -- },
   {
     "gs",
     function()

@@ -1,3 +1,4 @@
+require("plugins-pack.editor.fff")
 vim.pack.add({
   { src = "https://github.com/olimorris/codecompanion.nvim", version = vim.version.range("^19.0.0") },
   "https://github.com/supermaven-inc/supermaven-nvim",
