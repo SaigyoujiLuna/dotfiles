@@ -3,25 +3,14 @@ local keymap = vim.keymap
 keymap.set("i", "jk", "<ESC>", { desc = "Normal mode", noremap = true })
 
 -- better up/down
-keymap.set(
-  { "n", "x" },
-  "j",
-  "v:count == 0 ? 'gj' : 'j'",
-  { desc = "Down", expr = true, silent = true, noremap = true }
-)
-keymap.set(
-  { "n", "x" },
-  "<Down>",
-  "v:count == 0 ? 'gj' : 'j'",
-  { desc = "Down", expr = true, silent = true, noremap = true }
-)
+-- stylua: ignore
+keymap.set( { "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true, noremap = true })
+-- stylua: ignore
+keymap.set( { "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true, noremap = true })
+-- stylua: ignore
 keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true, noremap = true })
-keymap.set(
-  { "n", "x" },
-  "<Up>",
-  "v:count == 0 ? 'gk' : 'k'",
-  { desc = "Up", expr = true, silent = true, noremap = true }
-)
+-- stylua: ignore
+keymap.set( { "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true, noremap = true })
 
 -- Move to window using the <ctrl> hjkl keys
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", noremap = true })
