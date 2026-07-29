@@ -1,10 +1,6 @@
 if vim.g.vscode then
   return
 end
-vim.pack.add({
-  "https://github.com/Saecki/crates.nvim",
-  { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^9") },
-})
 
 require("crates").setup({
   completion = {

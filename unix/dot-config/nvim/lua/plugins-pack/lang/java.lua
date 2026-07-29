@@ -2,9 +2,6 @@ if vim.g.vscode then
   return
 end
 
-vim.pack.add({
-  "https://github.com/mfussenegger/nvim-jdtls",
-})
 vim.lsp.enable("jdtls", false)
 
 local cmd = { vim.fn.exepath("jdtls") }

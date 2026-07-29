@@ -1,9 +1,6 @@
 if vim.g.vscode then
   return
 end
-vim.pack.add({
-  "https://github.com/dchinmay2/clangd_extensions.nvim",
-})
 require("clangd_extensions").setup({
   ast = {
     role_icons = {

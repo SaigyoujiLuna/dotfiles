@@ -3,11 +3,6 @@ if vim.g.vscode then
 end
 local keymap = vim.keymap.set
 
-vim.pack.add({
-  "https://github.com/saghen/blink.cmp",
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
-})
 local ensure_installed = {
   "stylua",
   "shfmt",
