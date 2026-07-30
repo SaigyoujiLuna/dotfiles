@@ -22,7 +22,6 @@ set showmode
 set showcmd
 set visualbell
 "---------------plugin setting start------------------
-set peekaboo
 set which-key
 let g:WhichKeyDesc_language_tools = "<leader>c code"
 let g:WhichKey_FontSize = 16

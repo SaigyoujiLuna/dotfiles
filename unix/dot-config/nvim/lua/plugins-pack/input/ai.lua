@@ -3,7 +3,7 @@ require("codecompanion").setup({
     chat = {
       adapter = {
         name = "opencode",
-        model = "opencode/claude-sonnet-4-6",
+        model = "opencode/gpt-5.6-luna",
       },
     },
     inline = {

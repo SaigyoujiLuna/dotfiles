@@ -1,12 +1,8 @@
 local finder = require("plugins-pack.base.snacks.finder")
 local styles = require("plugins-pack.base.snacks.style")
-local notifier = require("plugins-pack.base.snacks.notifier")
 local keys = {}
 if finder.opts.enabled then
   vim.list_extend(keys, finder.keys)
-end
-if notifier.opts.enabled then
-  vim.list_extend(keys, notifier.keys)
 end
 require("snacks").setup({
   animate = { enabled = true, duration = 300, easing = "linear", fps = 60 },
@@ -17,7 +13,9 @@ require("snacks").setup({
   lazygit = {
     configure = true,
   },
-  notifier = notifier.opts,
+  notifier = {
+    enabled = false,
+  },
   image = {
     enabled = true,
   },

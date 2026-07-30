@@ -39,5 +39,5 @@ require("lualine").setup({
       end,
     },
   },
-  extensions = { "trouble", "nvim-dap-ui", "mason"  },
+  extensions = { "trouble", "nvim-dap-ui", "mason" },
 })
