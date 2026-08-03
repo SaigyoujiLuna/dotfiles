@@ -1,4 +1,8 @@
-vim.pack.add({
+local M = {}
+M.packages = {
   "https://github.com/folke/lazydev.nvim",
-})
-require("plugins-pack.base.lazydev")
+}
+M.config = function()
+  require("plugins-pack.base.lazydev")
+end
+return M

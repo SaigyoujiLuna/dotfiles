@@ -10,13 +10,10 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end
   end,
 })
-vim.pack.add({
-  { src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
-  { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
-})
 
 local telescope = require("telescope")
-telescope.setup({})
+telescope.setup({
+})
 telescope.load_extension("fzf")
 
 local telescope_api = require("telescope.builtin")

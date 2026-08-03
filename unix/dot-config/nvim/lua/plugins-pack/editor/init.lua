@@ -1,4 +1,3 @@
-require("plugins-pack.editor.telescope")
 vim.pack.add({
   { src = "https://github.com/olimorris/codecompanion.nvim", version = vim.version.range("^19.0.0") },
   "https://github.com/supermaven-inc/supermaven-nvim",
@@ -13,7 +12,10 @@ vim.pack.add({
   { src = "https://github.com/akinsho/bufferline.nvim", version = vim.version.range("*") },
   "https://github.com/HiPhish/rainbow-delimiters.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
+  { src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
+  { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 })
+require("plugins-pack.editor.telescope")
 local group = YukiVim.augroup("plugins-pack-editor")
 vim.api.nvim_create_autocmd("BufEnter", {
   once = true,

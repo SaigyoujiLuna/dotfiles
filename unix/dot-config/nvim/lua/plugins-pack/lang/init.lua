@@ -1,7 +1,5 @@
-if vim.g.vscode then
-  return
-end
-vim.pack.add({
+local M = {}
+M.packages = {
   "https://github.com/dchinmay2/clangd_extensions.nvim",
   "https://github.com/terrastruct/d2-vim",
   "https://github.com/mfussenegger/nvim-jdtls",
@@ -15,19 +13,27 @@ vim.pack.add({
   { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^9") },
   "https://github.com/wojciech-kulik/xcodebuild.nvim",
   "https://github.com/MunifTanjim/nui.nvim",
-})
-local group = YukiVim.augroup("plugins-pack-lang")
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-  group = group,
-  once = true,
-  callback = function()
-    require("plugins-pack.lang.lsp")
-    require("plugins-pack.lang.clangd")
-    require("plugins-pack.lang.d2")
-    require("plugins-pack.lang.java")
-    require("plugins-pack.lang.markdown")
-    require("plugins-pack.lang.python")
-    require("plugins-pack.lang.rust")
-    require("plugins-pack.lang.typescript")
-  end,
-})
+}
+
+if vim.g.vscode then
+  return M
+end
+
+M.config = function()
+  local group = YukiVim.augroup("plugins-pack-lang")
+  vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    group = group,
+    once = true,
+    callback = function()
+      require("plugins-pack.lang.lsp")
+      require("plugins-pack.lang.clangd")
+      require("plugins-pack.lang.d2")
+      require("plugins-pack.lang.java")
+      require("plugins-pack.lang.markdown")
+      require("plugins-pack.lang.python")
+      require("plugins-pack.lang.rust")
+      require("plugins-pack.lang.typescript")
+    end,
+  })
+end
+return M

@@ -25,23 +25,41 @@ vim.api.nvim_set_hl(0, "TinyTermWinbar", { link = "WinBar", default = true })
 local Terminal = {}
 Terminal.__index = Terminal
 
----@class yukivim.utils.terminal.Opts
+---@class yukivim.utils.terminal.Config
+---@field win? yukivim.utils.win.Config
+---@field shell? string|string[] The shell to use. Defaults to `vim.o.shell`
+---@field start_insert? boolean
+---@field auto_insert? boolean
+---@field auto_close? boolean
+---@field interactive? boolean
+local default = {
+  shell = vim.o.shell,
+  win = {
+    width = 0.8,
+    height = 0.8,
+    border = nil,
+  },
+  start_insert = true,
+  auto_insert = true,
+  auto_close = true,
+  interactive = true,
+}
+
+---@class yukivim.utils.terminal.Opts: yukivim.utils.terminal.Config
 ---@field cwd? string
 ---@field count? integer
 ---@field env? table<string, string>
----@field interactive? boolean
----@field start_insert boolean
----@field auto_insert boolean
----@field auto_close boolean
----@field win? table<string, any>
+---@field win? yukivim.utils.win.Config
 
----@param cmd string|nil
+---@param cmd string
 ---@param opts yukivim.utils.terminal.Opts
 ---@param tid string
 ---@return yukivim.utils.terminal.Terminal
 function Terminal.new(cmd, opts, tid)
-  opts = opts or {}
-  local interactive = opts.interactive == nil
+  local interactive = opts.interactive
+  if interactive == nil then
+    interactive = default.interactive
+  end
   if interactive then
     opts.start_insert = opts.start_insert ~= false
     opts.auto_insert = opts.auto_insert ~= false
@@ -72,6 +90,7 @@ local function _refresh_splits_if_needed(term)
   -- local win_id = term.win
 end
 
+---@return integer buf
 function Terminal:create_buf()
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_set_option_value("filetype", "yuki_term", { buf = buf })
@@ -84,16 +103,23 @@ function Terminal:create_buf()
     end,
   })
   self.autocmd_id = autocmd_id
+  return buf
 end
 
+---@return integer win
 function Terminal:create_win()
   local opts = vim.tbl_deep_extend("force", self.opts or {}, {
-
-    buf = self.buf,
     cmd = self.cmd,
-    term = self,
   })
-  self.win = YukiVim.win.create_float(opts)
+  local on_win = opts.win.on_win_open
+  opts.win.on_win_open = function(win)
+    vim.api.nvim_win_set_var(win.win, "yuki_term_id", self.id)
+    if on_win then
+      on_win(win)
+    end
+  end
+  opts.win.buf = self.buf
+  self.win = YukiVim.win.create_float(opts.win)
   self:setup_keymaps()
   return self.win
 end
@@ -102,11 +128,16 @@ function Terminal:setup_keymaps()
     return
   end
 
-  local opts = self.opts or {}
-  -- local keys = (opts.win or {}).keys or config.config.win.keys or window.get_default_keys()
-  local nav_keys = { ["<C-h>"] = true, ["<C-j>"] = true, ["<C-k>"] = true, ["<C-l>"] = true }
+  -- local opts = self.opts or {}
+  -- local keys = (opts.win or {}).keys or default.win.keys or YukiVim.win.get_default_keys()
+  -- local nav_keys = { ["<C-h>"] = true, ["<C-j>"] = true, ["<C-k>"] = true, ["<C-l>"] = true }
+  -- for _, keymap in ipairs(keys) do
+  --     if keymap[1] ~= false then
+  --         if not ()
+  --     end
+  -- end
 
-    vim.api.nvim_buf_set_keymap(self.buf, "t", "<Esc>", "", {
+  vim.api.nvim_buf_set_keymap(self.buf, "t", "<Esc>", "", {
     callback = function()
       if self:handle_double_esc() then
         vim.cmd("stopinsert")
@@ -197,10 +228,17 @@ function Terminal:hide()
   self.win = nil
 end
 
+function Terminal:toggle()
+  if self:is_visible() then
+    self:hide()
+  else
+    self:show()
+  end
+end
 function Terminal:start_process()
-  local cmd = self.cmd or vim.o.shell
-  local cwd = self.cwd or vim.fn.getcwd()
-  local shell = vim.o.shell
+  local cmd = self.cmd
+  local cwd = self.cwd
+  local shell = self.opts.shell or default.shell or vim.o.shell
   local shellcmdflag = vim.o.shellcmdflag or "-c"
   local cmd_list = { shell, shellcmdflag, cmd }
   local job_id = vim.fn.jobstart(cmd_list, {
@@ -236,7 +274,6 @@ function Terminal:handle_exit()
     self.autocmd_id = nil
   end
   self.job_id = nil
-  local opts = self.opts
   vim.schedule(function()
     self:hide()
     if self:buf_valid() then
@@ -247,16 +284,12 @@ function Terminal:handle_exit()
   end)
 end
 
----@class yukivim.utils.terminal.Config
----@field win? yukivim.utils.win.Config
----@field shell? string|string[] The shell to use. Defaults to `vim.o.shell`
-
----@param cmd? string
----@param opts? yukivim.utils.terminal.Opts
+---@param cmd string
+---@param opts yukivim.utils.terminal.Opts
 function M.tid(cmd, opts)
   opts = opts or {}
   return vim.inspect({
-    cmd = cmd or vim.o.shell,
+    cmd = cmd,
     cwd = opts.cwd or vim.fn.getcwd(),
     env = opts.env,
     count = opts.count or vim.v.count1,
@@ -267,6 +300,7 @@ end
 ---@param opts? yukivim.utils.terminal.Opts
 ---@return yukivim.utils.terminal.Terminal
 function M.get_or_create(cmd, opts)
+  cmd = cmd or vim.o.shell
   opts = opts or {}
   local id = M.tid(cmd, opts)
   local existing = M.terminals[id]
@@ -283,6 +317,7 @@ end
 ---@return yukivim.utils.terminal.Terminal
 function M.toggle(cmd, opts)
   opts = opts or {}
+  cmd = cmd or vim.o.shell
   local term = M.get_or_create(cmd, opts)
   if term:is_visible() then
     term:hide()
@@ -290,7 +325,7 @@ function M.toggle(cmd, opts)
     term:show()
     local auto_insert = opts.auto_insert
     if auto_insert == nil then
-      auto_insert = true
+      auto_insert = default.auto_insert
     end
     if auto_insert then
       vim.api.nvim_set_current_win(term.win)

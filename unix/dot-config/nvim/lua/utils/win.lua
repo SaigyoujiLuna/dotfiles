@@ -1,20 +1,62 @@
 ---@class yukivim.utils.win
----@field id number
----@field buf? number
----@field meta table<string, any>
-local M = setmetatable({}, {
-  __call = function(t, ...)
-    return t.new(...)
-  end,
-})
+---@field win integer
+---@field buf integer
+local M = {}
 M.__index = M
+
+local default_keys = {
+  { "<C-h>", "<C-w>h", mode = "t", desc = "Move to window left" },
+  { "<C-j>", "<C-w>j", mode = "t", desc = "Move to window below" },
+  { "<C-k>", "<C-w>k", mode = "t", desc = "Move to window above" },
+  { "<C-l>", "<C-w>l", mode = "t", desc = "Move to window right" },
+  -- {
+  --   "q",
+  --   function()
+  --     local current_win = vim.api.nvim_get_current_win()
+  --     local ok, term_id = pcall(vim.api.nvim_win_get_var, current_win, "tiny_term_id")
+  --     if not (ok and term_id) then
+  --       return
+  --     end
+  --     local terminal = require("tiny-term.terminal")
+  --     local term = terminal.get(term_id)
+  --     if term then
+  --       term:hide()
+  --     end
+  --   end,
+  --   mode = "n",
+  --   desc = "Hide terminal",
+  -- },
+  -- {
+  --   "gf",
+  --   function()
+  --     local file = vim.fn.expand("<cfile>")
+  --     if file == "" then
+  --       return
+  --     end
+  --     local current_win = vim.api.nvim_get_current_win()
+  --     local ok, term_id = pcall(vim.api.nvim_win_get_var, current_win, "yuki_win_id")
+  --     if ok and term_id then
+  --       local terminal = require("tiny-term.terminal")
+  --       local term = terminal.get(term_id)
+  --       if term then
+  --         term:hide()
+  --       end
+  --     end
+  --     vim.cmd("e " .. file)
+  --   end,
+  --   mode = "n",
+  --   desc = "Open file under cursor",
+  -- },
+}
 
 ---@class yukivim.utils.win.Config
 ---@field position? "float"|"bottom"|"top"|"left"|"right"
+---@field width? number
+---@field height? number
+---@field border? string
 ---@field keys? table<string, false|string|fun(self: yukivim.utils.win)>
----@field on_buf? fun(self: yukivim.utils.win)
----@field on_win? fun(self: yukivim.utils.win)
----@field on_close? fun(self: yukivim.utils.win)
+---@field buf? integer
+---@field on_win_open? fun(self: yukivim.utils.win)
 local defaults = {
   position = "float",
   keys = {
@@ -22,42 +64,15 @@ local defaults = {
   },
 }
 
-local id = 0
-
----@param opts? yukivim.utils.win.Config|{}
----@return yukivim.utils.win
-function M.new(opts)
-  local self = setmetatable({}, M)
-  id = id + 1
-  self.id = id
-  self.meta = {}
-  opts = M.resolve(defaults, opts)
-end
-
----@param ...? yukivim.utils.win.Config
----@return yukivim.utils.win.Config
-function M.resolve(...)
-  local done = {} ---@type table<string, boolean>
-  local merge = {} ---@type yukivim.utils.win.Config[]
-  local stack = {}
-  for i = 1, select("#", ...) do
-    local next = select(i, ...) ---@type yukivim.utils.win.Config|string?
-    if next then
-      table.insert(stack, next)
-    end
-  end
-  while #stack > 0 do
-    local next = table.remove(stack)
-    next = type(next) == "string" and { position = next } or next
-  end
-  local ret = #merge == 0 and {} or #merge == 1 and merge[1] or vim.tbl_deep_extend("force", {}, unpack(merge))
-  ret.style = nil
-  return ret
+function M.get_default_keys()
+  return default_keys
 end
 function M:buf_valid()
   return self.buf and vim.api.nvim_buf_is_valid(self.buf)
 end
 
+---@param opts yukivim.utils.win.Config
+---@return integer
 function M.create_float(opts)
   local width = 0.8
   local height = 0.8
@@ -69,6 +84,7 @@ function M.create_float(opts)
   local row = math.floor((editor_height - win_height) / 2)
   local col = math.floor((editor_width - win_width) / 2)
 
+  ---@type vim.api.keyset.win_config
   local config = {
     relative = "editor",
     width = win_width,
@@ -76,6 +92,7 @@ function M.create_float(opts)
     row = row,
     col = col,
     style = "minimal",
+    border = opts.border,
     mouse = true,
   }
 
@@ -93,15 +110,17 @@ function M.create_float(opts)
   end
   vim.api.nvim_set_option_value("wrap", false, { win = win_id })
   vim.api.nvim_set_option_value("signcolumn", "no", { win = win_id })
-  vim.api.nvim_set_option_value(
-    "winhighlight",
-    "NormalFloat:TinyTermNormal,FloatBorder:TinyTermBorder",
-    { win = win_id }
-  )
-  --
-  -- Store terminal ID on window for keymap access
-  if opts.term then
-    pcall(vim.api.nvim_win_set_var, win_id, "yuki_term_id", opts.term.id)
+  -- vim.api.nvim_set_option_value(
+  --   "winhighlight",
+  --   "NormalFloat:TinyTermNormal,FloatBorder:TinyTermBorder",
+  --   { win = win_id }
+  -- )
+  local self = setmetatable({
+    buf = buf,
+    win = win_id,
+  }, M)
+  if opts.on_win_open then
+    opts.on_win_open(self)
   end
 
   return win_id

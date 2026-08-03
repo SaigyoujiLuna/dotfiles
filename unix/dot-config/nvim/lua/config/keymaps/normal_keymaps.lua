@@ -52,9 +52,8 @@ keymap.set("n", "gh", vim.diagnostic.show, { desc = "Line Diagnostics" })
 keymap.set("n", "g[", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 keymap.set("n", "g]", diagnostic_goto(true), { desc = "Next Diagnostic" })
 
-keymap.set("n", "<C-/>", function()
-  YukiVim.terminal.toggle()
-end)
-keymap.set("n", "<C-t>", function()
-  YukiVim.terminal.toggle()
+keymap.set({ "n", "i", "t" }, "<C-/>", function()
+  YukiVim.terminal.toggle(nil, { win = {
+      border = "rounded",
+  }})
 end)
