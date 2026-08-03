@@ -17,7 +17,9 @@ vim.lsp.config("ruff", {
     },
   },
 })
-Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
+
+-- ruff handles lint/format only; let basedpyright provide hover
+YukiVim.lsp.on_attach({ name = "ruff" }, function(client)
   client.server_capabilities.hoverProvider = false
 end)
 

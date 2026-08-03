@@ -11,10 +11,10 @@ require("bufferline").setup({
     -- separator_style = "slant",
     always_show_bufferline = false,
     close_command = function(n)
-      Snacks.bufdelete(n)
+      -- Snacks.bufdelete(n)
     end,
     right_mouse_command = function(n)
-      Snacks.bufdelete(n)
+      -- Snacks.bufdelete(n)
     end,
     diagnostics = "nvim_lsp",
     offsets = {

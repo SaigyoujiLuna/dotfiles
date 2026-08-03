@@ -15,7 +15,6 @@ require("lualine").setup({
     lualine_b = { "branch" },
     lualine_c = { "filename", "diagnostics" },
     lualine_x = {
-      Snacks.profiler.status(),
       {
         function()
           local recording_register = vim.fn.reg_recording()

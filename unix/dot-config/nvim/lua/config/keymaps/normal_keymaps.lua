@@ -31,10 +31,12 @@ keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
 keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+
 --ui toggle
-Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw", { noremap = true })
-Snacks.toggle.zen():map("<leader>uz", { noremap = true })
-Snacks.toggle.dim():map("<leader>ud", { noremap = true })
+keymap.set("n", "<leader>uw", function()
+  vim.wo.wrap = not vim.wo.wrap
+  vim.notify("Wrap " .. (vim.wo.wrap and "Enabled" or "Disabled"))
+end, { desc = "Toggle Wrap", noremap = true })
 
 --lsp
 local diagnostic_goto = function(next, severity)

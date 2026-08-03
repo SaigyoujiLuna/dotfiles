@@ -4,6 +4,7 @@
 ---@field lsp yukivim.utils.lsp
 ---@field config yukivim.config
 ---@field treesitter yukivim.utils.treesitter
+---@field file yukivim.utils.file
 local M = {}
 
 setmetatable(M, {

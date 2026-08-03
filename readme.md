@@ -39,3 +39,5 @@ required dependencies:
 * fzf-tab
 * starship
 * zoxide
+* ripgrep
+* fd

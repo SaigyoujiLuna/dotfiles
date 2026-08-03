@@ -48,16 +48,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap({ "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
     keymap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
     keymap({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
-    keymap({ "n" }, "<leader>cN", function() Snacks.rename.rename_file() end, { desc = "Rename File" })
+    keymap({ "n" }, "<leader>cN", YukiVim.file.rename_file, { desc = "Rename File" })
     keymap({ "n" }, "<leader>cd", vim.lsp.buf.rename, { desc = "Rename" })
     -- inlay hints
-    Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+    YukiVim.lsp.on_attach({ method = "textDocument/inlayHint" }, function(client, bufnr)
       if
-        vim.api.nvim_buf_is_valid(buffer)
-        and vim.bo[buffer].filetype ~= ""
-        and not vim.tbl_contains({ "vue" }, vim.bo[buffer].filetype)
+        vim.api.nvim_buf_is_valid(bufnr)
+        and vim.bo[bufnr].filetype ~= ""
+        and not vim.tbl_contains({ "vue" }, vim.bo[bufnr].filetype)
       then
-        vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end
       -- code lens
       vim.lsp.codelens.enable(true)
