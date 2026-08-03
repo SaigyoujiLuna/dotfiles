@@ -1,4 +1,3 @@
-local group = YukiVim.augroup("plugins-pack")
 local pack_list = {
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -20,14 +19,14 @@ resolve("plugins-pack.treesitter")
 resolve("plugins-pack.ui")
 resolve("plugins-pack.dap")
 resolve("plugins-pack.lang")
+resolve("plugins-pack.editor")
+resolve("plugins-pack.test")
+resolve("plugins-pack.other")
+resolve("plugins-pack.input")
 
 vim.pack.add(pack_list)
 for _, config in ipairs(config_list) do
   config()
 end
 
-require("plugins-pack.editor")
-require("plugins-pack.test")
-require("plugins-pack.other")
-require("plugins-pack.input")
 vim.cmd.colorscheme("catppuccin-nvim")

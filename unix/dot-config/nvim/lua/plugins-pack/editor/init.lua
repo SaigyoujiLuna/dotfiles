@@ -1,9 +1,10 @@
-vim.pack.add({
+local M = {}
+M.packages = {
   { src = "https://github.com/olimorris/codecompanion.nvim", version = vim.version.range("^19.0.0") },
   "https://github.com/supermaven-inc/supermaven-nvim",
   { src = "https://github.com/echasnovski/mini.pairs" },
   "https://github.com/stevearc/conform.nvim",
-  {src = "https://github.com/echasnovski/mini.indentscope", version = "stable"},
+  { src = "https://github.com/echasnovski/mini.indentscope", version = "stable" },
   "https://codeberg.org/andyg/leap.nvim",
   "https://github.com/mfussenegger/nvim-lint",
   "https://github.com/echasnovski/mini.surround",
@@ -14,20 +15,23 @@ vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
   { src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
   { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
-})
-require("plugins-pack.editor.telescope")
-local group = YukiVim.augroup("plugins-pack-editor")
-vim.api.nvim_create_autocmd("BufEnter", {
-  once = true,
-  group = group,
-  callback = function()
-    require("plugins-pack.editor.indent_line")
-    require("plugins-pack.editor.todo")
-    require("plugins-pack.editor.formatter")
-    require("plugins-pack.editor.trouble")
-    require("plugins-pack.editor.lint")
-    require("plugins-pack.editor.bufferline")
-    require("plugins-pack.editor.rainbow")
-    require("plugins-pack.editor.git")
-  end,
-})
+}
+M.config = function()
+  require("plugins-pack.editor.telescope")
+  local group = YukiVim.augroup("plugins-pack-editor")
+  vim.api.nvim_create_autocmd("BufEnter", {
+    once = true,
+    group = group,
+    callback = function()
+      require("plugins-pack.editor.indent_line")
+      require("plugins-pack.editor.todo")
+      require("plugins-pack.editor.formatter")
+      require("plugins-pack.editor.trouble")
+      require("plugins-pack.editor.lint")
+      require("plugins-pack.editor.bufferline")
+      require("plugins-pack.editor.rainbow")
+      require("plugins-pack.editor.git")
+    end,
+  })
+end
+return M
