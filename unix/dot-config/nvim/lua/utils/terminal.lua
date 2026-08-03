@@ -152,7 +152,7 @@ function Terminal:buf_valid()
 end
 
 function Terminal:is_visible()
-  if not self.win or vim.api.nvim_win_is_valid(self.win) then
+  if not self.win or not vim.api.nvim_win_is_valid(self.win) then
     return false
   end
   return vim.api.nvim_win_get_tabpage(self.win) == vim.api.nvim_get_current_tabpage()
@@ -198,8 +198,8 @@ function Terminal:hide()
 end
 
 function Terminal:start_process()
-  local cmd = self.cmd
-  local cwd = self.cwd
+  local cmd = self.cmd or vim.o.shell
+  local cwd = self.cwd or vim.fn.getcwd()
   local shell = vim.o.shell
   local shellcmdflag = vim.o.shellcmdflag or "-c"
   local cmd_list = { shell, shellcmdflag, cmd }
