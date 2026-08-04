@@ -1,4 +1,3 @@
----@type yukivim.utils.pack.Spec
 return {
   packages = {
     { src = "https://github.com/olimorris/codecompanion.nvim", version = vim.version.range("^19.0.0") },
