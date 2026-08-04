@@ -5,7 +5,6 @@ M.packages = {
   "https://github.com/thehamsta/nvim-dap-virtual-text",
   "https://github.com/mfussenegger/nvim-dap",
   "https://github.com/rcarriga/nvim-dap-ui",
-  "https://github.com/nvim-neotest/neotest",
 }
 
 M.config = function()

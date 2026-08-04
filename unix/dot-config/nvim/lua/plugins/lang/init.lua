@@ -3,7 +3,6 @@ M.packages = {
   "https://github.com/dchinmay2/clangd_extensions.nvim",
   "https://github.com/terrastruct/d2-vim",
   "https://github.com/mfussenegger/nvim-jdtls",
-  "https://github.com/saghen/blink.cmp",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
