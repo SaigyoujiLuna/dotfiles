@@ -8,7 +8,6 @@ YukiVim.pack.setup({
     "plugins.test",
     "plugins.editor",
     "plugins.input",
-    "plugins.other"
   },
   after_load = function()
     vim.cmd.colorscheme("catppuccin-nvim")

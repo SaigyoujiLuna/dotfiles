@@ -16,6 +16,7 @@ return {
     "https://github.com/lewis6991/gitsigns.nvim",
     { src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
     { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
+    "https://github.com/fei6409/log-highlight.nvim",
   },
   config = function()
     require("plugins.editor.telescope")
@@ -32,6 +33,7 @@ return {
         require("plugins.editor.bufferline")
         require("plugins.editor.rainbow")
         require("plugins.editor.git")
+        require("plugins.editor.loghighlight")
       end,
     })
   end,
