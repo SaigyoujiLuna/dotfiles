@@ -23,8 +23,6 @@ return {
       callback = function()
         require("plugins.input.blink")
         require("plugins.input.ai")
-        require("plugins.input.surround")
-        require("plugins.input.autopairs")
         require("plugins.input.leap")
       end,
     })

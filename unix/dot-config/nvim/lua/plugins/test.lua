@@ -1,20 +1,10 @@
 return {
-  "nvim-neotest/neotest",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "antoinemadec/fixcursorhold.nvim",
-    "nvim-treesitter/nvim-treesitter",
-    -- "mrcjkb/rustaceanvim",
-    "nvim-neotest/nvim-nio",
+  packages = {
+    "https://github.com/nvim-neotest/neotest",
+    "https://github.com/antoinemadec/fixcursorhold.nvim",
+    "https://github.com/nvim-neotest/nvim-nio",
   },
-  opts = function()
-    return {adapters = {
-      require("rustaceanvim.neotest"),
-    },
-    status = { virtual_text = true, enabled = true },
-
-  }end,
-  config = function(opts)
+  config = function()
     local keymap = vim.keymap.set
 
     local loaded = false
@@ -23,7 +13,12 @@ return {
       if loaded then
         return
       end
-      require("neotest").setup(opts)
+      require("neotest").setup({
+        adapters = {
+          require("rustaceanvim.neotest"),
+        },
+        status = { virtual_text = true, enabled = true },
+      })
     end
     keymap({ "n" }, "<leader>t", "", { desc = "+test" })
     -- stylua: ignore
@@ -31,7 +26,7 @@ return {
     -- stylua: ignore
     keymap({ "n" }, "<leader>td", function() load_neotest(); require("neotest").run.run({ strategy = "dap", suite = true }) end, { desc = "Run Nearest Debug" })
     -- stylua: ignore
-    keymap( { "n", }, "<leader>tr", function() load_neotest(); require("neotest").run.run() end, { desc = "Run Nearest (Neotest)" })
+    keymap({ "n" }, "<leader>tr", function() load_neotest(); require("neotest").run.run() end, { desc = "Run Nearest (Neotest)" })
     -- stylua: ignore
     keymap({ "n" }, "<leader>tu", function() load_neotest(); require("neotest").output() end, { desc = "Test Output (Neotest)" })
   end,
