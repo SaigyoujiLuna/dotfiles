@@ -7,6 +7,7 @@
 ---@field file yukivim.utils.file
 ---@field terminal yukivim.utils.terminal
 ---@field win yukivim.utils.win
+---@field pack yukivim.utils.pack
 local M = {}
 
 setmetatable(M, {

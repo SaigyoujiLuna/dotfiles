@@ -14,14 +14,14 @@ M.config = function()
     once = true,
     callback = function()
       vim.schedule(function()
-        require("plugins-pack.ui.lualine")
-        require("plugins-pack.ui.whichkey")
+        require("plugins.ui.lualine")
+        require("plugins.ui.whichkey")
       end)
     end,
   })
 
-  require("plugins-pack.ui.catppuccin")
-  require("plugins-pack.ui.tree")
-  require("plugins-pack.ui.mini")
+  require("plugins.ui.catppuccin")
+  require("plugins.ui.tree")
+  require("plugins.ui.mini")
 end
 return M
