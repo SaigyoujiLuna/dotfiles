@@ -25,12 +25,10 @@ require("bufferline").setup({
         text_align = "left",
       },
       {
-        filetype = "snacks_layout_box",
-      },
-      {
         filetype = "NvimTree",
         text = "NvimTree",
         highlight = "Directory",
+        separator = false,
         text_align = "left",
       },
     },

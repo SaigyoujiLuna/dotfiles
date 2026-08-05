@@ -8,7 +8,6 @@ return {
     "https://github.com/mfussenegger/nvim-lint",
     "https://github.com/folke/todo-comments.nvim",
     "https://github.com/folke/trouble.nvim",
-    { src = "https://github.com/akinsho/bufferline.nvim", version = vim.version.range("*") },
     "https://github.com/HiPhish/rainbow-delimiters.nvim",
     { src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
     { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
@@ -26,7 +25,6 @@ return {
         require("plugins.editor.formatter")
         require("plugins.editor.trouble")
         require("plugins.editor.lint")
-        require("plugins.editor.bufferline")
         require("plugins.editor.rainbow")
         require("plugins.editor.loghighlight")
       end,

@@ -15,6 +15,7 @@ require("crates").setup({
     hover = true,
   },
 })
+
 local package_path = YukiVim.get_pkg_path("codelldb")
 local codelldb = package_path .. "/extension/adapter/codelldb"
 local library_path = ""
@@ -50,12 +51,12 @@ vim.g.rustaceanvim = {
             enabled = true,
           },
         },
-        checkOnSave = true,
+        checkOnSave = false,
         diagnostics = {
           enabled = false,
         },
         procMacro = {
-          enable = false,
+          enable = true,
         },
         files = {
           excludeDirs = {

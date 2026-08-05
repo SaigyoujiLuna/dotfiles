@@ -4,7 +4,6 @@ M.packages = {
   "https://github.com/terrastruct/d2-vim",
   "https://github.com/mfussenegger/nvim-jdtls",
   "https://github.com/mason-org/mason.nvim",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
   "https://github.com/iamcco/markdown-preview.nvim",
   "https://github.com/linux-cultist/venv-selector.nvim",

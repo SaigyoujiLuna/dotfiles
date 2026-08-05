@@ -1,8 +1,8 @@
 local M = {}
 M.packages = {
-  "nvim-treesitter/nvim-treesitter",
-  "nvim-treesitter/nvim-treesitter-context",
-  "nvim-treesitter/nvim-treesitter-textobjects",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 }
 local treesitter_opts = {
   incremental_selection = {

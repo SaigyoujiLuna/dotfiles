@@ -30,6 +30,8 @@ required dependencies:
 * vtsls
 * clang
 * lua-language-server
+* kotlin-lsp
+* basedpyright
 * rust
 * rust-analyzer
 * bacon-ls

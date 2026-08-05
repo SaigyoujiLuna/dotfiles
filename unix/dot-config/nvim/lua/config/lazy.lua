@@ -1,8 +1,8 @@
 YukiVim.pack.setup({
   imports = {
     "plugins.base",
-    "plugins.treesitter",
     "plugins.ui",
+    "plugins.treesitter",
     "plugins.dap",
     "plugins.lang",
     "plugins.test",

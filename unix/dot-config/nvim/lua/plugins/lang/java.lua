@@ -1,6 +1,7 @@
 if vim.g.vscode then
   return
 end
+local jdtls = require("jdtls")
 
 vim.lsp.enable("jdtls", false)
 
@@ -12,10 +13,13 @@ end
 local jdtls_workspace_dir = function(project_name)
   return vim.fn.stdpath("cache") .. "/jdtls/" .. project_name .. "/workspace"
 end
+local function jdtls_single_file_data_dir()
+    return vim.fn.stdpath("cache") .. "/jdtls/single/" .. vim.fn.sha256(vim.fn.expand("%:p"))
+end
 local project_name = function(root_dir)
   return root_dir and vim.fs.basename(root_dir)
 end
-local root_dir = function(path)
+local function root_dir(path)
   return vim.fs.root(path, vim.lsp.config.jdtls.root_markers)
 end
 local full_cmd = function()
@@ -27,16 +31,22 @@ local full_cmd = function()
       temp_cmd,
       { "-configuration", jdtls_config_dir(project_nm), "-data", jdtls_workspace_dir(project_nm) }
     )
+  else
+    -- single java file config
+    vim.list_extend(temp_cmd, { "-data", jdtls_single_file_data_dir() })
   end
   return temp_cmd
 end
 local bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*jar", false, true)
 vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
+
 local function attach_jdtls()
   local fname = vim.api.nvim_buf_get_name(0)
+  local rootdir = root_dir(fname)
   local config = {
     cmd = full_cmd(),
-    root_dir = root_dir(fname),
+    -- if rootdir is nil, is said current file is a single java file, and the root_dir is the directory of the file
+    root_dir = rootdir or vim.fn.getcwd(),
     init_options = {
       bundles = bundles,
     },
@@ -53,6 +63,7 @@ local function attach_jdtls()
   }
   require("jdtls").start_or_attach(config)
 end
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "java" },
   callback = attach_jdtls,
@@ -70,7 +81,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     require("jdtls.dap").setup_dap_main_class_configs({})
     wk.add({
       mode = "n",
-      buffer = ev.buf,
+      buffer = buf,
       {
         "<leader>tt",
         function()

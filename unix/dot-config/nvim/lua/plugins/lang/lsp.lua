@@ -11,6 +11,7 @@ local ensure_installed = {
   "codelldb",
   "markdownlint-cli2",
   "markdown-toc",
+  "json-lsp",
 }
 local mason = require("mason")
 mason.setup({
@@ -121,7 +122,4 @@ vim.lsp.enable("lua_ls", true)
 vim.lsp.config("marksman", {})
 vim.lsp.enable("marksman", true)
 
-require("mason-lspconfig").setup({
-  ensure_installed = { "jsonls" },
-})
 vim.lsp.enable("jsonls", true)

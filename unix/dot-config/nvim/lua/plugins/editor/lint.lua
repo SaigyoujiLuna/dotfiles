@@ -1,6 +1,6 @@
 local M = {}
 local lint = require("lint")
-
+lint.linters_by_ft = { markdown = { "markdownlint-cli2" } }
 function M.lint()
   local names = lint._resolve_linter_by_ft(vim.bo.filetype)
   names = vim.list_extend({}, names)
@@ -22,7 +22,6 @@ function M.lint()
   end
 end
 
-lint.linters_by_ft = { makrdown = { "markdownlint-cli2" } }
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
   group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
   callback = function()
