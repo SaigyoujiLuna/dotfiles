@@ -1,0 +1,28 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "theme": "catppuccin-macchiato",
+  "packages": [
+    "git:github.com/otahontas/pi-coding-agent-catppuccin",
+    "npm:context-mode",
+    "npm:pi-powerline-footer",
+    "npm:@ff-labs/pi-fff",
+    "npm:@narumitw/pi-btw",
+    "npm:@vigolium/piolium",
+    "npm:pi-simplify",
+    "npm:pi-web-access",
+    "npm:@ogulcancelik/pi-herdr",
+    "npm:@minhduydev/pi-subagents"
+  ],
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
+  "treeFilterMode": "default",
+  "terminal": {
+    "showTerminalProgress": false
+  },
+  "showHardwareCursor": false,
+  "images": {
+    "blockImages": true
+  },
+  "quietStartup": true
+}
