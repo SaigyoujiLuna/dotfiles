@@ -1,8 +1,5 @@
 {
   "lastChangelogVersion": "0.83.0",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-terra",
-  "defaultThinkingLevel": "medium",
   "theme": "catppuccin-macchiato",
   "packages": [
     "git:github.com/otahontas/pi-coding-agent-catppuccin",
@@ -25,7 +22,8 @@
   },
   "showHardwareCursor": false,
   "images": {
-    "blockImages": true
+    "blockImages": false
   },
-  "quietStartup": true
+  "quietStartup": true,
+  "defaultProjectTrust": "ask"
 }
