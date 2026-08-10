@@ -11,7 +11,8 @@
     "npm:pi-simplify",
     "npm:pi-web-access",
     "npm:@ogulcancelik/pi-herdr",
-    "npm:@minhduydev/pi-subagents"
+    "npm:@minhduydev/pi-subagents",
+    "npm:pi-puppeteer"
   ],
   "warnings": {
     "anthropicExtraUsage": true
@@ -25,5 +26,8 @@
     "blockImages": false
   },
   "quietStartup": true,
-  "defaultProjectTrust": "ask"
+  "defaultProjectTrust": "ask",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "max"
 }
