@@ -27,7 +27,7 @@
   },
   "quietStartup": true,
   "defaultProjectTrust": "ask",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
-  "defaultThinkingLevel": "max"
+  "defaultProvider": "opencode",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultThinkingLevel": "high"
 }
