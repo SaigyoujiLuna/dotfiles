@@ -39,7 +39,13 @@ for target in "${targets[@]}"; do
         failed+=("$target")
     fi
 done
-cp ./private_passport.conf ~/.config/private_passport.conf
+
+# copy private_passport.conf if not exists
+if [[ ! -f ~/.config/private_passport.conf ]]; then
+    info "Copying private_passport.conf"
+    cp ./private_passport.conf ~/.config/private_passport.conf
+fi
+
 # Summary
 if [[ ${#failed[@]} -eq 0 ]]; then
     success "Please remember to edit ~/.config/private_passport.conf file to set the api_key"
