@@ -7,8 +7,6 @@
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=10
 " easymotion 需要早于leader key设置
-Plug 'easymotion/vim-easymotion'
-set easymotion
 let mapleader = " "
 let maplocalleader = "\\"
 " Do incremental searching.
@@ -37,7 +35,7 @@ map Q gq
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
 " Core editing
-nmap <leader><Space> <Action>(GotoFile)
+nmap <leader><Space>  <Action>(GotoFile)
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>/ <Action>(FindInPath)
 inoremap jk <Esc>
