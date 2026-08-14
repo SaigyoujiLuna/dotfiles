@@ -1,25 +1,33 @@
 {
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.1",
   "theme": "catppuccin-macchiato",
+  "npmCommand": [
+    "bun"
+  ],
   "packages": [
     "git:github.com/otahontas/pi-coding-agent-catppuccin",
     "npm:context-mode",
     "npm:pi-powerline-footer",
     "npm:@ff-labs/pi-fff",
-    "npm:@narumitw/pi-btw",
     "npm:@vigolium/piolium",
     "npm:pi-simplify",
     "npm:pi-web-access",
     "npm:@ogulcancelik/pi-herdr",
-    "npm:@minhduydev/pi-subagents",
-    "npm:pi-puppeteer"
+    "npm:pi-puppeteer",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:pi-subagents",
+    "npm:@dietrichgebert/ponytail",
+    "npm:@plannotator/pi-extension"
   ],
   "warnings": {
     "anthropicExtraUsage": true
   },
   "treeFilterMode": "default",
   "terminal": {
-    "showTerminalProgress": false
+    "showTerminalProgress": true,
+    "clearOnShrink": true
   },
   "showHardwareCursor": false,
   "images": {
@@ -27,7 +35,11 @@
   },
   "quietStartup": true,
   "defaultProjectTrust": "ask",
-  "defaultProvider": "opencode",
-  "defaultModel": "deepseek-v4-pro",
-  "defaultThinkingLevel": "high"
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "max",
+  "fullscreenScrollbar": "auto",
+  "tuiMode": "fullscreen",
+  "transport": "websocket-cached",
+  "followUpMode": "one-at-a-time"
 }
