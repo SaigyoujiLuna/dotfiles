@@ -1,5 +1,6 @@
 local M = {}
 M.packages = {
+  "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/dchinmay2/clangd_extensions.nvim",
   "https://github.com/terrastruct/d2-vim",
   "https://github.com/mfussenegger/nvim-jdtls",
@@ -31,6 +32,7 @@ M.config = function()
       require("plugins.lang.python")
       require("plugins.lang.rust")
       require("plugins.lang.typescript")
+      require("plugins.lang.nix")
     end,
   })
 end

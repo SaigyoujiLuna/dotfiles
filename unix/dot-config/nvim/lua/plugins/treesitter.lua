@@ -41,6 +41,7 @@ local treesitter_opts = {
     "ron",
     "rst",
     "xml",
+    "nix",
     "yaml",
   },
 }

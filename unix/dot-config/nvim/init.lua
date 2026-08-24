@@ -1,3 +1,6 @@
+require('vim._core.ui2').enable({
+    enable = true
+})
 local config = require("config")
 config.init()
 config.setup()

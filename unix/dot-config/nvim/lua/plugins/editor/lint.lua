@@ -1,6 +1,9 @@
 local M = {}
 local lint = require("lint")
-lint.linters_by_ft = { markdown = { "markdownlint-cli2" } }
+lint.linters_by_ft = {
+  markdown = { "markdownlint-cli2" },
+  nix = { "statix" },
+}
 function M.lint()
   local names = lint._resolve_linter_by_ft(vim.bo.filetype)
   names = vim.list_extend({}, names)

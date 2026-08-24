@@ -1,12 +1,12 @@
 {
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.84.2",
   "theme": "catppuccin-macchiato",
   "npmCommand": [
     "bun"
   ],
   "packages": [
-    "git:github.com/otahontas/pi-coding-agent-catppuccin",
     "npm:context-mode",
+    "git:github.com/otahontas/pi-coding-agent-catppuccin",
     "npm:pi-powerline-footer",
     "npm:@ff-labs/pi-fff",
     "npm:@vigolium/piolium",
@@ -19,7 +19,9 @@
     "npm:@juicesharp/rpiv-btw",
     "npm:pi-subagents",
     "npm:@dietrichgebert/ponytail",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:@tunnckocore/pi-gpt-fast-mode",
+    "npm:pi-mcp-adapter"
   ],
   "warnings": {
     "anthropicExtraUsage": true
