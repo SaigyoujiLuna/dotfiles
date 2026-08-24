@@ -1,47 +1,49 @@
 {
-  "lastChangelogVersion": "0.84.2",
-  "theme": "catppuccin-macchiato",
-  "npmCommand": [
-    "bun"
-  ],
-  "packages": [
-    "npm:context-mode",
-    "git:github.com/otahontas/pi-coding-agent-catppuccin",
-    "npm:pi-powerline-footer",
-    "npm:@ff-labs/pi-fff",
-    "npm:@vigolium/piolium",
-    "npm:pi-simplify",
-    "npm:pi-web-access",
-    "npm:@ogulcancelik/pi-herdr",
-    "npm:pi-puppeteer",
-    "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@juicesharp/rpiv-todo",
-    "npm:@juicesharp/rpiv-btw",
-    "npm:pi-subagents",
-    "npm:@dietrichgebert/ponytail",
-    "npm:@plannotator/pi-extension",
-    "npm:@tunnckocore/pi-gpt-fast-mode",
-    "npm:pi-mcp-adapter"
-  ],
-  "warnings": {
-    "anthropicExtraUsage": true
-  },
-  "treeFilterMode": "default",
-  "terminal": {
-    "showTerminalProgress": true,
-    "clearOnShrink": true
-  },
-  "showHardwareCursor": false,
-  "images": {
-    "blockImages": false
-  },
-  "quietStartup": true,
-  "defaultProjectTrust": "ask",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
-  "defaultThinkingLevel": "max",
-  "fullscreenScrollbar": "auto",
-  "tuiMode": "fullscreen",
-  "transport": "websocket-cached",
-  "followUpMode": "one-at-a-time"
+    "lastChangelogVersion": "0.84.2",
+    "theme": "catppuccin-macchiato",
+    "npmCommand": [
+        "bun"
+    ],
+    "packages": [
+        "npm:pi-web-access",
+        "git:github.com/otahontas/pi-coding-agent-catppuccin",
+        "npm:@juicesharp/rpiv-ask-user-question",
+        "npm:@juicesharp/rpiv-todo",
+        "npm:@juicesharp/rpiv-btw",
+        "npm:@plannotator/pi-extension",
+        "npm:context-mode",
+        "npm:pi-powerline-footer",
+        "npm:@ff-labs/pi-fff",
+        "npm:@vigolium/piolium",
+        "npm:pi-simplify",
+        "npm:@ogulcancelik/pi-herdr",
+        "npm:pi-puppeteer",
+        "npm:pi-subagents",
+        "npm:@dietrichgebert/ponytail",
+        "npm:@plannotator/pi-extension",
+        "npm:@tunnckocore/pi-gpt-fast-mode",
+        "npm:pi-mcp-adapter",
+        "npm:@dietrichgebert/ponytail"
+    ],
+    "warnings": {
+        "anthropicExtraUsage": true
+    },
+    "treeFilterMode": "default",
+    "terminal": {
+        "showTerminalProgress": true,
+        "clearOnShrink": true
+    },
+    "showHardwareCursor": false,
+    "images": {
+        "blockImages": false
+    },
+    "quietStartup": true,
+    "defaultProjectTrust": "ask",
+    "fullscreenScrollbar": "auto",
+    "tuiMode": "fullscreen",
+    "transport": "websocket-cached",
+    "followUpMode": "one-at-a-time",
+    "defaultProvider": "opencode",
+    "defaultModel": "deepseek-v4-flash",
+    "defaultThinkingLevel": "high"
 }
