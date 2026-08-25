@@ -2,18 +2,17 @@ local M = {}
 
 return {
   packages = {
-    "https://github.com/saghen/blink.lib",
-    "https://github.com/saghen/blink.cmp",
+    { src = "https://github.com/saghen/blink.lib" },
+    { src = "https://github.com/saghen/blink.cmp" },
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/neovim/nvim-lspconfig",
-    "https://github.com/huijiro/blink-cmp-supermaven",
     "https://github.com/supermaven-inc/supermaven-nvim",
     "https://codeberg.org/andyg/leap.nvim",
   },
   build = {
-      ["blink.cmp"] = function()
-          require("blink.cmp"):build():pwait()
-      end,
+    ["blink.cmp"] = function()
+      require("blink.cmp"):build():pwait()
+    end,
   },
   config = function()
     local group = YukiVim.augroup("plugins-input")

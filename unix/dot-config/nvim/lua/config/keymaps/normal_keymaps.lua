@@ -48,7 +48,8 @@ local diagnostic_goto = function(next, severity)
     })
   end
 end
-keymap.set("n", "gh", vim.diagnostic.show, { desc = "Line Diagnostics" })
+
+keymap.set("n", "gh", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
 keymap.set("n", "g[", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 keymap.set("n", "g]", diagnostic_goto(true), { desc = "Next Diagnostic" })
 

@@ -1,29 +1,9 @@
 if vim.g.vscode then
   return
 end
-require("clangd_extensions").setup({
-  ast = {
-    role_icons = {
-      type = "",
-      declaration = "",
-      expression = "",
-      specifier = "",
-      statement = "",
-      ["template argument"] = "",
-    },
-    kind_icons = {
-      Compound = "",
-      Recovery = "",
-      TranslationUnit = "",
-      PackExpansion = "",
-      TemplateTypeParm = "",
-      TemplateTemplateParm = "",
-      TemplateParamObject = "",
-    },
-  },
-})
 
 vim.lsp.config("clangd", {
+  filetypes = { "c", "cpp", "h" },
   root_markers = {
     "compile_commands.json",
     "compile_flags.txt",
@@ -36,9 +16,6 @@ vim.lsp.config("clangd", {
     "meson_options.txt",
     "build.ninja",
     ".git",
-  },
-  capabilities = {
-    offsetEncoding = { "utf-16" },
   },
   cmd = {
     "clangd",
