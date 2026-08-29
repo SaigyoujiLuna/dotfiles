@@ -1,5 +1,5 @@
 frame = "full"
 [font]
-normal = ["MonoLisa Variable"]
+normal = ["MonoLisaCode", "MonoLisaCode Nerd Font", "Sarasa Term SC"]
 size = 14.0
 
