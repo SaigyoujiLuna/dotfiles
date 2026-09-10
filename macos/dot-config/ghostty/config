@@ -1,5 +1,6 @@
 theme = Catppuccin Macchiato
-font-family = "MonoLisa Variable"
+font-family = "MonoLisaCode"
+font-family = "MonoLisaCode Nerd Font"
 font-family = "Sarasa Term SC"
 font-size = 14
 cursor-style-blink = true

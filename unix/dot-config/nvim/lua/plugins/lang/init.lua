@@ -32,6 +32,7 @@ M.config = function()
       require("plugins.lang.rust")
       require("plugins.lang.typescript")
       require("plugins.lang.nix")
+      require("plugins.lang.kotlin")
     end,
   })
 end

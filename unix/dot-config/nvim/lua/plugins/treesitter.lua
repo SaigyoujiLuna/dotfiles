@@ -19,6 +19,7 @@ local treesitter_opts = {
     "diff",
     "html",
     "java",
+    "kotlin",
     "javascript",
     "jsdoc",
     "json",
@@ -43,6 +44,12 @@ local treesitter_opts = {
     "xml",
     "nix",
     "yaml",
+    "ruby",
+    "swift",
+    "make",
+    "cmake",
+    "sql",
+    "css",
   },
 }
 M.build = {

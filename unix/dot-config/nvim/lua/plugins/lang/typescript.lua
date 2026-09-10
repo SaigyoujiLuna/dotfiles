@@ -2,8 +2,7 @@ if vim.g.vscode then
   return
 end
 
-vim.lsp.enable("vtsls", true)
-vim.lsp.config("vtsls", {
+vim.lsp.config("tsgo", {
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -13,30 +12,18 @@ vim.lsp.config("vtsls", {
     "typescript.tsx",
   },
   settings = {
-    complete_function_calls = true,
-    vtsls = {
-      enableMoveToFileCodeAction = true,
-      autoUseWorkspaceTsdk = true,
-      experimental = {
-        maxInlayHintLength = 30,
-        completion = {
-          enableServerSideFuzzyMatch = true,
-        },
-      },
-    },
     typescript = {
-      updateImportsOnFileMove = { enabled = "always" },
-      suggest = {
-        completeFunctionCalls = true,
-      },
       inlayHints = {
         enumMemberValues = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        parameterNames = { enabled = "literals" },
+        functionLikeReturnTypes = { enabled = false },
+        parameterNames = {
+          enabled = "literals",
+          suppressWhenArgumentMatchesName = true,
+        },
         parameterTypes = { enabled = true },
         propertyDeclarationTypes = { enabled = true },
-        variableTypes = { enabled = false },
       },
     },
   },
 })
+vim.lsp.enable("tsgo", true)
