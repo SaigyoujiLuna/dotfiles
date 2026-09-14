@@ -2,7 +2,8 @@ if vim.g.vscode then
   return
 end
 
-vim.lsp.config("tsgo", {
+vim.lsp.config("tsc", {
+  cmd = { "tsc", "--lsp", "--stdio" },
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -26,4 +27,4 @@ vim.lsp.config("tsgo", {
     },
   },
 })
-vim.lsp.enable("tsgo", true)
+vim.lsp.enable("tsc", true)
