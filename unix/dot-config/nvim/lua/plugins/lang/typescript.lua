@@ -16,7 +16,7 @@ vim.lsp.config("tsc", {
     typescript = {
       inlayHints = {
         enumMemberValues = { enabled = true },
-        functionLikeReturnTypes = { enabled = false },
+        functionLikeReturnTypes = { enabled = true },
         parameterNames = {
           enabled = "literals",
           suppressWhenArgumentMatchesName = true,
